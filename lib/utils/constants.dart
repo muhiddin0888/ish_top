@@ -1,7 +1,7 @@
 const String splashPage = '/';
+const String mainPage = '/main_page';
 const String homePage = '/home_page';
-const String booksPage = '/books_page';
-const String languagesPage = '/languages_page';
-const String BASE_URL = 'https://book-store-aspnet.herokuapp.com';
+const String loginPage = '/login_page';
+const String signUpPage = '/sign-up_page';
 
 

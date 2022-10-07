@@ -1,21 +1,22 @@
 import 'package:authentication_repository/authentication_repository.dart';
-import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/app/app.dart';
 import 'package:ish_top/theme.dart';
+import 'package:ish_top/ui/home/home.dart';
+import 'package:ish_top/ui/login/login.dart';
+import 'package:ish_top/ui/router.dart';
+import 'package:ish_top/utils/constants.dart';
 
 class App extends StatelessWidget {
-  App({
-    super.key,
-  }) {
+  App({super.key}) {
     _init();
   }
 
   late AuthenticationRepository authenticationRepository;
 
   void _init() async {
-     authenticationRepository = AuthenticationRepository();
+    authenticationRepository = AuthenticationRepository();
     await authenticationRepository.user.first;
   }
 
@@ -34,7 +35,6 @@ class App extends StatelessWidget {
                 authenticationRepository:
                     context.read<AuthenticationRepository>(),
               ),
-              child: const AppView(),
             ),
           ],
           child: AppView(),
@@ -49,10 +49,22 @@ class AppView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-      home: FlowBuilder<AppStatus>(
-        state: context.select((AppBloc bloc) => bloc.state.status),
-        onGeneratePages: onGenerateAppViewPages,
-      ),
+      onGenerateRoute: MyRouter.generateRoute,
+      initialRoute: splashPage,
     );
+  }
+}
+
+class MainPage extends StatelessWidget {
+  const MainPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AppBloc, AppState>(builder: (context, state) {
+      if (state.status == AppStatus.authenticated) {
+        return HomePage();
+      }
+      return LoginPage();
+    });
   }
 }

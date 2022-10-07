@@ -24,7 +24,14 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: Scaffold(
-        
+        body: Column(
+          children: [
+            Text(user.email!),
+            Text(user.id.toString()),
+            TextButton(onPressed: (){
+            }, child: Icon(Icons.edit))
+          ],
+        ),
       )
     );
   }
