@@ -7,7 +7,6 @@ import 'package:ish_top/app/app.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = AppBlocObserver();
-
   await Firebase.initializeApp();
 
   runApp(App());

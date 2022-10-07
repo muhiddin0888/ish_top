@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ish_top/app/view/app.dart';
-import 'package:ish_top/ui/home/home.dart';
 import 'package:ish_top/ui/login/login.dart';
 import 'package:ish_top/ui/sign_up/sign_up.dart';
 import 'package:ish_top/ui/splash/splash_page.dart';
+import 'package:ish_top/ui/tab_box/home/view/home_page.dart';
+import 'package:ish_top/ui/tab_box/tab_box.dart';
 import 'package:ish_top/utils/constants.dart';
 
 class MyRouter {
@@ -11,8 +12,8 @@ class MyRouter {
     switch (settings.name) {
       case mainPage:
         return MaterialPageRoute(builder: (_) => MainPage());
-      case homePage:
-        return MaterialPageRoute(builder: (_) => HomePage());
+      case tabBox:
+        return MaterialPageRoute(builder: (_) => TabBox());
       case splashPage:
         return MaterialPageRoute(builder: (_) => SplashScreen());
       case loginPage:
