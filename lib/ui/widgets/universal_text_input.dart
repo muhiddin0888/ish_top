@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 
 class UniversalTextInput extends StatelessWidget {
-  const UniversalTextInput(
-      {Key? key,
-      required this.onChanged,
-      required this.hintText,
-      required this.caption,
-      required this.initialText})
-      : super(key: key);
+  const UniversalTextInput({
+    Key? key,
+    required this.onChanged,
+    required this.hintText,
+    required this.caption,
+    required this.initialText,
+  }) : super(key: key);
 
   final String hintText;
   final String initialText;
   final String caption;
+
+  VoidCallback validateCondition() {
+    return () {};
+  }
 
   final ValueChanged<String> onChanged;
 
@@ -27,12 +31,12 @@ class UniversalTextInput extends StatelessWidget {
         child: TextFormField(
           controller: controller,
           onChanged: onChanged,
-          validator: (value) => (value!.length <= 3) ? "Error" : null,
-          autovalidateMode: AutovalidateMode.always,
+          validator: (value) => ("" == "") ? "Error" : null,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             labelText: caption,
             hintText: hintText,
-            errorBorder: OutlineInputBorder(
+            errorBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.red),
             ),
           ),

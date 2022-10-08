@@ -13,11 +13,13 @@ class AnnFieldsOne extends StatefulWidget {
 class _AnnFieldsOneState extends State<AnnFieldsOne> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: BlocBuilder<AnnouncementCubit, AnnouncementState>(
+    return BlocBuilder<AnnouncementCubit, AnnouncementState>(
       builder: (context, state) {
         return Column(
           children: [
-            const SizedBox(height: 12,),
+            const SizedBox(
+              height: 12,
+            ),
             UniversalTextInput(
               caption: "FISH",
               onChanged: (value) {
@@ -32,23 +34,26 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
               initialText:
                   context.watch<AnnouncementCubit>().state.fields["full_name"],
             ),
-            const SizedBox(height: 12,),
+            const SizedBox(
+              height: 12,
+            ),
             UniversalTextInput(
               caption: "Yosh",
               onChanged: (value) {
                 if (value.length > 3) {
                   context.read<AnnouncementCubit>().updateCurrentItem(
-                    fieldValue: value,
-                    fieldKey: "age",
-                  );
+                        fieldValue: value,
+                        fieldKey: "age",
+                      );
                 }
               },
               hintText: "20",
-              initialText:
-              context.watch<AnnouncementCubit>().state.fields["age"].toString(),
+              initialText: context
+                  .watch<AnnouncementCubit>()
+                  .state
+                  .fields["age"]
+                  .toString(),
             ),
-
-
             Text("Full name"),
             Text("Age"),
             Text("Phone Number"),
@@ -57,6 +62,6 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
           ],
         );
       },
-    ));
+    );
   }
 }
