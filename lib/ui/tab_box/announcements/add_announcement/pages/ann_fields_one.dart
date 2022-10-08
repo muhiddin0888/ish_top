@@ -17,7 +17,9 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
       builder: (context, state) {
         return Column(
           children: [
+            const SizedBox(height: 12,),
             UniversalTextInput(
+              caption: "FISH",
               onChanged: (value) {
                 if (value.length > 3) {
                   context.read<AnnouncementCubit>().updateCurrentItem(
@@ -26,10 +28,26 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                       );
                 }
               },
-              hintText: "First Name",
+              hintText: "Falonchiyev Falonchi",
               initialText:
                   context.watch<AnnouncementCubit>().state.fields["full_name"],
             ),
+            const SizedBox(height: 12,),
+            UniversalTextInput(
+              caption: "Yosh",
+              onChanged: (value) {
+                if (value.length > 3) {
+                  context.read<AnnouncementCubit>().updateCurrentItem(
+                    fieldValue: value,
+                    fieldKey: "age",
+                  );
+                }
+              },
+              hintText: "20",
+              initialText:
+              context.watch<AnnouncementCubit>().state.fields["age"].toString(),
+            ),
+
 
             Text("Full name"),
             Text("Age"),

@@ -5,12 +5,13 @@ class UniversalTextInput extends StatelessWidget {
       {Key? key,
       required this.onChanged,
       required this.hintText,
-
+      required this.caption,
       required this.initialText})
       : super(key: key);
 
   final String hintText;
   final String initialText;
+  final String caption;
 
   final ValueChanged<String> onChanged;
 
@@ -29,6 +30,7 @@ class UniversalTextInput extends StatelessWidget {
           validator: (value) => (value!.length <= 3) ? "Error" : null,
           autovalidateMode: AutovalidateMode.always,
           decoration: InputDecoration(
+            labelText: caption,
             hintText: hintText,
             errorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.red),
