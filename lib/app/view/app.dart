@@ -89,6 +89,7 @@ class AppView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
+      debugShowCheckedModeBanner: false,
       onGenerateRoute: MyRouter.generateRoute,
       initialRoute: splashPage,
     );
