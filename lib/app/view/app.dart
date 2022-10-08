@@ -17,7 +17,7 @@ import 'package:ish_top/ui/on_boarding/on_boarding_page.dart';
 import 'package:ish_top/ui/router.dart';
 import 'package:ish_top/ui/tab_box/tab_box.dart';
 import 'package:ish_top/utils/constants.dart';
-//test
+
 class App extends StatelessWidget {
   App({super.key}) {
     _init();
@@ -89,10 +89,11 @@ class AppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: theme,
-      home: OnBoarding(),
+      home: MainOnBoardingPage(),
       // onGenerateRoute: MyRouter.generateRoute,
-      // initialRoute: splashPage,
+      // initialRoute: onBoarding,
     );
   }
 }
