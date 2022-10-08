@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ish_top/ui/tab_box/categories/categories_page.dart';
-import 'package:ish_top/ui/tab_box/favourites/favourites_page.dart';
-import 'package:ish_top/ui/tab_box/home/view/home_page.dart';
+import 'package:ish_top/ui/tab_box/announcements/announcements_page.dart';
+import 'package:ish_top/ui/tab_box/profile/home.dart';
+import 'package:ish_top/ui/tab_box/vacancies_page/vacancies_page.dart';
 import 'package:ish_top/utils/color.dart';
 
 class TabBox extends StatefulWidget {
@@ -15,9 +15,10 @@ class _TabBoxState extends State<TabBox> {
   int currentIndex = 0;
 
   List<Widget> screens = [
-    HomePage(),
-    CategoriesPage(),
-    FavouritesPage(),
+    AnnouncementsPage(),
+    VacanciesPage(),
+    ProfilePage(),
+
   ];
 
   @override

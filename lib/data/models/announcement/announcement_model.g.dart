@@ -8,7 +8,7 @@ part of 'announcement_model.dart';
 
 AnnouncementModel _$AnnouncementModelFromJson(Map<String, dynamic> json) =>
     AnnouncementModel(
-      jobType: JobType.fromJson(json['job_type'] as Map<String, dynamic>),
+      jobType: json['job_type'] as int? ?? 0,
       userId: json['user_id'] as String? ?? '',
       createdAt: json['created_at'] as String? ?? '',
       phoneNumber: json['phone_number'] as String? ?? '',
@@ -27,6 +27,7 @@ AnnouncementModel _$AnnouncementModelFromJson(Map<String, dynamic> json) =>
       level: json['level'] as String? ?? '',
       telegramUrl: json['telegram_url'] as String? ?? '',
       timeToContact: json['time_to_contact'] as String? ?? '',
+      isValid: json['is_valid'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$AnnouncementModelToJson(AnnouncementModel instance) =>
@@ -50,4 +51,5 @@ Map<String, dynamic> _$AnnouncementModelToJson(AnnouncementModel instance) =>
       'time_to_contact': instance.timeToContact,
       'cv_url': instance.cvUrl,
       'from_where': instance.fromWhere,
+      'is_valid': instance.isValid,
     };

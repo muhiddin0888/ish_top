@@ -1,4 +1,3 @@
-import 'package:ish_top/data/models/job/job_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'announcement_model.g.dart';
@@ -47,8 +46,8 @@ class AnnouncementModel {
   @JsonKey(defaultValue: "", name: "description")
   String description;
 
-  @JsonKey(name: "job_type")
-  JobType jobType;
+  @JsonKey(defaultValue: 0, name: "job_type")
+  int jobType;
 
   @JsonKey(defaultValue: "", name: "expected_salary")
   String expectedSalary;
@@ -61,6 +60,9 @@ class AnnouncementModel {
 
   @JsonKey(defaultValue: 0, name: "from_where")
   int fromWhere;
+
+  @JsonKey(defaultValue: false, name: "is_valid")
+  bool isValid;
 
   AnnouncementModel({
     required this.jobType,
@@ -82,6 +84,7 @@ class AnnouncementModel {
     required this.level,
     required this.telegramUrl,
     required this.timeToContact,
+    required this.isValid,
   });
 
   factory AnnouncementModel.fromJson(Map<String, dynamic> json) =>

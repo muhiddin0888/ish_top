@@ -4,20 +4,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:ish_top/data/models/category/category_item.dart';
-import 'package:ish_top/data/models/job/job_type.dart';
 
 class HelperRepository {
   final FirebaseFirestore _fireStore;
 
   HelperRepository({required FirebaseFirestore fireStore})
       : _fireStore = fireStore;
-
-  Stream<List<JobType>> getJobTypes() =>
-      _fireStore.collection('job_type').snapshots().map(
-            (snapshot) => snapshot.docs
-                .map((doc) => JobType.fromJson(doc.data()))
-                .toList(),
-          );
 
   Stream<List<CategoryItem>> getCategories() =>
       _fireStore.collection('categories').snapshots().map(

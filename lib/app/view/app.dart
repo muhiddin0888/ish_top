@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/app/app.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
+import 'package:ish_top/cubits/helper/helper_cubit.dart';
 import 'package:ish_top/cubits/user/user_cubit.dart';
 import 'package:ish_top/cubits/vacancy/vacancy_cubit.dart';
 import 'package:ish_top/data/repositories/announcement/announcement_repository.dart';
@@ -57,7 +58,6 @@ class App extends StatelessWidget {
             BlocProvider(
               create: (context) => AnnouncementCubit(
                 announcementRepository: context.read<AnnouncementRepository>(),
-                helperRepository: context.read<HelperRepository>(),
               ),
             ),
             BlocProvider(
@@ -69,6 +69,11 @@ class App extends StatelessWidget {
             BlocProvider(
               create: (context) => UserCubit(
                 userRepository: context.read<UserRepository>(),
+              ),
+            ),
+            BlocProvider(
+              create: (context) => HelperCubit(
+                helperRepository: context.read<HelperRepository>(),
               ),
             ),
           ],

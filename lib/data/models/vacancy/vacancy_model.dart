@@ -1,4 +1,3 @@
-import 'package:ish_top/data/models/job/job_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'vacancy_model.g.dart';
@@ -32,8 +31,11 @@ class VacancyModel {
   @JsonKey(defaultValue: "", name: "description")
   String description;
 
-  @JsonKey(name: "job_type")
-  JobType jobType;
+  @JsonKey(defaultValue: 0, name: "job_type")
+  int jobType;
+  //1-part time
+  //2-full time
+  //3 any
 
   @JsonKey(defaultValue: "", name: "recruiter_phone")
   String recruiterPhone;
@@ -64,6 +66,8 @@ class VacancyModel {
     required this.userId,
   });
 
-  factory VacancyModel.fromJson(Map<String, dynamic> json) => _$VacancyModelFromJson(json);
+  factory VacancyModel.fromJson(Map<String, dynamic> json) =>
+      _$VacancyModelFromJson(json);
+
   Map<String, dynamic> toJson() => _$VacancyModelToJson(this);
 }

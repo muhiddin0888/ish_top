@@ -15,7 +15,7 @@ VacancyModel _$VacancyModelFromJson(Map<String, dynamic> json) => VacancyModel(
       description: json['description'] as String? ?? '',
       fromWhere: json['from_where'] as int? ?? 0,
       jobTitle: json['job_title'] as String? ?? '',
-      jobType: JobType.fromJson(json['job_type'] as Map<String, dynamic>),
+      jobType: json['job_type'] as int? ?? 0,
       offeredSalary: json['offered_salary'] as String? ?? '',
       recruiterPhone: json['recruiter_phone'] as String? ?? '',
       requiredLevel: json['required_level'] as String? ?? '',

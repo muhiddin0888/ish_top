@@ -10,7 +10,7 @@ class CategoryItem {
   @JsonKey(defaultValue: "", name: "category_name")
   String categoryName;
 
-  @JsonKey(defaultValue: "", name: "name")
+  @JsonKey(defaultValue: "", name: "description")
   String description;
 
   @JsonKey(defaultValue: "", name: "created_at")

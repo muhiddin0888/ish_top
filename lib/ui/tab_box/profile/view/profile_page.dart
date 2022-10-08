@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/app/app.dart';
-import 'package:pack/pack.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
-  static Page<void> page() => const MaterialPage<void>(child: HomePage());
+  static Page<void> page() => const MaterialPage<void>(child: ProfilePage());
 
   @override
   Widget build(BuildContext context) {
