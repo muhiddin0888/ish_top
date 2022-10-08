@@ -94,6 +94,8 @@ class AppView extends StatelessWidget {
       home: MainOnBoardingPage(),
       // onGenerateRoute: MyRouter.generateRoute,
       // initialRoute: onBoarding,
+      onGenerateRoute: MyRouter.generateRoute,
+      initialRoute: splashPage,
     );
   }
 }

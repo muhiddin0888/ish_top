@@ -1,15 +1,13 @@
 name: ish_top
 description: A new Flutter project.
-
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
   sdk: '>=2.18.1 <3.0.0'
-
 dependencies:
   flutter:
+    # qaren fokus korsataman hozir qarab turin
     sdk: flutter
   authentication_repository:
     path: packages/authentication_repository
