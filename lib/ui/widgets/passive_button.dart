@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ish_top/utils/color.dart';
 
-class ActiveButton extends StatelessWidget {
-  ActiveButton({
+class PassiveButton extends StatelessWidget {
+  PassiveButton({
     Key? key,
     required this.buttonText,
     this.width,
@@ -19,13 +18,13 @@ class ActiveButton extends StatelessWidget {
       height: 56,
       width: width,
       decoration: BoxDecoration(
+        border: Border.all(color: Colors.black),
         borderRadius: BorderRadius.circular(5),
-        color: MyColors.buttonColor,
+        color: Colors.transparent,
       ),
       child: TextButton(
         style: TextButton.styleFrom(
-          primary: Colors.white,
-          foregroundColor: Colors.white,
+          primary: Colors.black,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
@@ -35,7 +34,7 @@ class ActiveButton extends StatelessWidget {
           child: Text(
             buttonText,
             style: const TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),

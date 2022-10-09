@@ -11,5 +11,3 @@ Future<void> main() async {
 
   runApp(App());
 }
-
-
