@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "241346212587",
+    "project_id": "ishtop2",
+    "storage_bucket": "ishtop2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241346212587:android:7259b56be9f2e5182644ae",
+        "android_client_info": {
+          "package_name": "com.example.ish_top"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "241346212587-bbqceh2e41thlp3ei3bjl5cncq794lr1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAY7KWGJGpPa77swC-J1DRs-xGCPgMkbNg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "241346212587-bbqceh2e41thlp3ei3bjl5cncq794lr1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

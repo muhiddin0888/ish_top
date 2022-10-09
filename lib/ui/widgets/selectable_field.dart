@@ -26,7 +26,7 @@ class _SelectableFieldState extends State<SelectableField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: DropdownButton<String>(
         value: currentValue,
         //isExpanded: true,
@@ -52,9 +52,7 @@ class _SelectableFieldState extends State<SelectableField> {
             var val = widget.items[index];
             return DropdownMenuItem<String>(
               value: val,
-              child: Row(children: [
-                Icon(Icons.ac_unit),Text(val)
-              ],),
+              child:Text(val)
             );
           },
         ),
