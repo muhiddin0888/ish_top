@@ -67,7 +67,7 @@ class MainOnBoardingPage extends StatelessWidget {
                   children: [
                     TextButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, tabBox);
+                          Navigator.pushReplacementNamed(context, mainPage);
                         },
                         child: const Text(
                           "Skip",
@@ -83,7 +83,7 @@ class MainOnBoardingPage extends StatelessWidget {
                       onPressed: () {
                         currentPage++;
                         if (currentPage == 6) {
-                          Navigator.pushReplacementNamed(context, tabBox);
+                          Navigator.pushReplacementNamed(context, mainPage);
                         } else {
                           pageController.animateToPage(
                             currentPage,
