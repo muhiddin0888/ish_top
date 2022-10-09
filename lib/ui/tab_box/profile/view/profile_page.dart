@@ -2,11 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/app/app.dart';
 import 'package:ish_top/ui/widgets/active_button.dart';
+import 'package:ish_top/ui/widgets/category_item_button.dart';
+import 'package:ish_top/ui/widgets/search_text_field.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
   static Page<void> page() => const MaterialPage<void>(child: ProfilePage());
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  bool isActive = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +33,8 @@ class ProfilePage extends StatelessWidget {
         ],
       ),
       body: Scaffold(
-        body: SizedBox(
+        body: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -39,6 +49,33 @@ class ProfilePage extends StatelessWidget {
                 buttonText: 'Next',
                 width: 158,
                 onPressed: () {},
+              ),
+              const SizedBox(height: 15),
+              SearchTextField(controller: TextEditingController()),
+              const SizedBox(height: 15),
+              Row(
+                children: [
+                  CategoryItemButton(
+                    buttonText: 'All',
+                    onPressed: () {
+                      setState(() {
+                        isActive = !isActive;
+                      });
+                    },
+                    isActive: isActive,
+                  ),
+                  const SizedBox(width: 16),
+                  CategoryItemButton(
+                    buttonText: 'Delivered',
+                    onPressed: () {
+                      setState(() {
+                        isActive = !isActive;
+                      });
+                    },
+                    isActive: !isActive,
+                  ),
+
+                ],
               ),
             ],
           ),
