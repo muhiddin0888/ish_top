@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/app/app.dart';
 import 'package:ish_top/ui/widgets/active_button.dart';
 import 'package:ish_top/ui/widgets/category_item_button.dart';
+import 'package:ish_top/ui/widgets/passive_button.dart';
 import 'package:ish_top/ui/widgets/search_text_field.dart';
 import 'package:ish_top/ui/widgets/selectable_button.dart';
 
@@ -48,7 +49,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: const Icon(Icons.edit),
               ),
               ActiveButton(
-                buttonText: 'Next',
+                buttonText: 'Active Button',
+                width: 158,
+                onPressed: () {},
+              ),
+              const SizedBox(height: 15),
+              PassiveButton(
+                buttonText: 'Passive Button',
                 width: 158,
                 onPressed: () {},
               ),
