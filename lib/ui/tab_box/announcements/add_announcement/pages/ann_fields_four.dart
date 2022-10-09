@@ -61,3 +61,9 @@ class _AnnFieldsFourState extends State<AnnFieldsFour> {
     );
   }
 }
+// Yes oxshadi boshqa endi bunaqa qimen Ozi
+// boldi rahamat endi hozir push qililik o'zimizani branchga
+// ok man orgataman
+// Birinchi bolib branch tanlimiz
+// Mana ozimizni branchda turibmiz endi push and commit qilamiz
+// commit and push qilamiz
