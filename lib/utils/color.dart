@@ -5,6 +5,9 @@ class MyColors {
   static const Color c_2C557D = Color(0xFF2C557D);
   static const Color c_FAFAFD = Color(0xFFFAFAFD);
   static const Color buttonColor = Color(0xFF2C557D);
+  static const Color C_95969D = Color(0xFF95969D);
+  static const Color C_356899 = Color(0xFF356899);
+  static const Color C_CACBCE = Color(0xFFCACBCE);
   static const Color primaryColor = Color(0xFF27459F);
   static const Color backgroundColor = Color(0xFFF3F5F9);
   static const Color c_0D0D26 = Color(0xFF0D0D26);
