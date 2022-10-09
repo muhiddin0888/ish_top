@@ -121,53 +121,7 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
               // Text("Telegram Url"),
               // Text("Address"),
             ],
-          ),
-        return Column(
-          children: [
-            const SizedBox(
-              height: 12,
-            ),
-            UniversalTextInput(
-              caption: "FISH",
-              onChanged: (value) {
-                if (value.length > 3) {
-                  context.read<AnnouncementCubit>().updateCurrentItem(
-                        fieldValue: value,
-                        fieldKey: "full_name",
-                      );
-                }
-              },
-              hintText: "Falonchiyev Falonchi",
-              initialText:
-                  context.watch<AnnouncementCubit>().state.fields["full_name"],
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            UniversalTextInput(
-              caption: "Yosh",
-              onChanged: (value) {
-                if (value.length > 3) {
-                  context.read<AnnouncementCubit>().updateCurrentItem(
-                        fieldValue: value,
-                        fieldKey: "age",
-                      );
-                }
-              },
-              hintText: "20",
-              initialText: context
-                  .watch<AnnouncementCubit>()
-                  .state
-                  .fields["age"]
-                  .toString(),
-            ),
-            Text("Full name"),
-            Text("Age"),
-            Text("Phone Number"),
-            Text("Telegram Url"),
-            Text("Address"),
-          ],
-        );
+          ));
       },
     );
   }

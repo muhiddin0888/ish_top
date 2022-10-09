@@ -8,7 +8,6 @@ import 'package:ish_top/ui/widgets/active_button.dart';
 import 'package:ish_top/ui/widgets/custom_app_bar.dart';
 import 'package:ish_top/utils/color.dart';
 
-import '../../../widgets/active_button.dart';
 
 class AddAnnouncementPage extends StatefulWidget {
   const AddAnnouncementPage({Key? key}) : super(key: key);
@@ -40,30 +39,7 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
         },
 
       ),
-      body: Column(
-        children: [
-          TopLeaderView(currentPage: currentPage + 1), // 1, 2, 3, 4
-          Expanded(
-              child: PageView(
-            controller: pageController,
-            onPageChanged: (pageNumber) {
-              setState(() {
-                currentPage = pageNumber;
-              });
-            },
-            children: [
-              AnnFieldsOne(),
-              AnnFieldsTwo(),
-              AnnFieldsThree(),
-              AnnFieldsFour(),
-            ],
-          )),
-          SizedBox(
-            height: 50,
-              child: ActiveButton(buttonText: 'Next', onPressed: () {  },),
 
-          )
-        ],
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
