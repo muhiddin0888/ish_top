@@ -16,7 +16,7 @@ class SixthOnBoardingPage extends StatelessWidget {
           ),
         ),
         Text(
-          "Search your dream job fast and ease",
+          "Search your dream job fast and ease",textAlign: TextAlign.center,
           style: MyTextStyle.sfProSemibold.copyWith(
             fontSize: 28,
             color: MyColors.c_0D0D26,
