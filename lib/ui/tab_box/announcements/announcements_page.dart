@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/cubits/helper/helper_cubit.dart';
+import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/constants.dart';
 
 class AnnouncementsPage extends StatefulWidget {
@@ -20,8 +21,10 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: MyColors.backgroundColor,
       appBar: AppBar(
-        title: Text("E'lonlar!"),
+        title: const Text("E'lonlar!"),
+
         actions: [
           IconButton(
               onPressed: () {
@@ -33,7 +36,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
       body: BlocBuilder<HelperCubit, HelperState>(
         builder: (context, state) {
           if (state is GetCategoriesInProgress) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (state is GetCategoriesInSuccess) {

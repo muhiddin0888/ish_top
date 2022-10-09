@@ -5,6 +5,9 @@ import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/ann_fiel
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/ann_fields_two.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/widgets/top_leader_view.dart';
 import 'package:ish_top/ui/widgets/custom_app_bar.dart';
+import 'package:ish_top/utils/color.dart';
+
+import '../../../widgets/active_button.dart';
 
 class AddAnnouncementPage extends StatefulWidget {
   const AddAnnouncementPage({Key? key}) : super(key: key);
@@ -20,7 +23,9 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: MyColors.backgroundColor,
       appBar: CustomAppBar(
+
         onBackTap: () {
           if (currentPage >= 0) {
             setState(() {
@@ -32,6 +37,7 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
             Navigator.pop(context);
           }
         },
+
       ),
       body: Column(
         children: [
@@ -53,10 +59,8 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
           )),
           SizedBox(
             height: 50,
-            child: TextButton(
-              onPressed: () {},
-              child: Text("Next"),
-            ),
+              child: ActiveButton(buttonText: 'Next', onPressed: () {  },),
+
           )
         ],
       ),
