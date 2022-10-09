@@ -38,7 +38,14 @@ class _AnnFieldsFourState extends State<AnnFieldsFour> {
                   style: MyTextStyle.sfProLight.copyWith(fontSize: 18),
                 ),
                 const SizedBox(height: 10),
-                const MyContainer(text: 'Upload a Doc/Docx/PDF',), // Upload a Doc/Docx/PDF
+
+                // Azambek qaren file yuklamsizdan oldin MyContainer turadi yukalab bo'ganizdan keyin // UrlContainer
+                // ishlatshiz kere shuni bitta bool olib qilasizmi endi bilmadim
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: MyContainer(text: 'Upload a Doc/Docx/PDF',) // UrlContainer(onTap: () {  }, title: '', subTitle: '',),
+                ) ,// Upload a Doc/Docx/PDF
                 const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -61,9 +68,6 @@ class _AnnFieldsFourState extends State<AnnFieldsFour> {
     );
   }
 }
-// Yes oxshadi boshqa endi bunaqa qimen Ozi
-// boldi rahamat endi hozir push qililik o'zimizani branchga
-// ok man orgataman
-// Birinchi bolib branch tanlimiz
-// Mana ozimizni branchda turibmiz endi push and commit qilamiz
-// commit and push qilamiz
+
+
+
