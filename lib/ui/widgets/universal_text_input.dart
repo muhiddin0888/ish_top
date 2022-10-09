@@ -32,22 +32,23 @@ class UniversalTextInput extends StatelessWidget {
           onChanged: onChanged,
           validator: (value) {
             if (keyBoardType == TextInputType.text) {
-              return (value!.length <= 3) ? "Error" : null;
+              return (value!.length <= 3) ? "Ism sharfingizni kiriting" : null;
             } else if (keyBoardType == TextInputType.number) {
-              for (int i = 0; i < value!.length; i++) {
+              for (int i = 0; i < value!.length; i++)
+              {
                 if (value[i] == "." ||
                     value[i] == " " ||
                     value[i] == "*" ||
                     value[i] == "-" ||
-                    value[i] == "#") {
-                  return "Error";
+                    value[i] == "#" ||
+                    value[i] == "," ) {
+                  return "Raqam kiriting";
                 }
               }
-              // if(!(value!.contains('.')||  value.contains('#')||  value.contains(' ')||  value.contains('*')||  value.contains('-'))){
               return (value.isEmpty ||
                       (value.isNotEmpty && int.parse(value) > 100 ||
-                          int.parse(value) <= 0))
-                  ? "Error"
+                          int.parse(value) < 12))
+                  ? "Yoshingzni togri kiriting"
                   : null;
               // }
 
@@ -57,20 +58,27 @@ class UniversalTextInput extends StatelessWidget {
                       !value.startsWith("+"))
                   ? "Error"
                   : null;
-            } else if (keyBoardType == TextInputType.streetAddress) {
-              return (value!.length < 13 || value.isEmpty) ? "Error" : null;
+            }
+            else if (keyBoardType == TextInputType.streetAddress) {
+              return (value!.length > 13 || value.isEmpty) ? "Manzilingizni kiriting" : null;
             }
             return null;
           },
-          autovalidateMode: AutovalidateMode.always,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             labelText: caption,
             hintText: hintText,
-            errorBorder: OutlineInputBorder(
+            // floatingLabelBehavior: FloatingLabelBehavior.never,
+            enabled: true,
+            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue,width: 1) ),
+            errorBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.red),
             ),
+            focusedBorder:  OutlineInputBorder(borderSide: BorderSide(color: Colors.blue,width: 1) ),
           ),
+
         ),
+
       ),
     );
   }

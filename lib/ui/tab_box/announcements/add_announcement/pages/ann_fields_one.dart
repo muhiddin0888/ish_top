@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
 import 'package:ish_top/ui/widgets/universal_text_input.dart';
+import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/style.dart';
 
 class AnnFieldsOne extends StatefulWidget {
@@ -23,12 +24,7 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                 height: 12,
               ),
               Center(
-                child: Text(
-                  "Your Personal Information",
-                  style: MyTextStyle.sfProBlack.copyWith(fontSize: 20)
-
-                ),
-
+                child: Text("Your Personal Information", style: MyTextStyle.sfProBlack.copyWith(fontSize: 20)),
               ),
               const SizedBox(
                 height: 12,
@@ -86,6 +82,7 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
               ),
               UniversalTextInput(
                 caption: "Telegram Url",
+
                 onChanged: (value) {
                   if (value.length > 13) {
                     context.read<AnnouncementCubit>().updateCurrentItem(
@@ -101,27 +98,42 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
               const SizedBox(
                 height: 12,
               ),
-              UniversalTextInput(
-                caption: "Address",
-                onChanged: (value) {
-                  if (value.length > 5) {
-                    context.read<AnnouncementCubit>().updateCurrentItem(
-                          fieldValue: value,
-                          fieldKey: "address",
-                        );
-                  }
-                },
-                hintText: "Tashkent.sh",
-                initialText: context.watch<AnnouncementCubit>().state.fields["telegram_url"].toString(),
-                keyBoardType: TextInputType.streetAddress,
-              ),
-              // Text("Full name"),
-              // Text("Age"),
-              // Text("Phone Number"),
-              // Text("Telegram Url"),
-              // Text("Address"),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 5,
+                    child: UniversalTextInput(
+                      caption: "Address",
+                      onChanged: (value) {
+                        if (value.length > 5) {
+                          context.read<AnnouncementCubit>().updateCurrentItem(
+                                fieldValue: value,
+                                fieldKey: "address",
+                              );
+                        }
+                      },
+                      hintText: "Tashkent.sh",
+                      initialText: context.watch<AnnouncementCubit>().state.fields["telegram_url"].toString(),
+                      keyBoardType: TextInputType.streetAddress,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: InkWell(
+                      onTap: () {},
+                      child: const Icon(
+                        Icons.location_on_rounded,
+                        size: 70,
+                        color: MyColors.primaryColor,
+                      ),
+                    ),
+                  )
+                ],
+              )
             ],
-          ));
+          ),
+        );
       },
     );
   }
