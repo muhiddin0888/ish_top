@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "241346212587",
-    "project_id": "ishtop2",
-    "storage_bucket": "ishtop2.appspot.com"
+    "project_number": "250336671533",
+    "project_id": "ish-top",
+    "storage_bucket": "ish-top.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:241346212587:android:7259b56be9f2e5182644ae",
+        "mobilesdk_app_id": "1:250336671533:android:f9b16ab62d49e531b845a4",
         "android_client_info": {
           "package_name": "com.example.ish_top"
         }
       },
       "oauth_client": [
         {
-          "client_id": "241346212587-bbqceh2e41thlp3ei3bjl5cncq794lr1.apps.googleusercontent.com",
+          "client_id": "250336671533-g9jovo1epi4cci6h5didldj3s64lip4t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ish_top",
+            "certificate_hash": "caeb2add9bf8d3edaa42a709efeea10dc0e8c787"
+          }
+        },
+        {
+          "client_id": "250336671533-ormdnsq3o9id3idrbqbe7rh494n5empo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAY7KWGJGpPa77swC-J1DRs-xGCPgMkbNg"
+          "current_key": "AIzaSyCAgOgkqP--I_ZtDoHPjqNZz1pnX7pv7yY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "241346212587-bbqceh2e41thlp3ei3bjl5cncq794lr1.apps.googleusercontent.com",
+              "client_id": "250336671533-ormdnsq3o9id3idrbqbe7rh494n5empo.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
