@@ -6,8 +6,10 @@ class MyIcons {
   static const imageSample = "assets/images/image_sample.svg";
   static const facebook = "assets/svg/facebook.svg";
   static const search = "assets/svg/search.svg";
+  static const time = "assets/svg/time.svg";
 
   //.jpg files
 
   //.lottie
+  static const tick = "assets/lottie/tick.json";
 }

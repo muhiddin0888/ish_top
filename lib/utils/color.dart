@@ -4,6 +4,7 @@ class MyColors {
   static const Color buttonColor = Color(0xFF2C557D);
   static const Color C_95969D = Color(0xFF95969D);
   static const Color C_356899 = Color(0xFF356899);
+  static const Color C_CACBCE = Color(0xFFCACBCE);
   static const Color primaryColor = Color(0xFF27459F);
   static const Color backgroundColor = Color(0xFFF3F5F9);
   static const Color transparent = Colors.transparent;
