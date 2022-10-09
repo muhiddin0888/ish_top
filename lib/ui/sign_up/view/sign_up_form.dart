@@ -50,6 +50,8 @@ class SignUpForm extends StatelessWidget {
               style: MyTextStyle.sfProRegular.copyWith(fontSize: 15, color: MyColors.C_95969D),
             ),
             const SizedBox(height: 25),
+            _UserFullNameInput(),
+            const SizedBox(height: 15),
 
             _EmailInput(),
             const SizedBox(height: 15),
@@ -62,7 +64,6 @@ class SignUpForm extends StatelessWidget {
 
             _SignUpButton(),
             const SizedBox(height: 12),
-
 
             Row(
               children: [
@@ -113,6 +114,45 @@ class SignUpForm extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _UserFullNameInput extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SignUpCubit, SignUpState>(
+      buildWhen: (previous, current) => previous.userName != current.userName,
+      builder: (context, state) {
+        return TextField(
+          key: const Key('signUpForm_userNameInput_textField'),
+          style: MyTextStyle.sfProRegular.copyWith(color: MyColors.C_0D0D26, fontSize: 16),
+          onChanged: (email) => context.read<SignUpCubit>().userNameChanged(email),
+          keyboardType: TextInputType.emailAddress,
+          decoration: InputDecoration(
+            prefixIcon: Icon(Icons.person,
+                color: state.userName.isEmpty
+                    ? MyColors.C_95969D.withOpacity(0.7)
+                    : state.userName.length < 2 && state.userName.isNotEmpty
+                        ? Colors.red.withOpacity(0.8)
+                        : MyColors.C_0D0D26.withOpacity(0.7)),
+            hintText: 'Full Name',
+            hintStyle: MyTextStyle.sfProMedium.copyWith(
+              fontSize: 16,
+              color: state.userName.length < 2 && state.userName.isNotEmpty ? Colors.red.withOpacity(0.8) : MyColors.C_95969D.withOpacity(0.7),
+            ),
+            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: MyColors.C_0D0D26.withOpacity(0.7))),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: state.userName.isNotEmpty ? MyColors.C_0D0D26.withOpacity(0.7) : MyColors.C_95969D.withOpacity(0.7))),
+            errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.red.withOpacity(0.7))),
+            focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: Colors.red.withOpacity(0.7))),
+            errorText: state.userName.length < 2 && state.userName.isNotEmpty ? 'Invalid Name' : null,
+            errorStyle: MyTextStyle.sfProRegular.copyWith(
+              color: Colors.red.withOpacity(0.8),
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -237,7 +277,7 @@ class _ConfirmPasswordInput extends StatelessWidget {
                       : state.password.invalid
                           ? Colors.red.withOpacity(0.8)
                           : MyColors.C_0D0D26.withOpacity(0.7)),
-              hintText: 'Password',
+              hintText: 'Confirm Password',
               hintStyle: MyTextStyle.sfProMedium.copyWith(
                 fontSize: 16,
                 color: state.password.invalid ? Colors.red.withOpacity(0.8) : MyColors.C_95969D.withOpacity(0.7),
@@ -267,10 +307,10 @@ class _SignUpButton extends StatelessWidget {
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
         return state.status.isSubmissionInProgress
-            ? const Center(child:  CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : ActiveButton(
                 key: const Key('signUpForm_continue_raisedButton'),
-                onPressed: state.status.isValidated
+                onPressed: state.status.isValidated && state.userName.length >= 2
                     ? () async {
                         await context.read<SignUpCubit>().signUpFormSubmitted();
                         final user = BlocProvider.of<AppBloc>(context).state.user;
@@ -279,14 +319,16 @@ class _SignUpButton extends StatelessWidget {
                           UserModel userModel = UserModel(
                             imageUrl: 'https://www.kindpng.com/picc/m/153-1530388_mario-head-png-png-download-people-profile-pic.png',
                             createdAt: DateTime.now(),
-                            fullName: '',
+                            fullName: state.userName,
                             phoneNumber: '',
                             userId: user.id,
                           );
                           BlocProvider.of<UserCubit>(context).postUser(userModel);
                         }
                       }
-                    : (){},
+                    : () {
+                        MyUtils.getMyToast(message: 'Fill all fields');
+                      },
                 buttonText: 'Register',
               );
       },

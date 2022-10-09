@@ -233,14 +233,15 @@ class _LoginButton extends StatelessWidget {
         return state.status.isSubmissionInProgress
             ? const Center(child: CircularProgressIndicator())
             : ActiveButton(
+                key: const Key('loginForm_continue_raisedButton'),
                 buttonText: 'Log in',
-                onPressed: () {
-                  state.status.isValidated ? () => context.read<LoginCubit>().logInWithCredentials() : MyUtils.getMyToast(message: "Please fill all Fields!");
+                onPressed: () async{
+                  state.status.isValidated ? await context.read<LoginCubit>().logInWithCredentials() : MyUtils.getMyToast(message: "Please field currently!");
                 },
               );
         // TODO O'ZINING ESKI BUTTONI AGAR ISHLAMASA QAYTARAMIZ
         // ElevatedButton(
-        //         key: const Key('loginForm_continue_raisedButton'),
+        //          key: const Key('loginForm_continue_raisedButton'),
         //         style: ElevatedButton.styleFrom(
         //           shape: RoundedRectangleBorder(
         //             borderRadius: BorderRadius.circular(30),
