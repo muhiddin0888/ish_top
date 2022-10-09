@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ish_top/ui/on_boarding/pages/fifth_on_boarding_page.dart';
 import 'package:ish_top/ui/on_boarding/pages/first_on_boarding_page.dart';
 import 'package:ish_top/ui/on_boarding/pages/fourth_on_boarding_page.dart';
 import 'package:ish_top/ui/on_boarding/pages/second_on_boarding_page.dart';
+import 'package:ish_top/ui/on_boarding/pages/sixth_on_boarding_page.dart';
 import 'package:ish_top/ui/on_boarding/pages/third_on_boarding_page.dart';
 import 'package:ish_top/ui/on_boarding/widgets/half_circle_on_top.dart';
 import 'package:ish_top/ui/widgets/active_button.dart';
@@ -45,6 +47,8 @@ class MainOnBoardingPage extends StatelessWidget {
                     SecondOnBoardingPage(),
                     ThirdOnBoardingPage(),
                     FourthOnBoardingPage(),
+                    FifthOnBoardingPage(),
+                    SixthOnBoardingPage()
                   ],
                 ),
               ),
