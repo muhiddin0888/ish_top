@@ -7,11 +7,13 @@ class CategoryItemButton extends StatelessWidget {
     required this.buttonText,
     required this.onPressed,
     this.isActive = false,
+    this.icon,
   }) : super(key: key);
 
   final String buttonText;
   final VoidCallback onPressed;
   final bool isActive;
+  final Widget? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +28,25 @@ class CategoryItemButton extends StatelessWidget {
         onPressed: onPressed,
         style: TextButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          primary: (isActive) ? Colors.white : Colors.black,
+          primary: (isActive) ? Colors.white : Colors.grey.shade700,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(100),
           ),
         ),
-        child: Center(
-          child: Text(
-            buttonText,
-            style: TextStyle(
-              color: (isActive) ? Colors.white : MyColors.C_95969D,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            icon ?? const SizedBox(),
+            SizedBox(width: (icon != null) ? 5 : 0),
+            Text(
+              buttonText,
+              style: TextStyle(
+                color: (isActive) ? Colors.white : MyColors.C_95969D,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
