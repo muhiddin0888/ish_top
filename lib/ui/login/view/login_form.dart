@@ -186,16 +186,15 @@ class _PasswordInput extends StatelessWidget {
             obscureText: isVisibility,
             decoration: InputDecoration(
               suffixIcon: GestureDetector(
-                  onTap: () {
-                    isVisibility = !isVisibility;
-                    setState(() {});
-                  },
-                  child: Icon(
-                    isVisibility ? Icons.visibility : Icons.visibility_off,
-                    color: state.password.pure ? MyColors.C_95969D.withOpacity(0.7) : MyColors.C_0D0D26.withOpacity(0.7),
-                  ),
+                onTap: () {
+                  isVisibility = !isVisibility;
+                  setState(() {});
+                },
+                child: Icon(
+                  isVisibility ? Icons.visibility : Icons.visibility_off,
+                  color: state.password.pure ? MyColors.C_95969D.withOpacity(0.7) : MyColors.C_0D0D26.withOpacity(0.7),
                 ),
-
+              ),
               prefixIcon: Icon(Icons.vpn_key_rounded,
                   color: state.password.pure
                       ? MyColors.C_95969D.withOpacity(0.7)
@@ -232,7 +231,7 @@ class _LoginButton extends StatelessWidget {
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
         return state.status.isSubmissionInProgress
-            ? const CircularProgressIndicator()
+            ? const Center(child: CircularProgressIndicator())
             : ActiveButton(
                 buttonText: 'Log in',
                 onPressed: () {
