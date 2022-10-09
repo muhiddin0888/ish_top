@@ -91,9 +91,7 @@ class AppView extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme,
-      home: MainOnBoardingPage(),
-      // onGenerateRoute: MyRouter.generateRoute,
-      // initialRoute: onBoarding,
+      // home: MainOnBoardingPage(),
       onGenerateRoute: MyRouter.generateRoute,
       initialRoute: splashPage,
     );

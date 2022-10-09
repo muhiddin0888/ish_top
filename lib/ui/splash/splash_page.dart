@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ish_top/app/bloc/app_bloc.dart';
 import 'package:ish_top/ui/widgets/white_flat_appbar.dart';
 import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/constants.dart';
@@ -13,8 +15,13 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Future<void> _init() async {
+    String userId = BlocProvider.of<AppBloc>(context).state.user.id;
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushReplacementNamed(context, mainPage);
+      if(userId == ''){
+        Navigator.pushReplacementNamed(context, onBoarding);
+      }else{
+        Navigator.pushReplacementNamed(context, mainPage);
+      }
     });
   }
 
