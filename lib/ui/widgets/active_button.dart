@@ -24,6 +24,7 @@ class ActiveButton extends StatelessWidget {
       ),
       child: TextButton(
         style: TextButton.styleFrom(
+          primary: Colors.white,
           // primary: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),

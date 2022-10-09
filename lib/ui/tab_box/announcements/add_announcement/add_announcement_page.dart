@@ -4,6 +4,7 @@ import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/ann_fiel
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/ann_fields_three.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/ann_fields_two.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/widgets/top_leader_view.dart';
+import 'package:ish_top/ui/widgets/active_button.dart';
 import 'package:ish_top/ui/widgets/custom_app_bar.dart';
 import 'package:ish_top/utils/color.dart';
 
@@ -63,6 +64,29 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
 
           )
         ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            TopLeaderView(currentPage: currentPage + 1), // 1, 2, 3, 4
+            Expanded(
+                child: PageView(
+              controller: pageController,
+              onPageChanged: (pageNumber) {
+                setState(() {
+                  currentPage = pageNumber;
+                });
+              },
+              children: const [
+                AnnFieldsOne(),
+                AnnFieldsTwo(),
+                AnnFieldsThree(),
+                AnnFieldsFour(),
+              ],
+            )),
+            ActiveButton(buttonText: "Next", onPressed: () {}),
+          ],
+        ),
       ),
     );
   }

@@ -91,6 +91,7 @@ class AppView extends StatelessWidget {
       theme: theme,
       onGenerateRoute: MyRouter.generateRoute,
       initialRoute: splashPage,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
