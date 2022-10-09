@@ -7,6 +7,7 @@ import 'package:ish_top/ui/widgets/passive_button.dart';
 import 'package:ish_top/ui/widgets/search_text_field.dart';
 import 'package:ish_top/ui/widgets/selectable_button.dart';
 
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -22,7 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    // final textTheme = Theme.of(context).textTheme;
     final user = context.select((AppBloc bloc) => bloc.state.user);
     return Scaffold(
       resizeToAvoidBottomInset: false,

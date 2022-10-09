@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyColors {
+  static const Color buttonColor = Color(0xFF2C557D);
   static const Color c_E4E5E7 = Color(0xFFE4E5E7);
   static const Color c_2C557D = Color(0xFF2C557D);
   static const Color c_FAFAFD = Color(0xFFFAFAFD);
@@ -17,8 +18,6 @@ class MyColors {
   static const Color black = Colors.black;
   static const Color textColor = Color(0xFF3E434D);
   static const Color C_F2F2F2 = Color(0xFFF2F2F2);
-  static const Color c_95969D = Color(0xFF95969D);
-
 }
 
 class Palette {

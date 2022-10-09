@@ -10,12 +10,14 @@ class AnnFieldsThree extends StatefulWidget {
 class _AnnFieldsThreeState extends State<AnnFieldsThree> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: Column(children: [
-      Text("Aim"),
-      Text("Job Title"),
-      Text("Description"),
-      Text("Expected Salary"),
-      Text("Time to contact"),
-    ],));
+    return Column(
+      children: const [
+        Text("Aim"),
+        Text("Job Title"),
+        Text("Description"),
+        Text("Expected Salary"),
+        Text("Time to contact"),
+      ],
+    );
   }
 }

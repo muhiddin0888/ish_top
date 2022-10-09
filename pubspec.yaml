@@ -38,7 +38,6 @@ dependencies:
   intl: ^0.17.0
   cloud_firestore: ^3.4.7
   firebase_storage: ^10.3.8
-
   cupertino_icons: ^1.0.2
   smooth_page_indicator: ^1.0.0+2
 

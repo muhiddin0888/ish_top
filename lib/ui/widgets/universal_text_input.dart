@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
 class UniversalTextInput extends StatelessWidget {
-  const UniversalTextInput(
-      {Key? key,
-      required this.onChanged,
-      required this.hintText,
-      required this.caption,
-      required this.initialText})
-      : super(key: key);
+  const UniversalTextInput({
+    Key? key,
+    required this.onChanged,
+    required this.hintText,
+    required this.caption,
+    required this.initialText,
+    required this.keyBoardType,
+  }) : super(key: key);
 
   final String hintText;
   final String initialText;
   final String caption;
+  final TextInputType keyBoardType;
 
   final ValueChanged<String> onChanged;
 
@@ -25,6 +27,7 @@ class UniversalTextInput extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: TextFormField(
+          keyboardType: keyBoardType,
           controller: controller,
           onChanged: onChanged,
           validator: (value) => (value!.length <= 3) ? "Error" : null,

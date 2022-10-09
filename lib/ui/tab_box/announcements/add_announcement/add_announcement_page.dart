@@ -4,7 +4,10 @@ import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/ann_fiel
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/ann_fields_three.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/ann_fields_two.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/widgets/top_leader_view.dart';
+import 'package:ish_top/ui/widgets/active_button.dart';
 import 'package:ish_top/ui/widgets/custom_app_bar.dart';
+import 'package:ish_top/utils/color.dart';
+
 
 class AddAnnouncementPage extends StatefulWidget {
   const AddAnnouncementPage({Key? key}) : super(key: key);
@@ -20,7 +23,9 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: MyColors.backgroundColor,
       appBar: CustomAppBar(
+
         onBackTap: () {
           if (currentPage >= 0) {
             setState(() {
@@ -32,33 +37,32 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
             Navigator.pop(context);
           }
         },
+
       ),
-      body: Column(
-        children: [
-          TopLeaderView(currentPage: currentPage + 1), // 1, 2, 3, 4
-          Expanded(
-              child: PageView(
-            controller: pageController,
-            onPageChanged: (pageNumber) {
-              setState(() {
-                currentPage = pageNumber;
-              });
-            },
-            children: [
-              AnnFieldsOne(),
-              AnnFieldsTwo(),
-              AnnFieldsThree(),
-              AnnFieldsFour(),
-            ],
-          )),
-          SizedBox(
-            height: 50,
-            child: TextButton(
-              onPressed: () {},
-              child: Text("Next"),
-            ),
-          )
-        ],
+
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            TopLeaderView(currentPage: currentPage + 1), // 1, 2, 3, 4
+            Expanded(
+                child: PageView(
+              controller: pageController,
+              onPageChanged: (pageNumber) {
+                setState(() {
+                  currentPage = pageNumber;
+                });
+              },
+              children: const [
+                AnnFieldsOne(),
+                AnnFieldsTwo(),
+                AnnFieldsThree(),
+                AnnFieldsFour(),
+              ],
+            )),
+            ActiveButton(buttonText: "Next", onPressed: () {}),
+          ],
+        ),
       ),
     );
   }

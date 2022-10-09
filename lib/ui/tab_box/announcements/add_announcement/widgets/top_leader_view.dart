@@ -36,7 +36,6 @@ class TopLeaderView extends StatelessWidget {
             ),
           ),
           getRoundedWidget(currentPage >= 4, "4"),
-
         ],
       ),
     );
@@ -47,14 +46,13 @@ class TopLeaderView extends StatelessWidget {
       height: 30,
       width: 30,
       decoration: BoxDecoration(
-        color: isActive ? Colors.blue : Colors.grey,
+        color: isActive ? Color(0xff356899) : Color(0xff95969d),
         shape: BoxShape.circle,
       ),
       child: Center(
         child: Text(
           text,
-          style: MyTextStyle.sfProBold.copyWith(
-              color: isActive ? Colors.white : Colors.black, fontSize: 16),
+          style: MyTextStyle.sfProBold.copyWith(color: Colors.white),
         ),
       ),
     );

@@ -10,9 +10,11 @@ class AnnFieldsFour extends StatefulWidget {
 class _AnnFieldsFourState extends State<AnnFieldsFour> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: Column(children: [
-      Text("Pdg tanlaydi firebasedan url olib keladi "),
-      Text("yerdan turib ishlashini tanlaydi masofadan ofisdan"),
-    ],));
+    return Column(
+      children: [
+        Text("Pdg tanlaydi firebasedan url olib keladi "),
+        Text("yerdan turib ishlashini tanlaydi masofadan ofisdan"),
+      ],
+    );
   }
 }
