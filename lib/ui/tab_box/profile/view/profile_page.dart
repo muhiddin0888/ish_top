@@ -24,6 +24,7 @@ class _ProfilePageState extends State<ProfilePage> {
     final textTheme = Theme.of(context).textTheme;
     final user = context.select((AppBloc bloc) => bloc.state.user);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Profile'),
         actions: <Widget>[
@@ -34,8 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
           )
         ],
       ),
-      body: Scaffold(
-        body: Container(
+      body: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           width: double.infinity,
           child: Column(
@@ -96,7 +96,6 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           ),
         ),
-      ),
     );
   }
 }
