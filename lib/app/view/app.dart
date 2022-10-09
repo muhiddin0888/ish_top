@@ -46,6 +46,9 @@ class App extends StatelessWidget {
           RepositoryProvider(
             create: (_) => AnnouncementRepository(fireStore: fireStore),
           ),
+          RepositoryProvider(
+            create: (_) => UserRepository(fireStore: fireStore),
+          ),
         ],
         child: MultiBlocProvider(
           providers: [

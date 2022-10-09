@@ -27,12 +27,11 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
       appBar: CustomAppBar(
 
         onBackTap: () {
-          if (currentPage >= 0) {
+          if (currentPage >= 1) {
             setState(() {
               --currentPage;
             });
-            pageController.animateToPage(currentPage,
-                duration: Duration(milliseconds: 500), curve: Curves.bounceIn);
+            navigateToPage();
           } else {
             Navigator.pop(context);
           }
@@ -47,6 +46,7 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
             TopLeaderView(currentPage: currentPage + 1), // 1, 2, 3, 4
             Expanded(
                 child: PageView(
+                  physics: const NeverScrollableScrollPhysics(),
               controller: pageController,
               onPageChanged: (pageNumber) {
                 setState(() {
@@ -60,10 +60,23 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
                 AnnFieldsFour(),
               ],
             )),
-            ActiveButton(buttonText: "Next", onPressed: () {}),
+            //0,1,2,3
+            ActiveButton(buttonText: "Next", onPressed: () {
+              if(currentPage<4){
+                setState(() {
+                  currentPage++;
+                });
+                navigateToPage();
+              }
+            }),
           ],
         ),
       ),
     );
+  }
+
+  void navigateToPage(){
+    pageController.animateToPage(currentPage,
+        duration: Duration(milliseconds: 500), curve: Curves.linear);
   }
 }

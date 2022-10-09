@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ish_top/data/models/announcement/announcement_model.dart';
 import 'package:ish_top/data/models/users/user_model.dart';
 
 class UserRepository {
@@ -31,6 +30,13 @@ class UserRepository {
     } catch (e) {
       throw Exception();
     }
+  }
+
+  Future<UserModel> getUserData({required String docId}) async {
+    var data = await _fireStore.collection('users').doc(docId).get();
+    UserModel userModel =
+        UserModel.fromJson(data.data() as Map<String, dynamic>);
+    return userModel;
   }
 
   Future<void> deleteUser({

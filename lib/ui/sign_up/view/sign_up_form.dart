@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:ish_top/app/app.dart';
+import 'package:ish_top/app/bloc/app_bloc.dart';
+import 'package:ish_top/cubits/user/user_cubit.dart';
+import 'package:ish_top/data/models/users/user_model.dart';
 import 'package:ish_top/ui/sign_up/sign_up.dart';
 
 class SignUpForm extends StatelessWidget {
@@ -126,7 +130,24 @@ class _SignUpButton extends StatelessWidget {
                   backgroundColor: Colors.orangeAccent,
                 ),
                 onPressed: state.status.isValidated
-                    ? () => context.read<SignUpCubit>().signUpFormSubmitted()
+                    ? () async {
+                         await context
+                            .read<SignUpCubit>()
+                            .signUpFormSubmitted();
+                        final user = BlocProvider.of<AppBloc>(context).state.user;
+                        print("USER ID:${user.id}");
+                        if (user.id.isNotEmpty) {
+                          UserModel userModel = UserModel(
+                            imageUrl:
+                                'https://www.kindpng.com/picc/m/153-1530388_mario-head-png-png-download-people-profile-pic.png',
+                            createdAt: DateTime.now(),
+                            fullName: '',
+                            phoneNumber: '',
+                            userId: user.id,
+                          );
+                          BlocProvider.of<UserCubit>(context).postUser(userModel);
+                        }
+                      }
                     : null,
                 child: const Text('SIGN UP'),
               );
