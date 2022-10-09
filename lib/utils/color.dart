@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 
 class MyColors {
   static const Color buttonColor = Color(0xFF2C557D);
-  static const Color c_E4E5E7 = Color(0xFFE4E5E7);
-  static const Color c_2C557D = Color(0xFF2C557D);
-  static const Color c_FAFAFD = Color(0xFFFAFAFD);
-  static const Color buttonColor = Color(0xFF2C557D);
+  static const Color C_E4E5E7 = Color(0xFFE4E5E7);
+  static const Color C_2C557D = Color(0xFF2C557D);
+  static const Color C_FAFAFD = Color(0xFFFAFAFD);
   static const Color C_95969D = Color(0xFF95969D);
   static const Color C_356899 = Color(0xFF356899);
   static const Color C_CACBCE = Color(0xFFCACBCE);
   static const Color primaryColor = Color(0xFF27459F);
   static const Color backgroundColor = Color(0xFFF3F5F9);
-  static const Color c_0D0D26 = Color(0xFF0D0D26);
+  static const Color C_0D0D26 = Color(0xFF0D0D26);
   static const Color transparent = Colors.transparent;
   static const Color white = Colors.white;
-  static const Color c_CFD5DE = Color(0xFFCFD5DE);
+  static const Color C_CFD5DE = Color(0xFFCFD5DE);
   static const Color black = Colors.black;
   static const Color textColor = Color(0xFF3E434D);
   static const Color C_F2F2F2 = Color(0xFFF2F2F2);

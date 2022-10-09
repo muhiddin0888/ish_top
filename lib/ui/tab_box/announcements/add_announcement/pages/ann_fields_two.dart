@@ -1,10 +1,9 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as print;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/cubits/helper/helper_cubit.dart';
+import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/widgets/comment_input_componenet.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/widgets/select_level.dart';
 import 'package:ish_top/utils/style.dart';
 
@@ -21,10 +20,10 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
   int selectedJobTypeId = 1;
   String selectJobType = "";
   final GlobalKey expansionTile = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
       children: [
         Text(
           "Darajangizni tanlang:",
@@ -93,12 +92,9 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
             );
           } else if (state is GetCategoriesInSuccess) {
             print.log(">>${state.categories[0].description}");
-            return Expanded(
-              flex: 2,
-              child: ListView.builder(
-                physics: BouncingScrollPhysics(),
-                itemCount: state.categories.length,
-                itemBuilder: (context, index) => InkWell(
+            return Column(
+              children: List.generate(state.categories.length, (index) {
+                return InkWell(
                   onTap: () => {
                     setState(
                       () => {},
@@ -133,8 +129,8 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
                       },
                     ),
                   ),
-                ),
-              ),
+                );
+              }),
             );
           } else if (state is GetCategoriesInFailure) {
             return Text(state.errorText);
@@ -196,11 +192,9 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
           style: MyTextStyle.sfProBold.copyWith(fontSize: 18),
         ),
         SizedBox(height: 10),
-        Expanded(
-          child: TextField(
-            decoration: InputDecoration(hintText: "-"),
-            maxLines: null,
-          ),
+        CommentInputComponent(
+          commentText: (String value) {},
+          commentFocusNode: FocusNode(),
         )
       ],
     );

@@ -13,7 +13,6 @@ import 'package:ish_top/data/repositories/user/user_repository.dart';
 import 'package:ish_top/data/repositories/vacancy/vacancy_repository.dart';
 import 'package:ish_top/theme.dart';
 import 'package:ish_top/ui/login/login.dart';
-import 'package:ish_top/ui/on_boarding/on_boarding_page.dart';
 import 'package:ish_top/ui/router.dart';
 import 'package:ish_top/ui/tab_box/tab_box.dart';
 import 'package:ish_top/utils/constants.dart';
@@ -91,10 +90,8 @@ class AppView extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme,
-      // home: MainOnBoardingPage(),
       onGenerateRoute: MyRouter.generateRoute,
       initialRoute: splashPage,
-      debugShowCheckedModeBanner: false,
     );
   }
 }

@@ -17,9 +17,9 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _init() async {
     String userId = BlocProvider.of<AppBloc>(context).state.user.id;
     Future.delayed(const Duration(seconds: 2), () {
-      if(userId == ''){
+      if (userId == '') {
         Navigator.pushReplacementNamed(context, onBoarding);
-      }else{
+      } else {
         Navigator.pushReplacementNamed(context, mainPage);
       }
     });

@@ -20,12 +20,12 @@ class MainOnBoardingPage extends StatelessWidget {
     int currentPage = 0;
     PageController pageController = PageController();
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: MyColors.c_CFD5DE,
+      statusBarColor: MyColors.C_CFD5DE,
       statusBarBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.dark,
     ));
     return Scaffold(
-      backgroundColor: MyColors.c_FAFAFD,
+      backgroundColor: MyColors.C_FAFAFD,
       body: SizedBox(
         width: double.infinity,
         height: double.infinity,
@@ -59,8 +59,8 @@ class MainOnBoardingPage extends StatelessWidget {
                 effect: const ExpandingDotsEffect(
                   dotHeight: 8,
                   dotWidth: 8,
-                  activeDotColor: MyColors.c_2C557D,
-                  dotColor: MyColors.c_E4E5E7,
+                  activeDotColor: MyColors.C_2C557D,
+                  dotColor: MyColors.C_E4E5E7,
                 ),
               ),
               const Expanded(child: SizedBox()),
@@ -73,10 +73,10 @@ class MainOnBoardingPage extends StatelessWidget {
                         onPressed: () {
                           Navigator.pushReplacementNamed(context, mainPage);
                         },
-                        child: const Text(
+                        child:  Text(
                           "Skip",
                           style: TextStyle(
-                            color: MyColors.c_95969D,
+                            color: MyColors.C_95969D,
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
                           ),

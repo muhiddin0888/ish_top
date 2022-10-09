@@ -19,7 +19,7 @@ class FifthOnBoardingPage extends StatelessWidget {
           "Make your dream career with job",
           style: MyTextStyle.sfProSemibold.copyWith(
             fontSize: 28,
-            color: MyColors.c_0D0D26,
+            color: MyColors.C_0D0D26,
           ),
         ),
         const SizedBox(height: 18),
@@ -29,7 +29,7 @@ class FifthOnBoardingPage extends StatelessWidget {
             '-----------------------------------------------------------',
             style: MyTextStyle.sfProRegular.copyWith(
               fontSize: 15,
-              color: MyColors.c_95969D,
+              color: MyColors.C_95969D,
             ),
             maxLines: 2,
             textAlign: TextAlign.center,

@@ -4,7 +4,7 @@ import 'package:ish_top/utils/icon.dart';
 import 'package:ish_top/utils/style.dart';
 
 class SixthOnBoardingPage extends StatelessWidget {
-  const  SixthOnBoardingPage({super.key});
+  const SixthOnBoardingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +16,11 @@ class SixthOnBoardingPage extends StatelessWidget {
           ),
         ),
         Text(
-          "Search your dream job fast and ease",textAlign: TextAlign.center,
+          "Search your dream job fast and ease",
+          textAlign: TextAlign.center,
           style: MyTextStyle.sfProSemibold.copyWith(
             fontSize: 28,
-            color: MyColors.c_0D0D26,
+            color: MyColors.C_0D0D26,
           ),
         ),
         const SizedBox(height: 18),
@@ -29,7 +30,7 @@ class SixthOnBoardingPage extends StatelessWidget {
             '-----------------------------------------------------------',
             style: MyTextStyle.sfProRegular.copyWith(
               fontSize: 15,
-              color: MyColors.c_95969D,
+              color: MyColors.C_95969D,
             ),
             maxLines: 2,
             textAlign: TextAlign.center,
