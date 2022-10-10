@@ -65,9 +65,7 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
         ),
         SizedBox(height: 5),
         CommentInputComponent(
-          commentText: (String value) {
-            context.read<AnnouncementCubit>().state.fields["knowledge"] = value;
-          },
+          height: 275,
           commentFocusNode: FocusNode(),
           textEditingController: textEditingController,
           textButton: TextButton(
@@ -75,6 +73,10 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
                 textEditingController.clear();
               },
               child: Text("Tozalash")),
+          hintText: "Ma'lumot kiriting",
+          onChanged: (String value) {
+            context.read<AnnouncementCubit>().state.fields["knowledge"] = value;
+          },
         )
       ],
     );
