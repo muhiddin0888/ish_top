@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ish_top/cubits/tab/tab_cubit.dart';
 import 'package:ish_top/ui/tab_box/announcements/announcements_page.dart';
 import 'package:ish_top/ui/tab_box/profile/home.dart';
 import 'package:ish_top/ui/tab_box/vacancies_page/vacancies_page.dart';
@@ -18,7 +21,6 @@ class _TabBoxState extends State<TabBox> {
     AnnouncementsPage(),
     VacanciesPage(),
     ProfilePage(),
-
   ];
 
   @override
@@ -26,30 +28,72 @@ class _TabBoxState extends State<TabBox> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      body:
-          //screens[currentIndex],
-          IndexedStack(
-        index: currentIndex,
-        children: screens,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: MyColors.textColor,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        iconSize: 24,
-        onTap: (index) {
-          setState(() {
-            currentIndex = index;
-          });
+      body: BlocBuilder<TabCubit, TabState>(
+        builder: (cubit, state) {
+          if (state is TabHome) {
+            return const AnnouncementsPage();
+          } else if (state is TabCategory) {
+            return const VacanciesPage();
+          } else if (state is TabCard) {
+            return const ProfilePage();
+          } else {
+            return const Center(
+              child: Text(
+                'Not Found',
+              ),
+            );
+          }
         },
-        currentIndex: currentIndex,
-        items: [
-          getItem(icon: Icons.store, labelText: "Home"),
-          getItem(icon: Icons.category, labelText: "Category"),
-          getItem(icon: Icons.shopping_basket, labelText: "Card"),
-        ],
       ),
+      bottomNavigationBar: NavigationBarTheme(
+        data:
+            const NavigationBarThemeData(indicatorColor: MyColors.primaryColor),
+        child: NavigationBar(
+          backgroundColor: CupertinoColors.quaternarySystemFill,
+          elevation: 0,
+          animationDuration: const Duration(seconds: 1),
+          selectedIndex: context.watch<TabCubit>().tabIndex,
+          onDestinationSelected: (v) {
+            context.read<TabCubit>().changeTabState(v);
+          },
+          destinations: const [
+            NavigationDestination(
+              icon: Icon(Icons.store_mall_directory_outlined),
+              label: '',
+              selectedIcon: Icon(Icons.store),
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.category_outlined),
+              label: '',
+              selectedIcon: Icon(Icons.category),
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.shopping_basket_outlined),
+              label: '',
+              selectedIcon: Icon(Icons.shopping_basket),
+            ),
+          ],
+        ),
+      ),
+
+      //  BottomNavigationBar(
+      //   type: BottomNavigationBarType.fixed,
+      //   backgroundColor: MyColors.textColor,
+      //   showSelectedLabels: false,
+      //   showUnselectedLabels: false,
+      //   iconSize: 24,
+      //   onTap: (index) {
+      //     setState(() {
+      //       currentIndex = index;
+      //     });
+      //   },
+      //   currentIndex: currentIndex,
+      //   items: [
+      //     getItem(icon: Icons.store, labelText: "Home"),
+      //     getItem(icon: Icons.category, labelText: "Category"),
+      //     getItem(icon: Icons.shopping_basket, labelText: "Card"),
+      //   ],
+      // ),
     );
   }
 
