@@ -171,6 +171,8 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                         // ),
                         Positioned(
                           bottom: 10,
+                          left: 5,
+                          right: 5,
                           child: InkWell(
                             onTap: () {
                               context
