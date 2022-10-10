@@ -24,6 +24,10 @@ class _AnnFieldsFourState extends State<AnnFieldsFour> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: const [
+         Text("Pdg tanlaydi firebasedan url olib keladi "),
+        Text("yerdan turib ishlashini tanlaydi masofadan ofisdan"),
     String cvUrl = context.read<AnnouncementCubit>().state.fields['cv_url'];
     return ListView(
       children: [

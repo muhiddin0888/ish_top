@@ -1,3 +1,4 @@
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'dart:developer' as print;
@@ -15,6 +16,7 @@ class AnnFieldsTwo extends StatefulWidget {
 }
 
 class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
+  final TextEditingController textEditingController = TextEditingController();
   int selectLevel = 1;
   int selectCategory = 0;
   int selectedJobTypeId = 1;
@@ -193,8 +195,15 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
         ),
         SizedBox(height: 10),
         CommentInputComponent(
-          commentText: (String value) {},
+          hintText: "Ma'lumot kiriting",
+          onChanged: (String value) {},
           commentFocusNode: FocusNode(),
+          textEditingController: textEditingController,
+          textButton: TextButton(
+              onPressed: () {
+                textEditingController.clear();
+              },
+              child: Text("Tozalash")),
         )
       ],
     );

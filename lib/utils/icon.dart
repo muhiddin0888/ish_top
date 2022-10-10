@@ -2,6 +2,10 @@ class MyIcons {
   //.png files
   static const findJob = "assets/images/find_job.png";
 
+  static const som = "assets/images/som.png";
+  static const usd = "assets/images/usd.png";
+  static const rubl = "assets/images/rubl.png";
+
   static const boardingImage1 = "assets/images/img.png";
   static const boardingImage2 = "assets/images/img_1.png";
   static const boardingImage3 = "assets/images/img_2.png";
