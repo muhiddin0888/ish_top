@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
-import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/widgets/select_address_with_map.dart';
 import 'package:ish_top/ui/widgets/universal_text_input.dart';
 import 'package:ish_top/utils/color.dart';
+import 'package:ish_top/utils/constants.dart';
 import 'package:ish_top/utils/style.dart';
 
 class AnnFieldsOne extends StatefulWidget {
-   const AnnFieldsOne({Key? key,}) : super(key: key);
-
+  const AnnFieldsOne({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<AnnFieldsOne> createState() => _AnnFieldsOneState();
@@ -57,8 +58,7 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                 onChanged: (value) {
                   if (value.length > 1) {
                     context.read<AnnouncementCubit>().updateCurrentItem(
-                          fieldValue:
-                          context.read<AnnouncementCubit>().state.fields["address"],
+                          fieldValue: value,
                           fieldKey: "age",
                         );
                   }
@@ -126,7 +126,10 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                       onChanged: (value) {
                         if (value.length > 5) {
                           context.read<AnnouncementCubit>().updateCurrentItem(
-                                fieldValue: value,
+                                fieldValue: context
+                                    .watch<AnnouncementCubit>()
+                                    .state
+                                    .fields["address"],
                                 fieldKey: "address",
                               );
                         }
@@ -144,12 +147,7 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                     flex: 2,
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>  GoogleMapView(),
-                          ),
-                        );
+                        Navigator.pushNamed(context, googleMapView);
                       },
                       child: const Icon(
                         Icons.location_on_rounded,

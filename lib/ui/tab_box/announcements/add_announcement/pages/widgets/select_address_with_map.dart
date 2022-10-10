@@ -173,9 +173,16 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                           bottom: 10,
                           child: InkWell(
                             onTap: () {
-                              context.read<AnnouncementCubit>().state.fields["address"] = locationName;
-                              debugPrint(context.read<AnnouncementCubit>().state.fields["address"]);
+                              context
+                                  .read<AnnouncementCubit>()
+                                  .state
+                                  .fields["address"] = locationName;
+                              debugPrint(context
+                                  .read<AnnouncementCubit>()
+                                  .state
+                                  .fields["address"]);
                               Navigator.pop(context);
+
                             },
                             child: Container(
                               height: 60,
@@ -198,23 +205,26 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                                     size: 40,
                                     color: Colors.blue,
                                   ),
-                                  !isIdle?const CircularProgressIndicator.adaptive() : Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      const Text(
-                                        "Send selected address",
-                                        style: TextStyle(
-                                            color: MyColors.primaryColor,
-                                            fontSize: 20),
-                                      ),
-                                      Text(
-                                         locationName,
-                                        style:
-                                            const TextStyle(color: Colors.blue),
-                                      ),
-                                    ],
-                                  ),
+                                  !isIdle
+                                      ? const CircularProgressIndicator
+                                          .adaptive()
+                                      : Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            const Text(
+                                              "Send selected address",
+                                              style: TextStyle(
+                                                  color: MyColors.primaryColor,
+                                                  fontSize: 20),
+                                            ),
+                                            Text(
+                                              locationName,
+                                              style: const TextStyle(
+                                                  color: Colors.blue),
+                                            ),
+                                          ],
+                                        ),
                                   const SizedBox()
                                 ],
                               ),
