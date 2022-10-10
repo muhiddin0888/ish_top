@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
+import 'package:ish_top/cubits/location/location_cubit.dart';
 import 'package:ish_top/ui/widgets/universal_text_input.dart';
 import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/constants.dart';
@@ -126,16 +127,17 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                       onChanged: (value) {
                         if (value.length > 5) {
                           context.read<AnnouncementCubit>().updateCurrentItem(
-                                fieldValue: value,
+                                fieldValue:
+                                    BlocProvider.of<LocationCubit>(context)
+                                        .selectedLocationName,
                                 fieldKey: "address",
                               );
                         }
                       },
                       hintText: "Tashkent.sh",
                       initialText: context
-                          .watch<AnnouncementCubit>()
-                          .state
-                          .fields["address"]
+                          .watch<LocationCubit>()
+                          .selectedLocationName
                           .toString(),
                       keyBoardType: TextInputType.streetAddress,
                     ),
@@ -152,15 +154,12 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                         color: MyColors.primaryColor,
                       ),
                     ),
-                  )
+                  ),
                 ],
               )
             ],
           ),
         );
-
-          
-
       },
     );
   }

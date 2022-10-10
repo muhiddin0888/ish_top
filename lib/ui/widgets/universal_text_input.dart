@@ -34,33 +34,31 @@ class UniversalTextInput extends StatelessWidget {
             if (keyBoardType == TextInputType.text) {
               return (value!.length <= 3) ? "Ism sharfingizni kiriting" : null;
             } else if (keyBoardType == TextInputType.number) {
-              for (int i = 0; i < value!.length; i++)
-              {
+              for (int i = 0; i < value!.length; i++) {
                 if (value[i] == "." ||
                     value[i] == " " ||
                     value[i] == "*" ||
                     value[i] == "-" ||
                     value[i] == "#" ||
-                    value[i] == "," ) {
-                  return "Raqam kiriting";
+                    value[i] == ",") {
+                  return "Raqam kiriting!";
                 }
               }
               return (value.isEmpty ||
                       (value.isNotEmpty && int.parse(value) > 100 ||
                           int.parse(value) < 12))
-                  ? "Yoshingzni togri kiriting"
+                  ? "Yoshingizni to'g'ri kiriting!"
                   : null;
-              // }
-
             } else if (keyBoardType == TextInputType.phone) {
               return (value!.length < 13 ||
                       value.length > 13 ||
                       !value.startsWith("+"))
                   ? "Error"
                   : null;
-            }
-            else if (keyBoardType == TextInputType.streetAddress) {
-              return (value!.length > 13 || value.isEmpty) ? "Manzilingizni kiriting" : null;
+            } else if (keyBoardType == TextInputType.streetAddress) {
+              return (value!.length > 13 || value.isEmpty)
+                  ? "Manzilingizni kiriting"
+                  : null;
             }
             return null;
           },
@@ -70,15 +68,15 @@ class UniversalTextInput extends StatelessWidget {
             hintText: hintText,
             // floatingLabelBehavior: FloatingLabelBehavior.never,
             enabled: true,
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue,width: 1) ),
+            enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue, width: 1)),
             errorBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.red),
             ),
-            focusedBorder:  OutlineInputBorder(borderSide: BorderSide(color: Colors.blue,width: 1) ),
+            focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue, width: 1)),
           ),
-
         ),
-
       ),
     );
   }

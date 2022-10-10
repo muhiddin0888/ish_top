@@ -15,18 +15,30 @@ class GoogleMapView extends StatefulWidget {
 }
 
 class _GoogleMapViewState extends State<GoogleMapView> {
-  bool isIdle = true;
+  bool isIdle = false;
 
   late final GoogleMapController googleMapController;
 
   CameraPosition currentCameraPosition = const CameraPosition(
       target: LatLng(41.286393176986685, 69.20411702245474), zoom: 14);
 
+  String currentLocationName = '';
+  String locationName = '';
+
+  @override
+  void initState() {
+    currentLocationName =
+        BlocProvider.of<LocationCubit>(context).currentLocationName;
+    debugPrint(currentLocationName.toString());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Position? position = context.watch<LocationCubit>().position;
 
-    String locationName = context.watch<LocationCubit>().selectedLocationName;
+    locationName = context.watch<LocationCubit>().selectedLocationName;
+
     debugPrint("locationName    $locationName");
     return Scaffold(
       appBar: AppBar(
@@ -77,12 +89,11 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                                   isIdle = false;
                                 });
                               },
-                              zoomControlsEnabled: false,
+                              zoomControlsEnabled: true,
                               onCameraIdle: () {
                                 setState(() {
                                   isIdle = true;
                                 });
-
                                 debugPrint("IDLE");
                                 debugPrint(
                                     "LONGITUDE:${currentCameraPosition.target.longitude}");
@@ -112,100 +123,110 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                             ),
                           ),
                         ),
-                        Positioned(
-                          right: 10,
-                          bottom: 150,
-                          child: IconButton(
-                            style: const ButtonStyle(
-                                elevation: MaterialStatePropertyAll(3.5),
-                                shadowColor:
-                                    MaterialStatePropertyAll(Colors.grey),
-                                backgroundColor:
-                                    MaterialStatePropertyAll(Colors.white)),
-                            color: Colors.blue,
-                            onPressed: () async {
-                              googleMapController.animateCamera(
-                                CameraUpdate.newLatLngZoom(
-                                  LatLng(
-                                    position.latitude,
-                                    position.longitude,
+                        Visibility(
+                          visible: isIdle,
+                          child: Positioned(
+                            top: 20,
+                            left: 10,
+                            right: 10,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 3),
+                              decoration: BoxDecoration(
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    offset: Offset(0, 0),
+                                    blurRadius: 10,
                                   ),
-                                  16,
-                                ),
-                              );
-                            },
-                            icon: const Icon(
-                              Icons.my_location,
-                              size: 30,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 20,
-                          left: 10,
-                          right: 10,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 3),
-                            decoration: BoxDecoration(
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  offset: Offset(0, 0),
-                                  blurRadius: 10,
-                                )
-                              ],
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Text(
-                              locationName,
-                              maxLines: 3,
-                              textAlign: TextAlign.center,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                  fontSize: 16, color: Colors.blue),
+                                ],
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Text(
+                                locationName.isEmpty
+                                    ? "Address not selected"
+                                    : locationName,
+                                maxLines: 3,
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    fontSize: 16, color: Colors.blue),
+                              ),
                             ),
                           ),
                         ),
                         Positioned(
                           bottom: 10,
-                          left: 30,
-                          right: 30,
-                          child: InkWell(
-                            onTap: () {
-                              context
-                                  .read<AnnouncementCubit>()
-                                  .state
-                                  .fields["address"] = locationName;
-                              debugPrint(context
-                                  .read<AnnouncementCubit>()
-                                  .state
-                                  .fields["address"]);
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              height: 70,
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                  boxShadow: const [
-                                    BoxShadow(
-                                        color: Colors.grey,
-                                        offset: Offset(0, 0),
-                                        blurRadius: 10)
-                                  ],
-                                  color: Colors.green,
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: const Center(
-                                child: Text(
-                                  "Save",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 20),
+                          left: 10,
+                          right: 50,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  context
+                                      .read<AnnouncementCubit>()
+                                      .updateCurrentItem(
+                                          fieldValue: locationName,
+                                          fieldKey: 'address');
+                                  context.read<LocationCubit>().selectedLocationName = locationName;
+
+                                  debugPrint(context
+                                      .read<AnnouncementCubit>()
+                                      .state
+                                      .fields["address"]);
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.5,
+                                  decoration: BoxDecoration(
+                                      boxShadow: const [
+                                        BoxShadow(
+                                            color: Colors.grey,
+                                            offset: Offset(0, 0),
+                                            blurRadius: 10)
+                                      ],
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: const Center(
+                                    child: Text(
+                                      "Save",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 24),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                              IconButton(
+                                style: const ButtonStyle(
+                                    elevation: MaterialStatePropertyAll(10),
+                                    shadowColor:
+                                        MaterialStatePropertyAll(Colors.grey),
+                                    backgroundColor:
+                                        MaterialStatePropertyAll(Colors.white)),
+                                color: Colors.blue,
+                                onPressed: () async {
+                                  googleMapController.animateCamera(
+                                    CameraUpdate.newLatLngZoom(
+                                      LatLng(
+                                        position.latitude,
+                                        position.longitude,
+                                      ),
+                                      16,
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(
+                                  Icons.my_location,
+                                  size: 35,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
