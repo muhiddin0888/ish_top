@@ -67,8 +67,6 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
         CommentInputComponent(
           commentText: (String value) {
             context.read<AnnouncementCubit>().state.fields["knowledge"] = value;
-            print
-                .log(context.read<AnnouncementCubit>().state.fields.toString());
           },
           commentFocusNode: FocusNode(),
           textEditingController: textEditingController,
