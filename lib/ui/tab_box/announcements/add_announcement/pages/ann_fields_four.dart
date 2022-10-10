@@ -11,8 +11,8 @@ class _AnnFieldsFourState extends State<AnnFieldsFour> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        Text("Pdg tanlaydi firebasedan url olib keladi "),
+      children: const [
+         Text("Pdg tanlaydi firebasedan url olib keladi "),
         Text("yerdan turib ishlashini tanlaydi masofadan ofisdan"),
       ],
     );

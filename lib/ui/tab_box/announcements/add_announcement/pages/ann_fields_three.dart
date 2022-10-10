@@ -4,6 +4,8 @@ import 'package:ish_top/ui/widgets/selectable_field.dart';
 import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/my_utils.dart';
 
+import 'widgets/clock.dart';
+
 class AnnFieldsThree extends StatefulWidget {
   const AnnFieldsThree({Key? key}) : super(key: key);
 
@@ -24,12 +26,43 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
   final fromF = FocusNode();
   final toF = FocusNode();
 
+  TimeOfDay selectedTimeFrom = TimeOfDay.now();
+  TimeOfDay selectedTimeTo = TimeOfDay.now();
+
+  Future<TimeOfDay> _selectTimeFrom(BuildContext context) async {
+    final selected = await showTimePicker(
+      context: context,
+      initialTime: selectedTimeFrom,
+    );
+    if (selected != null && selected != selectedTimeFrom) {
+      setState(() {
+        selectedTimeFrom = selected;
+      });
+    }
+    return selectedTimeFrom;
+  }
+
+  Future<TimeOfDay> _selectTimeTo(BuildContext context) async {
+    final selected = await showTimePicker(
+      context: context,
+      initialTime: selectedTimeTo,
+    );
+    if (selected != null && selected != selectedTimeTo) {
+      setState(() {
+        selectedTimeTo = selected;
+      });
+    }
+    return selectedTimeTo;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 15),
           CommentInputComponent(
@@ -153,9 +186,43 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
               ),
             ],
           ),
-          const SizedBox(height: 25),
+
+          ////         CLOCK  PART
+
           const SizedBox(height: 20),
-          const Text("Time to contact - IQBOL AKA QILING"),
+          const Text(
+            "Time to Apply  : ",
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
+
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Card(
+                child: SelectDateItem(
+                  text: "${selectedTimeFrom.hour}:${selectedTimeFrom.minute}",
+                  onTap: () async {
+                    var t = await _selectTimeFrom(context);
+                    setState(() {
+                      selectedTimeFrom = t;
+                    });
+                  },
+                ),
+              ),
+              Card(
+                child: SelectDateItem(
+                  text: "${selectedTimeTo.hour}:${selectedTimeFrom.minute}",
+                  onTap: () async {
+                    var t = await _selectTimeTo(context);
+                    setState(() {
+                      selectedTimeTo = t;
+                    });
+                  },
+                ),
+              )
+            ],
+          ),
         ],
       ),
     );
