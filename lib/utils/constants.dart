@@ -6,3 +6,5 @@ const String signUpPage = '/sign_up_page';
 const String addAnnouncementPage = '/add_announcement_page';
 const String onBoarding = '/on_boarding';
 const String profileUpdatePage = '/profile_update_page';
+const String mapBaseUrl = "https://geocode-maps.yandex.ru/1.x/";
+const String mapApiKey = "d66d2234-ec39-4855-adf7-adb6779100dd";

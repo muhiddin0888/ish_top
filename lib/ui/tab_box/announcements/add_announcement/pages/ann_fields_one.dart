@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
+import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/widgets/select_address_with_map.dart';
 import 'package:ish_top/ui/widgets/universal_text_input.dart';
 import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/style.dart';
@@ -24,7 +25,8 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                 height: 12,
               ),
               Center(
-                child: Text("Your Personal Information", style: MyTextStyle.sfProBlack.copyWith(fontSize: 20)),
+                child: Text("Your Personal Information",
+                    style: MyTextStyle.sfProBlack.copyWith(fontSize: 20)),
               ),
               const SizedBox(
                 height: 12,
@@ -40,7 +42,10 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                   }
                 },
                 hintText: "Falonchiyev Pistonchi",
-                initialText: context.watch<AnnouncementCubit>().state.fields["full_name"],
+                initialText: context
+                    .watch<AnnouncementCubit>()
+                    .state
+                    .fields["full_name"],
                 keyBoardType: TextInputType.text,
               ),
               const SizedBox(
@@ -57,7 +62,11 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                   }
                 },
                 hintText: "20",
-                initialText: context.watch<AnnouncementCubit>().state.fields["age"].toString(),
+                initialText: context
+                    .watch<AnnouncementCubit>()
+                    .state
+                    .fields["age"]
+                    .toString(),
                 keyBoardType: TextInputType.number,
               ),
               const SizedBox(
@@ -74,7 +83,11 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                   }
                 },
                 hintText: "+998 99",
-                initialText: context.watch<AnnouncementCubit>().state.fields["phone_number"].toString(),
+                initialText: context
+                    .watch<AnnouncementCubit>()
+                    .state
+                    .fields["phone_number"]
+                    .toString(),
                 keyBoardType: TextInputType.phone,
               ),
               const SizedBox(
@@ -82,7 +95,6 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
               ),
               UniversalTextInput(
                 caption: "Telegram Url",
-
                 onChanged: (value) {
                   if (value.length > 13) {
                     context.read<AnnouncementCubit>().updateCurrentItem(
@@ -92,7 +104,11 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                   }
                 },
                 hintText: "@falonchi95",
-                initialText: context.watch<AnnouncementCubit>().state.fields["telegram_url"].toString(),
+                initialText: context
+                    .watch<AnnouncementCubit>()
+                    .state
+                    .fields["telegram_url"]
+                    .toString(),
                 keyBoardType: TextInputType.text,
               ),
               const SizedBox(
@@ -114,14 +130,25 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                         }
                       },
                       hintText: "Tashkent.sh",
-                      initialText: context.watch<AnnouncementCubit>().state.fields["telegram_url"].toString(),
+                      initialText: context
+                          .watch<AnnouncementCubit>()
+                          .state
+                          .fields["telegram_url"]
+                          .toString(),
                       keyBoardType: TextInputType.streetAddress,
                     ),
                   ),
                   Expanded(
                     flex: 2,
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const GoogleMapView(),
+                          ),
+                        );
+                      },
                       child: const Icon(
                         Icons.location_on_rounded,
                         size: 70,
