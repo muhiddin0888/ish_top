@@ -41,27 +41,22 @@ class CommentInputComponent extends StatelessWidget {
           textInputAction: TextInputAction.done,
           focusNode: commentFocusNode,
           keyboardType: TextInputType.text,
-          style: const TextStyle(
-              fontSize: 16, color: MyColors.black, fontWeight: FontWeight.w500),
+          style: const TextStyle(fontSize: 16, color: MyColors.black, fontWeight: FontWeight.w500),
           onChanged: onChanged,
           maxLength: maxLength,
           decoration: InputDecoration(
             border: InputBorder.none,
-            focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: MyColors.C_2C557D, width: 2)),
-            enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: MyColors.C_95969D)),
+            focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: MyColors.C_2C557D, width: 2)),
+            enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: MyColors.C_95969D)),
             errorBorder: InputBorder.none,
             disabledBorder: InputBorder.none,
-            contentPadding:
-                const EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+            contentPadding: const EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
             hintText: hintText,
             hintStyle: const TextStyle(fontSize: 15, color: MyColors.C_2C557D),
           ),
           cursorColor: MyColors.C_2C557D,
         ),
-        Positioned(
-            bottom: 15, right: -5, child: textButton ?? const SizedBox()),
+        Positioned(bottom: 15, right: -5, child: textButton ?? const SizedBox()),
       ]),
     );
   }

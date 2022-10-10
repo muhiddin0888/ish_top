@@ -1,7 +1,7 @@
 part of 'announcement_cubit.dart';
 
 class AnnouncementState extends Equatable {
-  AnnouncementState({
+  const AnnouncementState({
     required this.announcements,
     required this.status,
     required this.errorText,
