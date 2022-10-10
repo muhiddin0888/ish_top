@@ -30,7 +30,11 @@ class MyRouter {
       case profileUpdatePage:
         return navigateTo(const ProfileUpdatePage());
       case googleMapView:
-        return navigateTo(const GoogleMapView());
+        return navigateTo(
+          GoogleMapView(
+            addressName: settings.arguments as ValueChanged<String>,
+          ),
+        );
       default:
         return navigateTo(Scaffold(
           body: Center(child: Text('No route defined for ${settings.name}')),

@@ -8,17 +8,17 @@ import 'package:ish_top/cubits/location/location_cubit.dart';
 import 'package:ish_top/utils/icon.dart';
 
 class GoogleMapView extends StatefulWidget {
-  const GoogleMapView({super.key});
+  const GoogleMapView({super.key, required this.addressName});
 
   @override
   State<GoogleMapView> createState() => _GoogleMapViewState();
+  final ValueChanged<String> addressName;
 }
 
 class _GoogleMapViewState extends State<GoogleMapView> {
   bool isIdle = false;
 
   late final GoogleMapController googleMapController;
-
   CameraPosition currentCameraPosition = const CameraPosition(
       target: LatLng(41.286393176986685, 69.20411702245474), zoom: 14);
 
@@ -27,6 +27,7 @@ class _GoogleMapViewState extends State<GoogleMapView> {
 
   @override
   void initState() {
+    BlocProvider.of<LocationCubit>(context).fetchCurrentPosition();
     currentLocationName =
         BlocProvider.of<LocationCubit>(context).currentLocationName;
     debugPrint(currentLocationName.toString());
@@ -53,6 +54,17 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                     child: CircularProgressIndicator.adaptive(),
                   );
                 } else if (state.status == FormzStatus.submissionSuccess) {
+                  currentCameraPosition = CameraPosition(
+                    target: LatLng(
+                      BlocProvider.of<LocationCubit>(context)
+                          .position!
+                          .latitude,
+                      BlocProvider.of<LocationCubit>(context)
+                          .position!
+                          .longitude,
+                    ),
+                    zoom: 14,
+                  );
                   return SizedBox(
                     width: double.infinity,
                     height: double.infinity,
@@ -165,12 +177,10 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                             children: [
                               InkWell(
                                 onTap: () {
+                                  widget.addressName.call(locationName);
                                   context
-                                      .read<AnnouncementCubit>()
-                                      .updateCurrentItem(
-                                          fieldValue: locationName,
-                                          fieldKey: 'address');
-                                  context.read<LocationCubit>().selectedLocationName = locationName;
+                                      .read<LocationCubit>()
+                                      .selectedLocationName = locationName;
 
                                   debugPrint(context
                                       .read<AnnouncementCubit>()
@@ -220,6 +230,12 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                                       16,
                                     ),
                                   );
+                                  context
+                                      .read<LocationCubit>()
+                                      .viewSelectedLocationName(
+                                        lat: position.latitude,
+                                        long: position.longitude,
+                                      );
                                 },
                                 icon: const Icon(
                                   Icons.my_location,

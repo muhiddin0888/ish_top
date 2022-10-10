@@ -146,7 +146,20 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                     flex: 2,
                     child: InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, googleMapView);
+                        Navigator.pushNamed(
+                          context,
+                          googleMapView,
+                          arguments: (addressName) {
+                            setState(() {
+                              context
+                                  .read<AnnouncementCubit>()
+                                  .updateCurrentItem(
+                                    fieldValue: addressName,
+                                    fieldKey: 'address',
+                                  );
+                            });
+                          },
+                        );
                       },
                       child: const Icon(
                         Icons.location_on_rounded,
