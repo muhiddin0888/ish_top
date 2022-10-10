@@ -195,6 +195,7 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
         ),
         SizedBox(height: 10),
         CommentInputComponent(
+          height: 250,
           hintText: "Ma'lumot kiriting",
           onChanged: (String value) {},
           commentFocusNode: FocusNode(),
