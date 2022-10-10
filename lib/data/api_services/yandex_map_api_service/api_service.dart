@@ -16,7 +16,7 @@ class MapApiService {
         'geocode': geoCodeText,
         'lang': 'uz_UZ',
         'format': 'json',
-        'kind': 'locality',
+        'kind': 'house',
         'rspn': '1',
         'results': '1',
       };

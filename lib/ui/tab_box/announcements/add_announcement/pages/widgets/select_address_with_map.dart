@@ -182,10 +182,9 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                                   .state
                                   .fields["address"]);
                               Navigator.pop(context);
-
                             },
                             child: Container(
-                              height: 60,
+                              height: 70,
                               width: MediaQuery.of(context).size.width,
                               decoration: BoxDecoration(
                                   boxShadow: const [
@@ -209,6 +208,8 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                                       ? const CircularProgressIndicator
                                           .adaptive()
                                       : Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceAround,
                                           children: [
@@ -220,12 +221,13 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                                             ),
                                             Text(
                                               locationName,
+                                              // maxLines: 3,
+                                              overflow: TextOverflow.ellipsis,
                                               style: const TextStyle(
                                                   color: Colors.blue),
                                             ),
                                           ],
                                         ),
-                                  const SizedBox()
                                 ],
                               ),
                             ),
