@@ -69,7 +69,7 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
           height: 275,
 
           hintText: "Ma'lumot kiriting",
-          onChanged: (String value) {},
+
 
           commentFocusNode: FocusNode(),
           textEditingController: textEditingController,
@@ -78,7 +78,7 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
                 textEditingController.clear();
               },
               child: Text("Tozalash")),
-          hintText: "Ma'lumot kiriting",
+
           onChanged: (String value) {
             context.read<AnnouncementCubit>().state.fields["knowledge"] = value;
           },
