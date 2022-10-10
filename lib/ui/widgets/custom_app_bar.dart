@@ -3,22 +3,23 @@ import 'package:flutter/services.dart';
 import 'package:ish_top/utils/color.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSize {
-  const CustomAppBar({Key? key, required this.onBackTap}) : super(key: key);
+  const CustomAppBar({Key? key, this.onBackTap}) : super(key: key);
 
-  final VoidCallback onBackTap;
+  final VoidCallback? onBackTap;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: MyColors.backgroundColor,
+      backgroundColor: MyColors.white,
       elevation: 0,
-      leading: IconButton(
+      // TODO: bir hil joylarda arrow kerakmas shunga onBackTap null bolishi ham mumkin (sherzod)
+      leading: onBackTap != null ? IconButton(
         onPressed: onBackTap,
         icon: const Icon(
           Icons.arrow_back_ios,
           color: Colors.black,
         ),
-      ),
+      ):null,
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: MyColors.white,
         statusBarIconBrightness: Brightness.dark,
