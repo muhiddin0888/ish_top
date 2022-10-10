@@ -6,6 +6,7 @@ import 'package:ish_top/ui/tab_box/announcements/announcements_page.dart';
 import 'package:ish_top/ui/tab_box/profile/home.dart';
 import 'package:ish_top/ui/tab_box/vacancies_page/vacancies_page.dart';
 import 'package:ish_top/utils/color.dart';
+import 'package:ish_top/utils/icon.dart';
 
 class TabBox extends StatefulWidget {
   const TabBox({Key? key}) : super(key: key);
@@ -56,21 +57,21 @@ class _TabBoxState extends State<TabBox> {
           onDestinationSelected: (v) {
             context.read<TabCubit>().changeTabState(v);
           },
-          destinations: const [
+          destinations:  [
             NavigationDestination(
-              icon: Icon(Icons.store_mall_directory_outlined),
+              icon: Image.asset(MyIcons.announcement,height: 25,),
               label: '',
-              selectedIcon: Icon(Icons.store),
+              selectedIcon: Image.asset(MyIcons.announcement,height: 25,color: Colors.white,),
             ),
             NavigationDestination(
-              icon: Icon(Icons.category_outlined),
+              icon: Image.asset(MyIcons.vacancies,height: 25,),
               label: '',
-              selectedIcon: Icon(Icons.category),
+              selectedIcon: Image.asset(MyIcons.vacancies,height: 25,color: Colors.white,),
             ),
             NavigationDestination(
-              icon: Icon(Icons.shopping_basket_outlined),
+              icon: Image.asset(MyIcons.profile,height: 25,),
               label: '',
-              selectedIcon: Icon(Icons.shopping_basket),
+              selectedIcon: Image.asset(MyIcons.profile,height: 25,color: Colors.white,),
             ),
           ],
         ),
