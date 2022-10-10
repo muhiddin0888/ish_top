@@ -29,8 +29,8 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
   int selectLevel = 0;
   int selectedCategory = 0;
   int selectedCategoryForIcon = -1;
-  int selectedJobTypeId = 1;
-  String selectJobType = "";
+  int selectedFromWhere = 1;
+  String selectFromWhereText = "";
   int element = -1;
   List<CategoryItem> searchedCategory = [];
   final TextEditingController searchController = TextEditingController();
@@ -86,49 +86,52 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
     return ExpansionTile(
       key: UniqueKey(),
       title: Text(
-        selectJobType == "" ? "Ish turini tanlang" : selectJobType,
+        selectFromWhereText == ""
+            ? "Qayerdan turib ishlaysiz"
+            : selectFromWhereText,
         style: MyTextStyle.sfProMedium.copyWith(
           fontSize: 18,
-          color: selectJobType == "" ? MyColors.C_2C557D : MyColors.C_039D57,
+          color:
+              selectFromWhereText == "" ? MyColors.C_2C557D : MyColors.C_039D57,
         ),
       ),
       children: [
         TextButton(
           onPressed: () {
-            selectedJobTypeId = 1;
-            selectJobType = "To'liq stavka";
-            context.read<AnnouncementCubit>().state.fields["job_type"] =
-                selectedJobTypeId;
+            selectedFromWhere = 1;
+            selectFromWhereText = "Uydan";
+            context.read<AnnouncementCubit>().state.fields["from_where"] =
+                selectedFromWhere;
             setState(
               () => {},
             );
           },
           child: Text(
-            "To'liq stavka",
+            "Uydan",
             style: MyTextStyle.sfProMedium.copyWith(fontSize: 18),
           ),
         ),
         TextButton(
           onPressed: () {
-            selectedJobTypeId = 2;
-            selectJobType = "Yarim stavka";
-            context.read<AnnouncementCubit>().state.fields["job_type"] =
-                selectedJobTypeId;
+            selectedFromWhere = 2;
+            selectFromWhereText = "Ofisdan";
+            context.read<AnnouncementCubit>().state.fields["from_where"] =
+                selectedFromWhere;
             setState(
               () => {},
             );
           },
           child: Text(
-            "Yarim stavka",
+            "Ofisdan",
             style: MyTextStyle.sfProMedium.copyWith(fontSize: 18),
           ),
         ),
         TextButton(
           onPressed: () {
-            selectedJobTypeId = 3;
-            selectJobType = "Har qanday";
-            context.read<AnnouncementCubit>().state.fields["job_type"] =
-                selectedJobTypeId;
+            selectedFromWhere = 3;
+            selectFromWhereText = "Har qanday";
+            context.read<AnnouncementCubit>().state.fields["from_where"] =
+                selectedFromWhere;
             setState(
               () => {},
             );
