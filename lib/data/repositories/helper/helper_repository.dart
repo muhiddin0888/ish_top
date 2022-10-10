@@ -32,6 +32,16 @@ class HelperRepository {
     }
   }
 
+  Future<bool> deleteCv({required String cvUrl}) async {
+    try {
+      String storagePath = "files/pdf/$cvUrl";
+      var ref = FirebaseStorage.instance.ref().child(storagePath).delete();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<String> uploadUserImage(
     PlatformFile pickedFile,
   ) async {
