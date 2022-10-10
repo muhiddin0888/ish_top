@@ -5,6 +5,7 @@ import 'package:ish_top/ui/on_boarding/on_boarding_page.dart';
 import 'package:ish_top/ui/sign_up/sign_up.dart';
 import 'package:ish_top/ui/splash/splash_page.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/add_announcement_page.dart';
+import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/widgets/select_address_with_map.dart';
 import 'package:ish_top/ui/tab_box/profile/view/profile_update_page.dart';
 import 'package:ish_top/ui/tab_box/tab_box.dart';
 import 'package:ish_top/utils/constants.dart';
@@ -13,29 +14,31 @@ class MyRouter {
   static Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case onBoarding:
-        return MaterialPageRoute(
-          builder: (_) => MainOnBoardingPage(),
-        );
+        return navigateTo(const MainOnBoardingPage());
       case mainPage:
-        return navigateTo(MainPage());
+        return navigateTo(const MainPage());
       case tabBox:
-        return navigateTo(TabBox());
+        return navigateTo(const TabBox());
       case splashPage:
-        return navigateTo(SplashScreen());
+        return navigateTo(const SplashScreen());
       case loginPage:
-        return navigateTo(LoginPage());
+        return navigateTo(const LoginPage());
       case signUpPage:
-        return navigateTo(SignUpPage());
+        return navigateTo(const SignUpPage());
       case addAnnouncementPage:
-        return navigateTo(AddAnnouncementPage());
+        return navigateTo(const AddAnnouncementPage());
       case profileUpdatePage:
-        return navigateTo(ProfileUpdatePage());
+        return navigateTo(const ProfileUpdatePage());
+      case googleMapView:
+        return navigateTo(const GoogleMapView());
       default:
         return navigateTo(Scaffold(
-          body: Center(
-              child: Text('No route defined for ${settings.name}')),
+          body: Center(child: Text('No route defined for ${settings.name}')),
         ));
     }
   }
 }
-MaterialPageRoute navigateTo(Widget widget) => MaterialPageRoute(builder: (context) => widget,);
+
+MaterialPageRoute navigateTo(Widget widget) => MaterialPageRoute(
+      builder: (context) => widget,
+    );

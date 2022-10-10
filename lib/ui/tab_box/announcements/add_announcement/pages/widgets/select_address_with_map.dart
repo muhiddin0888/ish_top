@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
 import 'package:ish_top/cubits/location/location_cubit.dart';
+import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/icon.dart';
 
 class GoogleMapView extends StatefulWidget {
@@ -138,31 +140,83 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                             ),
                           ),
                         ),
+                        // Positioned(
+                        //   top: 20,
+                        //   left: 20,
+                        //   right: 20,
+                        //   child: Container(
+                        //     // width: 150,
+                        //     padding: const EdgeInsets.symmetric(
+                        //         horizontal: 6, vertical: 3),
+                        //     decoration: BoxDecoration(
+                        //         boxShadow: const [
+                        //           BoxShadow(
+                        //               color: Colors.grey,
+                        //               offset: Offset(0, 0),
+                        //               blurRadius: 10)
+                        //         ],
+                        //         color: Colors.white,
+                        //         borderRadius: BorderRadius.circular(25)),
+                        //     child: Text(
+                        //       locationName,
+                        //       maxLines: 3,
+                        //       textAlign: TextAlign.center,
+                        //       style: const TextStyle(
+                        //         color: Colors.black,
+                        //         fontSize: 22,
+                        //         fontWeight: FontWeight.w700,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         Positioned(
-                          top: 20,
-                          left: 20,
-                          right: 20,
-                          child: Container(
-                            // width: 150,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 6, vertical: 3),
-                            decoration: BoxDecoration(
-                                boxShadow: const [
-                                  BoxShadow(
-                                      color: Colors.grey,
-                                      offset: Offset(0, 0),
-                                      blurRadius: 10)
+                          bottom: 10,
+                          child: InkWell(
+                            onTap: () {
+                              context.read<AnnouncementCubit>().state.fields["address"] = locationName;
+                              debugPrint(context.read<AnnouncementCubit>().state.fields["address"]);
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              height: 60,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                  boxShadow: const [
+                                    BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(0, 0),
+                                        blurRadius: 10)
+                                  ],
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  const Icon(
+                                    Icons.location_history,
+                                    size: 40,
+                                    color: Colors.blue,
+                                  ),
+                                  !isIdle?const CircularProgressIndicator.adaptive() : Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      const Text(
+                                        "Send selected address",
+                                        style: TextStyle(
+                                            color: MyColors.primaryColor,
+                                            fontSize: 20),
+                                      ),
+                                      Text(
+                                         locationName,
+                                        style:
+                                            const TextStyle(color: Colors.blue),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox()
                                 ],
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(25)),
-                            child: Text(
-                              locationName,
-                              maxLines: 3,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 22,
-                                fontWeight: FontWeight.w700,
                               ),
                             ),
                           ),
