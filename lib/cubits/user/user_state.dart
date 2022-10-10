@@ -1,7 +1,7 @@
 part of 'user_cubit.dart';
 
 class UserState extends Equatable {
-  UserState({
+  const UserState({
     required this.userModel,
     required this.status,
     required this.errorText,
