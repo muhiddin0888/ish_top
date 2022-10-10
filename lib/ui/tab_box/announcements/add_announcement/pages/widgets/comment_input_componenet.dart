@@ -14,6 +14,7 @@ class CommentInputComponent extends StatelessWidget {
     this.maxLength,
     this.onSubmitted,
   }) : super(key: key);
+  
   final ValueChanged<String> onChanged;
   final FocusNode commentFocusNode;
   final TextEditingController? textEditingController;
@@ -22,7 +23,7 @@ class CommentInputComponent extends StatelessWidget {
   final double? height;
   final int? maxLength;
   final ValueChanged<String>? onSubmitted;
-
+  
   @override
   Widget build(BuildContext context) {
     return SizedBox(

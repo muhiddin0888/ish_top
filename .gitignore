@@ -1,4 +1,5 @@
 # Miscellaneous
+*.json
 *.class
 *.log
 *.pyc
@@ -39,6 +40,8 @@ google-services.json
 
 # Symbolication related
 app.*.symbols
+
+google-services.json
 
 # Obfuscation related
 app.*.map.json

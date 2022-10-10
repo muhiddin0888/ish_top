@@ -20,8 +20,6 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
       ),
       body: Column(
         children: [
-
-
           ActiveButton(
               buttonText: "Update",
               onPressed: () {
@@ -37,7 +35,6 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
                 );
 
                 BlocProvider.of<UserCubit>(context).updateUser(userModel);
-
               }),
         ],
       ),
