@@ -17,25 +17,25 @@ class MyRouter {
           builder: (_) => MainOnBoardingPage(),
         );
       case mainPage:
-        return MaterialPageRoute(builder: (_) => MainPage());
+        return navigateTo(MainPage());
       case tabBox:
-        return MaterialPageRoute(builder: (_) => TabBox());
+        return navigateTo(TabBox());
       case splashPage:
-        return MaterialPageRoute(builder: (_) => SplashScreen());
+        return navigateTo(SplashScreen());
       case loginPage:
-        return MaterialPageRoute(builder: (_) => LoginPage());
+        return navigateTo(LoginPage());
       case signUpPage:
-        return MaterialPageRoute(builder: (_) => SignUpPage());
+        return navigateTo(SignUpPage());
       case addAnnouncementPage:
-        return MaterialPageRoute(builder: (_) => AddAnnouncementPage());
+        return navigateTo(AddAnnouncementPage());
       case profileUpdatePage:
-        return MaterialPageRoute(builder: (_) => ProfileUpdatePage());
+        return navigateTo(ProfileUpdatePage());
       default:
-        return MaterialPageRoute(
-            builder: (_) => Scaffold(
-                  body: Center(
-                      child: Text('No route defined for ${settings.name}')),
-                ));
+        return navigateTo(Scaffold(
+          body: Center(
+              child: Text('No route defined for ${settings.name}')),
+        ));
     }
   }
 }
+MaterialPageRoute navigateTo(Widget widget) => MaterialPageRoute(builder: (context) => widget,);
