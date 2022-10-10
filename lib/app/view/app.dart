@@ -5,10 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/app/app.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
 import 'package:ish_top/cubits/helper/helper_cubit.dart';
+import 'package:ish_top/cubits/location/location_cubit.dart';
+import 'package:ish_top/cubits/tab/tab_cubit.dart';
 import 'package:ish_top/cubits/user/user_cubit.dart';
 import 'package:ish_top/cubits/vacancy/vacancy_cubit.dart';
+import 'package:ish_top/data/api_services/yandex_map_api_service/api_client.dart';
+import 'package:ish_top/data/api_services/yandex_map_api_service/api_service.dart';
 import 'package:ish_top/data/repositories/announcement/announcement_repository.dart';
 import 'package:ish_top/data/repositories/helper/helper_repository.dart';
+import 'package:ish_top/data/repositories/location/location_repository.dart';
 import 'package:ish_top/data/repositories/user/user_repository.dart';
 import 'package:ish_top/data/repositories/vacancy/vacancy_repository.dart';
 import 'package:ish_top/theme.dart';
@@ -49,6 +54,13 @@ class App extends StatelessWidget {
           RepositoryProvider(
             create: (_) => UserRepository(fireStore: fireStore),
           ),
+          RepositoryProvider(
+            create: (context) => LocationRepository(
+              mapApiService: MapApiService(
+                mapApiClient: MapApiClient(),
+              ),
+            ),
+          )
         ],
         child: MultiBlocProvider(
           providers: [
@@ -78,6 +90,14 @@ class App extends StatelessWidget {
               create: (context) => HelperCubit(
                 helperRepository: context.read<HelperRepository>(),
               ),
+            ),
+            BlocProvider(
+              create: (context) => LocationCubit(
+                locationRepository: context.read<LocationRepository>(),
+              ),
+            ),
+            BlocProvider(
+              create: (context) => TabCubit(),
             ),
           ],
           child: AppView(),

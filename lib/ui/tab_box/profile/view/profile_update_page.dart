@@ -55,6 +55,18 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
         });
       }
     }
+=======
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Profile Update page"),
+      ),
+      body: Column(
+        children: [
+          ActiveButton(
+              buttonText: "Update",
+              onPressed: () {
+                var currentUser =
+                    BlocProvider.of<UserCubit>(context).state.userModel;
 
     getFromCamera() async {
       imageFile = await _picker.pickImage(
@@ -168,6 +180,9 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
             ),
           );
         },
+                BlocProvider.of<UserCubit>(context).updateUser(userModel);
+              }),
+        ],
       ),
     );
   }

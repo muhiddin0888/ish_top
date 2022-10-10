@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/icon.dart';
+import 'package:ish_top/utils/style.dart';
 
 class SearchTextField extends StatelessWidget {
-  SearchTextField({Key? key, this.hintText, this.width, required this.controller, this.onChanged}) : super(key: key);
+  SearchTextField({
+    Key? key,
+    this.hintText,
+    this.width,
+    required this.controller,
+    this.onChanged,
+  }) : super(key: key);
 
   String? hintText;
   double? width;
@@ -16,13 +23,14 @@ class SearchTextField extends StatelessWidget {
     return SizedBox(
       width: width,
       child: TextField(
-        onChanged: onChanged ?? (v){},
+        onChanged: onChanged ?? (v) {},
         controller: controller,
-        style: const TextStyle(fontWeight: FontWeight.w600),
+        style: MyTextStyle.sfProMedium.copyWith(fontSize: 18),
         cursorColor: MyColors.textColor,
         decoration: InputDecoration(
           hintText: hintText ?? "Search a job or position",
-          hintStyle: const TextStyle(color: MyColors.C_95969D, fontWeight: FontWeight.w400),
+          hintStyle: const TextStyle(
+              color: MyColors.C_95969D, fontWeight: FontWeight.w400),
           fillColor: MyColors.C_F2F2F2,
           filled: true,
           prefixIcon: SizedBox(
