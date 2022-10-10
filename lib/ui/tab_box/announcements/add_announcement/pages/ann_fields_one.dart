@@ -7,7 +7,8 @@ import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/style.dart';
 
 class AnnFieldsOne extends StatefulWidget {
-  const AnnFieldsOne({Key? key}) : super(key: key);
+   const AnnFieldsOne({Key? key,}) : super(key: key);
+
 
   @override
   State<AnnFieldsOne> createState() => _AnnFieldsOneState();
@@ -56,7 +57,8 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                 onChanged: (value) {
                   if (value.length > 1) {
                     context.read<AnnouncementCubit>().updateCurrentItem(
-                          fieldValue: value,
+                          fieldValue:
+                          context.read<AnnouncementCubit>().state.fields["address"],
                           fieldKey: "age",
                         );
                   }
@@ -145,7 +147,7 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const GoogleMapView(),
+                            builder: (context) =>  GoogleMapView(),
                           ),
                         );
                       },

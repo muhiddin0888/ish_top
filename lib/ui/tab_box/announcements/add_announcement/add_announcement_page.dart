@@ -58,6 +58,7 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
                 AnnFieldsTwo(),
                 AnnFieldsThree(),
                 AnnFieldsFour(),
+
               ],
             )),
             //0,1,2,3
