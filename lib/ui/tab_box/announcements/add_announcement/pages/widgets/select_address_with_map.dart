@@ -140,35 +140,6 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                             ),
                           ),
                         ),
-                        // Positioned(
-                        //   top: 20,
-                        //   left: 20,
-                        //   right: 20,
-                        //   child: Container(
-                        //     // width: 150,
-                        //     padding: const EdgeInsets.symmetric(
-                        //         horizontal: 6, vertical: 3),
-                        //     decoration: BoxDecoration(
-                        //         boxShadow: const [
-                        //           BoxShadow(
-                        //               color: Colors.grey,
-                        //               offset: Offset(0, 0),
-                        //               blurRadius: 10)
-                        //         ],
-                        //         color: Colors.white,
-                        //         borderRadius: BorderRadius.circular(25)),
-                        //     child: Text(
-                        //       locationName,
-                        //       maxLines: 3,
-                        //       textAlign: TextAlign.center,
-                        //       style: const TextStyle(
-                        //         color: Colors.black,
-                        //         fontSize: 22,
-                        //         fontWeight: FontWeight.w700,
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
                         Positioned(
                           bottom: 10,
                           left: 5,

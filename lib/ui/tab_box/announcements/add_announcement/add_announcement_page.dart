@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ish_top/app/app.dart';
+import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/ann_fields_four.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/ann_fields_one.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/ann_fields_three.dart';
@@ -49,21 +52,31 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
                   currentPage = pageNumber;
                 });
               },
-              children: const [
+              children: [
                 AnnFieldsOne(),
                 AnnFieldsTwo(),
                 AnnFieldsThree(),
                 AnnFieldsFour(),
-
               ],
             )),
             //0,1,2,3
             ActiveButton(
                 buttonText: "Next",
                 onPressed: () {
-                  if (currentPage < 4) {
+                  if (currentPage == 3) {
+                    BlocProvider.of<AnnouncementCubit>(context)
+                        .addAnnouncement();
+                    BlocProvider.of<AnnouncementCubit>(context)
+                        .updateCurrentItem(
+                      fieldValue:
+                          BlocProvider.of<AppBloc>(context).state.user.id,
+                      fieldKey: "user_id",
+                    );
+                  }
+                  if ((currentPage < 3)) {
                     setState(() {
                       currentPage++;
+                      print(currentPage);
                     });
                     navigateToPage();
                   }

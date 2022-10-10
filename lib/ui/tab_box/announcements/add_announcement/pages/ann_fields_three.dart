@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/widgets/comment_input_componenet.dart';
 import 'package:ish_top/ui/widgets/selectable_field.dart';
 import 'package:ish_top/utils/color.dart';
@@ -56,6 +58,16 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
   }
 
   @override
+  void initState() {
+    titleC.text =  BlocProvider.of<AnnouncementCubit>(context).state.fields["job_title"];
+    aimC.text =  BlocProvider.of<AnnouncementCubit>(context).state.fields["aim"];
+    descC.text =  BlocProvider.of<AnnouncementCubit>(context).state.fields["description"];
+    // selectedTimeTo =  BlocProvider.of<AnnouncementCubit>(context).state.fields["time_to_contact"];
+    // selectedTimeFrom =  BlocProvider.of<AnnouncementCubit>(context).state.fields["time_to_contact"];
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
@@ -72,7 +84,10 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
               MyUtils.fieldFocusChange(context, titleF, aimF);
             },
             hintText: "Job Title",
-            onChanged: (text) {},
+            onChanged: (text) {
+              BlocProvider.of<AnnouncementCubit>(context)
+                  .updateCurrentItem(fieldValue: text, fieldKey: "job_title");
+            },
             commentFocusNode: titleF,
             textEditingController: titleC,
             textButton: IconButton(
@@ -90,7 +105,10 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
             },
             hintText: "Write your aim...",
             maxLength: 500,
-            onChanged: (text) {},
+            onChanged: (text) {
+              BlocProvider.of<AnnouncementCubit>(context)
+                  .updateCurrentItem(fieldValue: text, fieldKey: "aim");
+            },
             commentFocusNode: aimF,
             textEditingController: aimC,
             textButton: IconButton(
@@ -108,7 +126,10 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
             onSubmitted: (v) {
               descF.unfocus();
             },
-            onChanged: (text) {},
+            onChanged: (text) {
+              BlocProvider.of<AnnouncementCubit>(context)
+                  .updateCurrentItem(fieldValue: text, fieldKey: "description");
+            },
             commentFocusNode: descF,
             textEditingController: descC,
             textButton: IconButton(

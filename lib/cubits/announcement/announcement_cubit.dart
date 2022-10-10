@@ -16,7 +16,7 @@ class AnnouncementCubit extends Cubit<AnnouncementState> {
             announcements: [],
             status: FormzStatus.pure,
             errorText: '',
-            fields:  {
+            fields: {
               "announcement_id": "",
               "full_name": "",
               "age": 0,
@@ -26,7 +26,7 @@ class AnnouncementCubit extends Cubit<AnnouncementState> {
               "level": "",
               "address": "",
               "aim": "",
-              "created_at": "",
+              "created_at": DateTime.now().toString(),
               "category_id": "",
               "user_id": "",
               "job_title": "",
@@ -74,13 +74,27 @@ class AnnouncementCubit extends Cubit<AnnouncementState> {
     );
   }
 
+  Future<void> addAnnouncement() async {
+    emit(state.copyWith(status: FormzStatus.submissionInProgress));
+    try {
+      await announcementRepository.postAnnouncement(
+        announcementJson: state.fields,
+      );
+      emit(state.copyWith(
+        status: FormzStatus.submissionSuccess,
+      ));
+    } catch (error) {
+      emit(state.copyWith(status: FormzStatus.submissionFailure));
+    }
+  }
+
   void updateCurrentItem({
-    required String fieldValue,
+    required dynamic fieldValue,
     required String fieldKey,
   }) {
     var map = state.fields;
     map[fieldKey] = fieldValue;
-    print(map);
+    print({"MAP DATA:${map}"});
     emit(state.copyWith(fields: map));
   }
 

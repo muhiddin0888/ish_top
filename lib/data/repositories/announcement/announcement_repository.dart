@@ -8,12 +8,12 @@ class AnnouncementRepository {
       : _fireStore = fireStore;
 
   Future<void> postAnnouncement({
-    required AnnouncementModel announcementModel,
+    required Map<String, dynamic> announcementJson,
   }) async {
     try {
       var newAnnouncement = await _fireStore
           .collection("announcements")
-          .add(announcementModel.toJson());
+          .add(announcementJson);
       await _fireStore
           .collection("announcements")
           .doc(newAnnouncement.id)

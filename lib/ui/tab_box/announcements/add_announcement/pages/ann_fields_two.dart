@@ -65,12 +65,8 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
         ),
         SizedBox(height: 5),
         CommentInputComponent(
-
           height: 275,
-
           hintText: "Ma'lumot kiriting",
-
-
           commentFocusNode: FocusNode(),
           textEditingController: textEditingController,
           textButton: TextButton(
@@ -78,9 +74,9 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
                 textEditingController.clear();
               },
               child: Text("Tozalash")),
-
           onChanged: (String value) {
-            context.read<AnnouncementCubit>().state.fields["knowledge"] = value;
+            BlocProvider.of<AnnouncementCubit>(context)
+                .updateCurrentItem(fieldValue: value, fieldKey: "knowledge");
           },
         )
       ],
@@ -381,8 +377,7 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
               setState(
                 () => {},
               );
-              context.read<AnnouncementCubit>().state.fields["level"] =
-                  "Middle";
+              context.read<AnnouncementCubit>().state.fields["level"] = "Middle";
             },
             backGroundColor: selectLevel == 2 ? Color(0xff356899) : null,
             border: selectLevel == 2

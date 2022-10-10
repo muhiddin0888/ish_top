@@ -33,9 +33,8 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
       final destination = 'files/$fileName';
 
       try {
-        final ref = FirebaseStorage.instance
-            .ref(destination)
-            .child('files/images/');
+        final ref =
+            FirebaseStorage.instance.ref(destination).child('files/images/');
         await ref.putFile(imageFile as File);
       } catch (e) {
         print('error occured');
@@ -55,18 +54,6 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
         });
       }
     }
-=======
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Profile Update page"),
-      ),
-      body: Column(
-        children: [
-          ActiveButton(
-              buttonText: "Update",
-              onPressed: () {
-                var currentUser =
-                    BlocProvider.of<UserCubit>(context).state.userModel;
 
     getFromCamera() async {
       imageFile = await _picker.pickImage(
@@ -126,11 +113,10 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Profile Update page"),
-      ),
-      body: BlocBuilder<UserCubit, UserState>(
-        builder: (context, state) {
+        appBar: AppBar(
+          title: Text("Profile Update page"),
+        ),
+        body: BlocBuilder<UserCubit, UserState>(builder: (context, state) {
           return SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: width * .1),
@@ -179,11 +165,6 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
               ),
             ),
           );
-        },
-                BlocProvider.of<UserCubit>(context).updateUser(userModel);
-              }),
-        ],
-      ),
-    );
+        }));
   }
 }

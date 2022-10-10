@@ -77,7 +77,7 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
               UniversalTextInput(
                 caption: "Telefon no'mer",
                 onChanged: (value) {
-                  if (value.length > 13) {
+                  if (value.length >= 13) {
                     context.read<AnnouncementCubit>().updateCurrentItem(
                           fieldValue: value,
                           fieldKey: "phone_number",
@@ -98,7 +98,7 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
               UniversalTextInput(
                 caption: "Telegram Url",
                 onChanged: (value) {
-                  if (value.length > 13) {
+                  if (value.length > 3) {
                     context.read<AnnouncementCubit>().updateCurrentItem(
                           fieldValue: value,
                           fieldKey: "telegram_url",
@@ -126,10 +126,7 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                       onChanged: (value) {
                         if (value.length > 5) {
                           context.read<AnnouncementCubit>().updateCurrentItem(
-                                fieldValue: context
-                                    .watch<AnnouncementCubit>()
-                                    .state
-                                    .fields["address"],
+                                fieldValue: value,
                                 fieldKey: "address",
                               );
                         }
@@ -138,7 +135,7 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                       initialText: context
                           .watch<AnnouncementCubit>()
                           .state
-                          .fields["telegram_url"]
+                          .fields["address"]
                           .toString(),
                       keyBoardType: TextInputType.streetAddress,
                     ),
