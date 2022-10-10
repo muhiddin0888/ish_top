@@ -278,6 +278,7 @@ class _ConfirmPasswordInput extends StatelessWidget {
                           ? Colors.red.withOpacity(0.8)
                           : MyColors.C_0D0D26.withOpacity(0.7)),
               hintText: 'Confirm Password',
+              
               hintStyle: MyTextStyle.sfProMedium.copyWith(
                 fontSize: 16,
                 color: state.password.invalid ? Colors.red.withOpacity(0.8) : MyColors.C_95969D.withOpacity(0.7),
