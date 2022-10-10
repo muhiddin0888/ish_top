@@ -25,6 +25,7 @@ class CommentInputComponent extends StatelessWidget {
         TextField(
           controller: textEditingController,
           expands: true,
+          textAlignVertical: TextAlignVertical.top,
           minLines: null,
           maxLines: null,
           textInputAction: TextInputAction.done,
@@ -44,8 +45,8 @@ class CommentInputComponent extends StatelessWidget {
             contentPadding:
                 const EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
             hintText: "Ma'lumot kiriting",
-            hintStyle: MyTextStyle.sfProMedium
-                .copyWith(fontSize: 16, color: MyColors.C_2C557D),
+            hintStyle: MyTextStyle.sfProMedium.copyWith(
+                fontSize: 16, color: MyColors.C_2C557D.withOpacity(0.8)),
           ),
           cursorColor: MyColors.C_2C557D,
         ),
