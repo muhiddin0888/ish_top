@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/app/app.dart';
 import 'package:ish_top/cubits/user/user_cubit.dart';
-import 'package:ish_top/ui/widgets/active_button.dart';
-import 'package:ish_top/ui/widgets/category_item_button.dart';
-import 'package:ish_top/ui/widgets/passive_button.dart';
-import 'package:ish_top/ui/widgets/search_text_field.dart';
-import 'package:ish_top/ui/widgets/selectable_button.dart';
+import 'package:ish_top/ui/tab_box/profile/widgets/profile_item.dart';
 import 'package:ish_top/utils/constants.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -32,13 +28,15 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    // final textTheme = Theme.of(context).textTheme;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     final user = context.select((AppBloc bloc) => bloc.state.user);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Profile'),
-        actions: <Widget>[
+        centerTitle: true,
+        actions: [
           IconButton(
             key: const Key('homePage_logout_iconButton'),
             icon: const Icon(Icons.exit_to_app),
@@ -46,84 +44,77 @@ class _ProfilePageState extends State<ProfilePage> {
           )
         ],
       ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(user.email!),
-            Image.network(
-              context.watch<UserCubit>().state.userModel.imageUrl,
-              height: 200,
-              width: 200,
-            ),
-            Text(user.id.toString()),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, profileUpdatePage);
-              },
-              child: const Icon(Icons.edit),
-            ),
-            ActiveButton(
-              buttonText: 'Active Button',
-              width: 158,
-              onPressed: () {},
-            ),
-            const SizedBox(height: 15),
-            PassiveButton(
-              buttonText: 'Passive Button',
-              width: 158,
-              onPressed: () {},
-            ),
-            const SizedBox(height: 15),
-            SearchTextField(controller: TextEditingController()),
-            const SizedBox(height: 15),
-            Row(
-              children: [
-                CategoryItemButton(
-                  buttonText: 'All',
-                  onPressed: () {
-                    setState(() {
-                      isActive = !isActive;
-                    });
-                  },
-                  isActive: isActive,
-                ),
-                const SizedBox(width: 16),
-                CategoryItemButton(
-                  icon: const FlutterLogo(),
-                  buttonText: 'Flutter',
-                  onPressed: () {
-                    setState(() {
-                      isActive = !isActive;
-                    });
-                  },
-                  isActive: !isActive,
-                ),
-                const SizedBox(height: 50),
-              ],
-            ),
-            ...List.generate(
-              3,
-              (index) => SelectableButton(
-                onPressed: () {
-                  selectedIndex = index;
-                  setState(() {});
-                },
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                isActive: selectedIndex == index,
-                icon:
-                    const Icon(Icons.access_time_rounded, color: Colors.black),
-                text: (index == 0)
-                    ? 'Full Time'
-                    : (index == 1)
-                        ? 'Part Time'
-                        : 'Any',
+      body: BlocConsumer<UserCubit, UserState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ClipOval(
+                    child: Image.network(
+                      context.watch<UserCubit>().state.userModel.imageUrl.toString(),
+                      height: 200,
+                      width: 200,
+                    ),
+                  ),
+                  SizedBox(height: height * .02),
+                  Text(
+                    user.email!,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(height: height * .02),
+                  ProfileItem(
+                      width,
+                      height,
+                      state,
+                      Text(
+                        state.userModel.fullName.toString() == ''
+                            ? 'Your full name'
+                            : state.userModel.fullName.toString(),
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      () {}),
+                  ProfileItem(
+                      width,
+                      height,
+                      state,
+                      Text(
+                        state.userModel.fullName.toString() == ''
+                            ? 'Your phone number'
+                            : state.userModel.phoneNumber.toString(),
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      () {}),
+                  ProfileItem(
+                    width,
+                    height,
+                    state,
+                    Text(
+                      'Edit',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    () {
+                      Navigator.pushNamed(context, profileUpdatePage);
+                    },
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
