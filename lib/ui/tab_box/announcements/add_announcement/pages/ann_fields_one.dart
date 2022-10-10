@@ -117,34 +117,49 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
               const SizedBox(
                 height: 12,
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    flex: 5,
-                    child: UniversalTextInput(
-                      caption: "Manzil",
-                      onChanged: (value) {
-                        if (value.length > 5) {
-                          context.read<AnnouncementCubit>().updateCurrentItem(
-                                fieldValue:
-                                    BlocProvider.of<LocationCubit>(context)
-                                        .selectedLocationName,
-                                fieldKey: "address",
-                              );
-                        }
-                      },
-                      hintText: "Tashkent.sh",
-                      initialText: context
-                          .watch<LocationCubit>()
-                          .selectedLocationName
-                          .toString(),
-                      keyBoardType: TextInputType.streetAddress,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        context
+                                    .read<AnnouncementCubit>()
+                                    .state
+                                    .fields['address'] ==
+                                ""
+                            ? "Address is not selected"
+                            : context
+                                .read<AnnouncementCubit>()
+                                .state
+                                .fields['address'],
+                        style: MyTextStyle.sfProMedium.copyWith(fontSize: 15),
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: InkWell(
+                    // Expanded(
+                    //   flex: 5,
+                    //   child: UniversalTextInput(
+                    //     caption: "Manzil",
+                    //     onChanged: (value) {
+                    //       if (value.length > 5) {
+                    //         context.read<AnnouncementCubit>().updateCurrentItem(
+                    //               fieldValue:
+                    //                   BlocProvider.of<LocationCubit>(context)
+                    //                       .selectedLocationName,
+                    //               fieldKey: "address",
+                    //             );
+                    //       }
+                    //     },
+                    //     hintText: "Tashkent.sh",
+                    //     initialText: context
+                    //         .watch<LocationCubit>()
+                    //         .selectedLocationName
+                    //         .toString(),
+                    //     keyBoardType: TextInputType.streetAddress,
+                    //   ),
+                    // ),
+                    InkWell(
                       onTap: () {
                         Navigator.pushNamed(
                           context,
@@ -167,8 +182,8 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                         color: MyColors.primaryColor,
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               )
             ],
           ),

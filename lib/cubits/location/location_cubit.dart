@@ -12,10 +12,7 @@ class LocationCubit extends Cubit<LocationState> {
       : super(const LocationState(
             status: FormzStatus.submissionInProgress,
             errorText: "",
-            locationName: '')) {
-    fetchCurrentPosition();
-    getLocationName();
-  }
+            locationName: ''));
 
   LocationRepository locationRepository;
 
