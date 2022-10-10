@@ -226,6 +226,7 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                                               // maxLines: 3,
                                               overflow: TextOverflow.ellipsis,
                                               style: const TextStyle(
+                                                fontSize: 16,
                                                   color: Colors.blue),
                                             ),
                                           ],
