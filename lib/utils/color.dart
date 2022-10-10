@@ -17,6 +17,8 @@ class MyColors {
   static const Color black = Colors.black;
   static const Color textColor = Color(0xFF3E434D);
   static const Color C_F2F2F2 = Color(0xFFF2F2F2);
+  static const Color C_5386e4 = Color(0xFF5386E4);
+  static const Color C_039D57 = Color(0xFF039D57);
 }
 
 class Palette {

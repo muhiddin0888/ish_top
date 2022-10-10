@@ -20,7 +20,8 @@ class CategoryItemButton extends StatelessWidget {
     return Container(
       height: 37,
       decoration: BoxDecoration(
-        border: Border.all(color: (isActive) ? MyColors.C_356899 : MyColors.C_95969D),
+        border: Border.all(
+            color: (isActive) ? MyColors.C_356899 : MyColors.C_95969D),
         borderRadius: BorderRadius.circular(100),
         color: (isActive) ? MyColors.C_356899 : Colors.transparent,
       ),

@@ -20,7 +20,7 @@ class CommentInputComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 180,
+      height: 275,
       child: Stack(children: [
         TextField(
           controller: textEditingController,
