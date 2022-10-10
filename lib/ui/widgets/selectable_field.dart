@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
 
 class SelectableField extends StatefulWidget {
   const SelectableField({
@@ -8,7 +10,7 @@ class SelectableField extends StatefulWidget {
   }) : super(key: key);
 
   final List<String> items;
-  final ValueChanged<String> onChanged;
+  final ValueChanged<int> onChanged;
 
   @override
   State<SelectableField> createState() => _SelectableFieldState();
@@ -19,7 +21,9 @@ class _SelectableFieldState extends State<SelectableField> {
 
   @override
   void initState() {
-    currentValue = widget.items[0];
+    int onCubit =
+        BlocProvider.of<AnnouncementCubit>(context).state.fields['job_type'];
+    currentValue = widget.items[onCubit];
     super.initState();
   }
 
@@ -41,19 +45,23 @@ class _SelectableFieldState extends State<SelectableField> {
           color: Colors.blueAccent,
         ),
         onChanged: (newValue) {
-          widget.onChanged.call(newValue!);
+          if (newValue == widget.items[0]) {
+            widget.onChanged.call(0);
+          }
+          else if(newValue == widget.items[1]){
+             widget.onChanged.call(1);
+          }else{
+             widget.onChanged.call(2);
+          }
           setState(() {
-            currentValue = newValue;
+            currentValue = newValue!;
           });
         },
         items: List.generate(
           widget.items.length,
           (index) {
             var val = widget.items[index];
-            return DropdownMenuItem<String>(
-              value: val,
-              child:Text(val)
-            );
+            return DropdownMenuItem<String>(value: val, child: Text(val));
           },
         ),
       ),
