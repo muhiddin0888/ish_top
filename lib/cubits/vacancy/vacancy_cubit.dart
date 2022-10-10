@@ -30,6 +30,9 @@ class VacancyCubit extends Cubit<VacancyState> {
     );
   }
 
+
+
+
   Future<void> listenToVacanciesById({required String categoryId}) async {
     emit(GetVacancyProgress());
     _subscription = vacancyRepository.getVacanciesByCategory(categoryId: categoryId).listen(
