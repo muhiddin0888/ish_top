@@ -40,13 +40,6 @@ migrate_working_dir/
 
 # Symbolication related
 app.*.symbols
-# Google Services (e.g. APIs or Firebase)
-google-services.json
-
-google-services.json
-
-#google-services
-google-services.json
 
 # Obfuscation related
 app.*.map.json
