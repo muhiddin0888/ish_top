@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:ish_top/data/api_services/yandex_map_api_service/api_client.dart';
+import 'package:ish_top/data/models/geocoding/geocoding.dart';
 import 'package:ish_top/utils/constants.dart';
 
 class MapApiService {
@@ -26,11 +27,11 @@ class MapApiService {
       );
       String text = '';
       if (response.statusCode! == HttpStatus.ok) {
-        var data = response.data;
-        if (data['response']['GeoObjectCollection']['featureMember'][0]
-            .isNotEmpty) {
-          text = data['response']['GeoObjectCollection']['featureMember'][0]
-              ['GeoObject']['metaDataProperty']['GeocoderMetaData']['text'];
+        Geocoding geocoding = Geocoding.fromJson(response.data);
+
+        if (geocoding.response.geoObjectCollection.featureMember.isNotEmpty) {
+          text = geocoding.response.geoObjectCollection.featureMember[0].geoObject
+              .metaDataProperty.geocoderMetaData.text;
           debugPrint("text>>>>>>>>>>>> $text");
         } else {
           text = 'Aniqlanmagan hudud';
