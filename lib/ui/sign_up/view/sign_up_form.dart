@@ -255,6 +255,7 @@ class _ConfirmPasswordInput extends StatelessWidget {
     return BlocBuilder<SignUpCubit, SignUpState>(
       buildWhen: (previous, current) => previous.password != current.password || previous.confirmedPassword != current.confirmedPassword,
       builder: (context, state) {
+
         return StatefulBuilder(
           builder: (context, setState) => TextField(
             key: const Key('signUpForm_confirmedPasswordInput_textField'),
@@ -278,7 +279,7 @@ class _ConfirmPasswordInput extends StatelessWidget {
                           ? Colors.red.withOpacity(0.8)
                           : MyColors.C_0D0D26.withOpacity(0.7)),
               hintText: 'Confirm Password',
-              
+
               hintStyle: MyTextStyle.sfProMedium.copyWith(
                 fontSize: 16,
                 color: state.password.invalid ? Colors.red.withOpacity(0.8) : MyColors.C_95969D.withOpacity(0.7),
