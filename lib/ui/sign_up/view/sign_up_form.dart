@@ -255,7 +255,6 @@ class _ConfirmPasswordInput extends StatelessWidget {
     return BlocBuilder<SignUpCubit, SignUpState>(
       buildWhen: (previous, current) => previous.password != current.password || previous.confirmedPassword != current.confirmedPassword,
       builder: (context, state) {
-
         return StatefulBuilder(
           builder: (context, setState) => TextField(
             key: const Key('signUpForm_confirmedPasswordInput_textField'),
