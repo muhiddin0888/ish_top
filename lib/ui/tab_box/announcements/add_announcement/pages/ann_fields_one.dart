@@ -64,7 +64,7 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                 height: 12,
               ),
               UniversalTextInput(
-                caption: "Phone number",
+                caption: "Telefon no'mer",
                 onChanged: (value) {
                   if (value.length > 13) {
                     context.read<AnnouncementCubit>().updateCurrentItem(
@@ -104,7 +104,7 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                   Expanded(
                     flex: 5,
                     child: UniversalTextInput(
-                      caption: "Address",
+                      caption: "Manzil",
                       onChanged: (value) {
                         if (value.length > 5) {
                           context.read<AnnouncementCubit>().updateCurrentItem(
