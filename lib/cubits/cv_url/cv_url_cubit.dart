@@ -36,7 +36,7 @@ class CvUrlCubit extends Cubit<CvUrlState> {
         state.copyWith(
           status: FormzStatus.submissionInProgress,
           cvUrl: CvUrlModel(
-            downloadUrl: "onProgress",
+            downloadUrl: "",
             fileName: "onProgress",
             sizeOfFile: "onProgress",
           ),

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/app/app.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
-import 'package:ish_top/cubits/cv_url/cv_url_cubit.dart';
 import 'package:ish_top/cubits/helper/helper_cubit.dart';
 import 'package:ish_top/cubits/location/location_cubit.dart';
 import 'package:ish_top/cubits/tab/tab_cubit.dart';
@@ -99,11 +98,6 @@ class App extends StatelessWidget {
             ),
             BlocProvider(
               create: (context) => TabCubit(),
-            ),
-            BlocProvider(
-              create: (context) => CvUrlCubit(
-                helperRepository: context.read<HelperRepository>(),
-              ),
             ),
           ],
           child: AppView(),

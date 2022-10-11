@@ -39,7 +39,7 @@ class _AnnFieldsFourState extends State<AnnFieldsFour> {
               width: double.infinity,
               child: BlocConsumer<CvUrlCubit, CvUrlState>(
                 listener: (context, state) {
-                  MyUtils.getMyToast(message: state.errorText);
+                  MyUtils.getMyToast(message: "File not picked");
                 },
                 listenWhen: (previous, current) {
                   return current.status == FormzStatus.submissionFailure;
