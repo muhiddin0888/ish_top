@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/cubits/helper/helper_cubit.dart';
+import 'package:ish_top/ui/tab_box/announcements/widgets/custom_drawer.dart';
 import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/constants.dart';
 
@@ -51,6 +52,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
           return Text("error");
         },
       ),
+      drawer: const CustomDrawer(),
     );
   }
 }

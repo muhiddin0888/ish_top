@@ -67,6 +67,7 @@ flutter:
     - assets/
     - assets/lottie/
     - assets/images/
+    - assets/images/users/
     - assets/svg/
     - assets/translations/
 
