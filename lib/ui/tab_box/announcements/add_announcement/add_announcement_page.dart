@@ -4,7 +4,7 @@ import 'package:ish_top/app/app.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
 import 'package:ish_top/cubits/cv_url/cv_url_cubit.dart';
 import 'package:ish_top/data/repositories/helper/helper_repository.dart';
-import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/ann_fields_four.dart';
+import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/ann_fields_four/ann_fields_four.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/ann_fields_one/ann_fields_one.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/ann_fields_three.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/ann_fields_two.dart';
