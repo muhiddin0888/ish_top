@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
@@ -29,8 +28,8 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
   final fromF = FocusNode();
   final toF = FocusNode();
 
-  TimeOfDay selectedTimeFrom = TimeOfDay.now();
-  TimeOfDay selectedTimeTo = TimeOfDay.now();
+  TimeOfDay selectedTimeFrom = TimeOfDay.fromDateTime(DateTime(0,0,0,10,0,));
+  TimeOfDay selectedTimeTo = TimeOfDay.fromDateTime(DateTime(0,0,0,20,0,));
 
   Future<TimeOfDay> _selectTimeFrom(BuildContext context) async {
     final selected = await showTimePicker(
@@ -67,8 +66,7 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
     aimC.text = BlocProvider.of<AnnouncementCubit>(context).state.fields["aim"];
     descC.text =
         BlocProvider.of<AnnouncementCubit>(context).state.fields["description"];
-    // selectedTimeTo =  BlocProvider.of<AnnouncementCubit>(context).state.fields["time_to_contact"];
-    // selectedTimeFrom =  BlocProvider.of<AnnouncementCubit>(context).state.fields["time_to_contact"];
+    BlocProvider.of<AnnouncementCubit>(context).updateCurrentItem(fieldValue: "${selectedTimeFrom.hour}:${selectedTimeFrom.minute} - ${selectedTimeTo.hour}:${selectedTimeTo.minute}", fieldKey: "time_to_contact");
     super.initState();
   }
 
@@ -226,33 +224,33 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
             style: TextStyle(fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 10),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //   children: [
-          //     Card(
-          //       child: SelectDateItem(
-          //         text: "${selectedTimeFrom.hour}:${selectedTimeFrom.minute}",
-          //         onTap: () async {
-          //           var t = await _selectTimeFrom(context);
-          //           setState(() {
-          //             selectedTimeFrom = t;
-          //           });
-          //         },
-          //       ),
-          //     ),
-          //     Card(
-          //       child: SelectDateItem(
-          //         text: "${selectedTimeTo.hour}:${selectedTimeFrom.minute}",
-          //         onTap: () async {
-          //           var t = await _selectTimeTo(context);
-          //           setState(() {
-          //             selectedTimeTo = t;
-          //           });
-          //         },
-          //       ),
-          //     )
-          //   ],
-          // ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Card(
+                child: SelectDateItem(
+                  text: "${selectedTimeFrom.hour}:${selectedTimeFrom.minute}",
+                  onTap: () async {
+                    var t = await _selectTimeFrom(context);
+                    setState(() {
+                      selectedTimeFrom = t;
+                    });
+                  },
+                ),
+              ),
+              Card(
+                child: SelectDateItem(
+                  text: "${selectedTimeTo.hour}:${selectedTimeFrom.minute}",
+                  onTap: () async {
+                    var t = await _selectTimeTo(context);
+                    setState(() {
+                      selectedTimeTo = t;
+                    });
+                  },
+                ),
+              )
+            ],
+          ),
         ],
       ),
     );
