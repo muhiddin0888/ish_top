@@ -26,14 +26,14 @@ class _AnnFieldsFourState extends State<AnnFieldsFour> {
     return ListView(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: DottedBorder(
             borderType: BorderType.RRect,
             dashPattern: const [10, 20],
             strokeWidth: 2,
             color: MyColors.buttonColor,
             radius: const Radius.circular(25),
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(10),
             child: SizedBox(
               height: 340,
               width: double.infinity,
