@@ -202,6 +202,7 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
               ),
               const SizedBox(height: 18),
               SelectableField(
+                hideCurrencyIcons: false,
                 items: const ["SO'M", "USD", "RUB"],
                 onChanged: (value) {},
               ),

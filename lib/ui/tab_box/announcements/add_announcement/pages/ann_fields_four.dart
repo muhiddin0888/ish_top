@@ -1,8 +1,9 @@
 import 'package:dotted_border/dotted_border.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:formz/formz.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
-import 'package:ish_top/data/repositories/helper/helper_repository.dart';
+import 'package:ish_top/cubits/cv_url/cv_url_cubit.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/widgets/my_container.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/widgets/url_container.dart';
 import 'package:ish_top/ui/widgets/active_button.dart';
@@ -20,83 +21,90 @@ class AnnFieldsFour extends StatefulWidget {
 }
 
 class _AnnFieldsFourState extends State<AnnFieldsFour> {
-  PlatformFile? pickedFile;
-  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-    String cvUrl = context.read<AnnouncementCubit>().state.fields['cv_url'];
     return ListView(
       children: [
-        DottedBorder(
-          borderType: BorderType.RRect,
-          dashPattern: const [10, 20],
-          strokeWidth: 2,
-          color: MyColors.buttonColor,
-          radius: const Radius.circular(25),
-          padding: const EdgeInsets.all(5),
-          child: SizedBox(
-            height: 340,
-            width: double.infinity,
-            child: Column(
-              children: [
-                const SizedBox(height: 30),
-                Text(
-                  "Upload your CV or Resume and \n use it when you apply for jobs",
-                  style: MyTextStyle.sfProLight.copyWith(fontSize: 18),
-                ),
-                const SizedBox(height: 10),
-                isLoading
-                    ? const CircularProgressIndicator()
-                    : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                        child: cvUrl != ""
-                            ? UrlContainer(
-                                title: pickedFile != null
-                                    ? pickedFile!.name
-                                    : "PDF has uploaded",
-                                subTitle: pickedFile != null
-                                    ? "${(pickedFile!.size / 1000000).toStringAsFixed(1)} mb"
-                                    : "Unknown mb",
-                                onTap: () async {
-                                  if (pickedFile != null) {
-                                    bool isDeleted = await context
-                                        .read<HelperRepository>()
-                                        .deleteCv(cvUrl: pickedFile!.name);
-                                    if (isDeleted) {
-                                      context
-                                          .read<AnnouncementCubit>()
-                                          .updateCurrentItem(
-                                            fieldValue: '',
-                                            fieldKey: "cv_url",
-                                          );
-                                      setState(() {});
-                                    } else {
-                                      MyUtils.getMyToast(
-                                          message: "Something went wrong");
-                                    }
-                                  } else {
-                                    MyUtils.getMyToast(
-                                        message: "Can not remove");
-                                  }
-                                },
-                              )
-                            : const MyContainer(text: "Upload a PDF"),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: DottedBorder(
+            borderType: BorderType.RRect,
+            dashPattern: const [10, 20],
+            strokeWidth: 2,
+            color: MyColors.buttonColor,
+            radius: const Radius.circular(25),
+            padding: const EdgeInsets.all(5),
+            child: SizedBox(
+              height: 340,
+              width: double.infinity,
+              child: BlocConsumer<CvUrlCubit, CvUrlState>(
+                listener: (context, state) {
+                  MyUtils.getMyToast(message: state.errorText);
+                },
+                listenWhen: (previous, current) {
+                  return current.status == FormzStatus.submissionFailure;
+                },
+                builder: (context, state) {
+                  return Column(
+                    children: [
+                      const SizedBox(height: 30),
+                      Text(
+                        "Upload your CV or Resume and\nuse it when you apply for jobs",
+                        style: MyTextStyle.sfProLight.copyWith(fontSize: 18),
+                        textAlign: TextAlign.center,
                       ),
-                const SizedBox(height: 20),
-                Visibility(
-                  visible: !isLoading,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 20),
-                    child: ActiveButton(
-                      buttonText: 'Upload',
-                      onPressed: () async {
-                        await selectFile();
-                      },
-                    ),
-                  ),
-                )
-              ],
+                      const SizedBox(height: 10),
+                      Visibility(
+                        visible:
+                            state.status == FormzStatus.submissionInProgress,
+                        child: Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              SpinKitWave(
+                                size: 40,
+                                color: MyColors.buttonColor,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible:
+                            state.status != FormzStatus.submissionInProgress,
+                        child: state.cvUrl.isEmpty
+                            ? const MyContainer(text: "Upload a PDF")
+                            : Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    UrlContainer(
+                                      onTap: () async =>
+                                          context.read<CvUrlCubit>().deleteCv(),
+                                      title: state.cvUrl.fileName,
+                                      subTitle: state.cvUrl.sizeOfFile,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                      ),
+                      const SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 20),
+                        child: Visibility(
+                          visible: state.cvUrl.isEmpty,
+                          child: ActiveButton(
+                            buttonText: 'Upload',
+                            onPressed: () async =>
+                                context.read<CvUrlCubit>().selectAndUploadCv(),
+                          ),
+                        ),
+                      )
+                    ],
+                  );
+                },
+              ),
             ),
           ),
         ),
@@ -108,27 +116,5 @@ class _AnnFieldsFourState extends State<AnnFieldsFour> {
         ),
       ],
     );
-  }
-
-  Future<void> selectFile() async {
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(allowMultiple: false);
-    if (result != null) {
-      setState(() {
-        isLoading = true;
-      });
-      pickedFile = result.files.first;
-      String downloadUrl =
-          await context.read<HelperRepository>().uploadFile(pickedFile!);
-      context.read<AnnouncementCubit>().updateCurrentItem(
-            fieldValue: downloadUrl,
-            fieldKey: "cv_url",
-          );
-    } else {
-      MyUtils.getMyToast(message: "File not picked");
-    }
-    setState(() {
-      isLoading = false;
-    });
   }
 }

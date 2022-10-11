@@ -8,11 +8,13 @@ class SelectableField extends StatefulWidget {
   const SelectableField({
     Key? key,
     required this.items,
+    this.hideCurrencyIcons = true,
     required this.onChanged,
   }) : super(key: key);
 
   final List<String> items;
   final ValueChanged<int> onChanged;
+  final bool hideCurrencyIcons;
 
   @override
   State<SelectableField> createState() => _SelectableFieldState();
@@ -64,8 +66,11 @@ class _SelectableFieldState extends State<SelectableField> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset(currencyIcons[index],
-                        width: 25, height: 25, fit: BoxFit.cover),
+                    Visibility(
+                      visible: !widget.hideCurrencyIcons,
+                      child: Image.asset(currencyIcons[index],
+                          width: 25, height: 25, fit: BoxFit.cover),
+                    ),
                     const SizedBox(width: 5),
                     Text(currency),
                   ],

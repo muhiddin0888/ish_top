@@ -17,6 +17,7 @@ class UrlContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 30),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: MyColors.C_F2F2F2,

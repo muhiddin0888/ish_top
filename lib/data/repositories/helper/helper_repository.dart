@@ -18,7 +18,7 @@ class HelperRepository {
                 .toList(),
           );
 
-  Future<String> uploadFile(
+  Future<String> uploadCv(
     PlatformFile pickedFile,
   ) async {
     try {
@@ -35,7 +35,7 @@ class HelperRepository {
   Future<bool> deleteCv({required String cvUrl}) async {
     try {
       String storagePath = "files/pdf/$cvUrl";
-      var ref = FirebaseStorage.instance.ref().child(storagePath).delete();
+      FirebaseStorage.instance.ref().child(storagePath).delete();
       return true;
     } catch (e) {
       return false;
@@ -53,6 +53,16 @@ class HelperRepository {
       return downloadUrl;
     } catch (error) {
       throw Exception();
+    }
+  }
+
+  Future<PlatformFile?> selectFile() async {
+    FilePickerResult? result =
+        await FilePicker.platform.pickFiles(allowMultiple: false);
+    if (result != null) {
+      return result.files.first;
+    } else {
+      return null;
     }
   }
 }
