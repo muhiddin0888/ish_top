@@ -28,7 +28,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, addAnnouncementPage);
+                Navigator.pushNamed(context, detailAnnouncements);//detail Announcementga shuyerdan o'tib turdim
               },
               icon: Icon(Icons.add))
         ],

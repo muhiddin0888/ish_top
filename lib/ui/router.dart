@@ -6,6 +6,7 @@ import 'package:ish_top/ui/sign_up/sign_up.dart';
 import 'package:ish_top/ui/splash/splash_page.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/add_announcement_page.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/widgets/select_address_with_map.dart';
+import 'package:ish_top/ui/tab_box/announcements/detail_announcements_page.dart';
 import 'package:ish_top/ui/tab_box/profile/view/profile_update_page.dart';
 import 'package:ish_top/ui/tab_box/tab_box.dart';
 import 'package:ish_top/utils/constants.dart';
@@ -31,6 +32,8 @@ class MyRouter {
         return navigateTo(const ProfileUpdatePage());
       case googleMapView:
         return navigateTo(const GoogleMapView());
+        case detailAnnouncements:
+        return navigateTo(const DetailAnnouncementsPage());
       default:
         return navigateTo(Scaffold(
           body: Center(child: Text('No route defined for ${settings.name}')),
