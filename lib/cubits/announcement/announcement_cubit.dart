@@ -33,7 +33,7 @@ class AnnouncementCubit extends Cubit<AnnouncementState> {
               "description": "",
               "job_type": 0,
               "expected_salary": "",
-              "time_to_contact": "",
+              "time_to_contact": "18:00-20:00",
               "cv_url": "",
               "from_where": 0,
               "is_valid": false

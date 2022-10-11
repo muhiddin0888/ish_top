@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,13 +8,10 @@ import 'package:ish_top/data/models/category/category_item.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/add_fields_two/widgets/select_from_where.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/add_fields_two/widgets/select_level.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/widgets/comment_input_componenet.dart';
-import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/widgets/select_level.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/widgets/title_text.dart';
 import 'package:ish_top/ui/widgets/active_button.dart';
 import 'package:ish_top/ui/widgets/search_text_field.dart';
-import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/my_utils.dart';
-import 'package:ish_top/utils/style.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'dart:developer' as print;
 
@@ -40,6 +36,8 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
   @override
   void initState() {
     super.initState();
+    textEditingController.text =
+        context.read<AnnouncementCubit>().state.fields['knowledge'];
     selectLevel = context.read<AnnouncementCubit>().state.fields['level'];
   }
 
@@ -87,6 +85,8 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
           textButton: TextButton(
               onPressed: () {
                 textEditingController.clear();
+                BlocProvider.of<AnnouncementCubit>(context)
+                    .updateCurrentItem(fieldValue: "", fieldKey: "knowledge");
               },
               child: Text("Tozalash")),
           onChanged: (String value) {
