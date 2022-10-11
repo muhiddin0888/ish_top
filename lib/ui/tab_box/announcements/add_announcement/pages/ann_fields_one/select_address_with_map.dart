@@ -5,6 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
 import 'package:ish_top/cubits/location/location_cubit.dart';
+import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/icon.dart';
 
 class GoogleMapView extends StatefulWidget {
@@ -28,8 +29,10 @@ class _GoogleMapViewState extends State<GoogleMapView> {
   @override
   void initState() {
     BlocProvider.of<LocationCubit>(context).fetchCurrentPosition();
-    currentLocationName =
-        BlocProvider.of<LocationCubit>(context).currentLocationName;
+    setState(() {
+      currentLocationName =
+          BlocProvider.of<LocationCubit>(context).currentLocationName;
+    });
     debugPrint(currentLocationName.toString());
     super.initState();
   }
@@ -163,7 +166,10 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
-                                    fontSize: 16, color: Colors.blue),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: MyColors.primaryColor,
+                                ),
                               ),
                             ),
                           ),

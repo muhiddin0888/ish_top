@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
-import 'package:ish_top/cubits/location/location_cubit.dart';
 import 'package:ish_top/ui/widgets/universal_text_input.dart';
-import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/constants.dart';
+import 'package:ish_top/utils/icon.dart';
 import 'package:ish_top/utils/style.dart';
 
 class AnnFieldsOne extends StatefulWidget {
-  const AnnFieldsOne({
-    Key? key,
-  }) : super(key: key);
+  const AnnFieldsOne({Key? key}) : super(key: key);
 
   @override
   State<AnnFieldsOne> createState() => _AnnFieldsOneState();
@@ -106,7 +103,7 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                         );
                   }
                 },
-                hintText: "@falonchi95",
+                hintText: "@forExample",
                 initialText: context
                     .watch<AnnouncementCubit>()
                     .state
@@ -176,10 +173,22 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                           },
                         );
                       },
-                      child: const Icon(
-                        Icons.location_on_rounded,
-                        size: 70,
-                        color: MyColors.primaryColor,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.greenAccent[100],
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 10,
+                              offset: Offset(0, 5),
+                            ),
+                          ],
+                        ),
+                        child: Image.asset(
+                          MyIcons.chooseLocation,
+                          scale: 8.5,
+                        ),
                       ),
                     ),
                   ],
