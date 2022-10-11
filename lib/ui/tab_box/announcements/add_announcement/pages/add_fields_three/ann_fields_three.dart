@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
@@ -6,7 +7,7 @@ import 'package:ish_top/ui/widgets/selectable_field.dart';
 import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/my_utils.dart';
 
-import 'widgets/clock.dart';
+import '../widgets/clock.dart';
 
 class AnnFieldsThree extends StatefulWidget {
   const AnnFieldsThree({Key? key}) : super(key: key);
@@ -41,6 +42,7 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
         selectedTimeFrom = selected;
       });
     }
+    context.read<AnnouncementCubit>().updateCurrentItem(fieldValue: "${selectedTimeFrom.hour}:${selectedTimeFrom.minute} - ${selectedTimeTo.hour}:${selectedTimeTo.minute}", fieldKey: "time_to_contact");
     return selectedTimeFrom;
   }
 
@@ -54,14 +56,17 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
         selectedTimeTo = selected;
       });
     }
+    context.read<AnnouncementCubit>().updateCurrentItem(fieldValue: "${selectedTimeFrom.hour}:${selectedTimeFrom.minute} - ${selectedTimeTo.hour}:${selectedTimeTo.minute}", fieldKey: "time_to_contact");
     return selectedTimeTo;
   }
 
   @override
   void initState() {
-    titleC.text =  BlocProvider.of<AnnouncementCubit>(context).state.fields["job_title"];
-    aimC.text =  BlocProvider.of<AnnouncementCubit>(context).state.fields["aim"];
-    descC.text =  BlocProvider.of<AnnouncementCubit>(context).state.fields["description"];
+    titleC.text =
+        BlocProvider.of<AnnouncementCubit>(context).state.fields["job_title"];
+    aimC.text = BlocProvider.of<AnnouncementCubit>(context).state.fields["aim"];
+    descC.text =
+        BlocProvider.of<AnnouncementCubit>(context).state.fields["description"];
     // selectedTimeTo =  BlocProvider.of<AnnouncementCubit>(context).state.fields["time_to_contact"];
     // selectedTimeFrom =  BlocProvider.of<AnnouncementCubit>(context).state.fields["time_to_contact"];
     super.initState();
@@ -159,6 +164,9 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
                     TextField(
                       controller: fromC,
                       focusNode: fromF,
+                      onChanged: (value){
+                        context.read<AnnouncementCubit>().updateCurrentItem(fieldValue: "${fromC.text} - ${toC.text}", fieldKey: "expected_salary");
+                      },
                       onSubmitted: (v) {
                         MyUtils.fieldFocusChange(context, fromF, toF);
                       },
@@ -184,6 +192,10 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
                     TextField(
                       controller: toC,
                       focusNode: toF,
+                      onChanged: (value){
+                        context.read<AnnouncementCubit>().updateCurrentItem(fieldValue: "${fromC.text} - ${toC.text}", fieldKey: "expected_salary");
+                        print(context.read<AnnouncementCubit>().state.fields['expected_salary']);
+                      },
                       onSubmitted: (v) {
                         toF.unfocus();
                       },
@@ -208,43 +220,39 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
               ),
             ],
           ),
-
-          ////         CLOCK  PART
-
           const SizedBox(height: 20),
           const Text(
             "Time to Apply  : ",
             style: TextStyle(fontWeight: FontWeight.w600),
           ),
-
           const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Card(
-                child: SelectDateItem(
-                  text: "${selectedTimeFrom.hour}:${selectedTimeFrom.minute}",
-                  onTap: () async {
-                    var t = await _selectTimeFrom(context);
-                    setState(() {
-                      selectedTimeFrom = t;
-                    });
-                  },
-                ),
-              ),
-              Card(
-                child: SelectDateItem(
-                  text: "${selectedTimeTo.hour}:${selectedTimeFrom.minute}",
-                  onTap: () async {
-                    var t = await _selectTimeTo(context);
-                    setState(() {
-                      selectedTimeTo = t;
-                    });
-                  },
-                ),
-              )
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //   children: [
+          //     Card(
+          //       child: SelectDateItem(
+          //         text: "${selectedTimeFrom.hour}:${selectedTimeFrom.minute}",
+          //         onTap: () async {
+          //           var t = await _selectTimeFrom(context);
+          //           setState(() {
+          //             selectedTimeFrom = t;
+          //           });
+          //         },
+          //       ),
+          //     ),
+          //     Card(
+          //       child: SelectDateItem(
+          //         text: "${selectedTimeTo.hour}:${selectedTimeFrom.minute}",
+          //         onTap: () async {
+          //           var t = await _selectTimeTo(context);
+          //           setState(() {
+          //             selectedTimeTo = t;
+          //           });
+          //         },
+          //       ),
+          //     )
+          //   ],
+          // ),
         ],
       ),
     );
