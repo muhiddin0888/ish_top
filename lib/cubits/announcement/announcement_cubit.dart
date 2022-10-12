@@ -33,10 +33,24 @@ class AnnouncementCubit extends Cubit<AnnouncementState> {
               "description": "",
               "job_type": 0,
               "expected_salary": "",
-              "time_to_contact": "18:00-20:00",
+              "time_to_contact_from": DateTime(
+                0,
+                0,
+                0,
+                10,
+                0,
+              ).toString(),
+              "time_to_contact_to": DateTime(
+                0,
+                0,
+                0,
+                20,
+                0,
+              ).toString(),
               "cv_url": "",
               "from_where": 0,
-              "is_valid": false
+              "is_valid": false,
+              "expected_salary_currency": "UZS",
             },
           ),
         );

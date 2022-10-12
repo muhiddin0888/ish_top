@@ -56,7 +56,7 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                 onChanged: (value) {
                   if (value.length > 1) {
                     context.read<AnnouncementCubit>().updateCurrentItem(
-                          fieldValue: value,
+                          fieldValue: int.tryParse(value),
                           fieldKey: "age",
                         );
                   }
