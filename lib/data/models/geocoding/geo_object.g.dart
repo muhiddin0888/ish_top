@@ -6,14 +6,12 @@ part of 'geo_object.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GeoObject _$GeoObjectFromJson(Map<String, dynamic> json) {
-  return GeoObject(
-    metaDataProperty: MetaDataProperty.fromJson(
-        json['metaDataProperty'] as Map<String, dynamic>),
-    name: json['name'] as String? ?? '',
-    description: json['description'] as String? ?? '',
-  );
-}
+GeoObject _$GeoObjectFromJson(Map<String, dynamic> json) => GeoObject(
+      metaDataProperty: MetaDataProperty.fromJson(
+          json['metaDataProperty'] as Map<String, dynamic>),
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+    );
 
 Map<String, dynamic> _$GeoObjectToJson(GeoObject instance) => <String, dynamic>{
       'metaDataProperty': instance.metaDataProperty.toJson(),

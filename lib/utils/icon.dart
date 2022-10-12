@@ -20,11 +20,21 @@ class MyIcons {
 
 
   static const String mapLogo = "assets/images/google_maps_logo.png";
-  
 
+  static const List<String> userImg = [
+    "assets/images/users/user_1.png",
+    "assets/images/users/user_2.png",
+    "assets/images/users/user_3.png",
+    "assets/images/users/user_4.png",
+    "assets/images/users/user_5.png",
+  ];
 
+  static const String chooseLocation = "assets/images/choose_location.png";
+
+ 
 
   static const pdfImage = "assets/images/pdf_image.png";
+  static const String defaultUser = "assets/images/default_user.png";
 
 
   //.svg files

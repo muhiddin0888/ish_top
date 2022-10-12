@@ -14,6 +14,7 @@ class MyContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       height: 90,
       width: 300,
       decoration: BoxDecoration(

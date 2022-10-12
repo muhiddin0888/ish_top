@@ -52,11 +52,17 @@ class AnnouncementModel {
   @JsonKey(defaultValue: "", name: "expected_salary")
   String expectedSalary;
 
-  @JsonKey(defaultValue: "", name: "time_to_contact")
-  String timeToContact;
+  @JsonKey(defaultValue: "", name: "time_to_contact_to")
+  String timeToContactTo;
+
+  @JsonKey(defaultValue: "", name: "time_to_contact_from")
+  String timeToContactFrom;
 
   @JsonKey(defaultValue: "", name: "cv_url")
   String cvUrl;
+
+  @JsonKey(defaultValue: "", name: "currency")
+  String currency;
 
   @JsonKey(defaultValue: 0, name: "from_where")
   int fromWhere;
@@ -83,7 +89,9 @@ class AnnouncementModel {
     required this.knowledge,
     required this.level,
     required this.telegramUrl,
-    required this.timeToContact,
+    required this.currency,
+    required this.timeToContactFrom,
+    required this.timeToContactTo,
     required this.isValid,
   });
 

@@ -26,7 +26,9 @@ AnnouncementModel _$AnnouncementModelFromJson(Map<String, dynamic> json) =>
       knowledge: json['knowledge'] as String? ?? '',
       level: json['level'] as String? ?? '',
       telegramUrl: json['telegram_url'] as String? ?? '',
-      timeToContact: json['time_to_contact'] as String? ?? '',
+      currency: json['currency'] as String? ?? '',
+      timeToContactFrom: json['time_to_contact_from'] as String? ?? '',
+      timeToContactTo: json['time_to_contact_to'] as String? ?? '',
       isValid: json['is_valid'] as bool? ?? false,
     );
 
@@ -48,8 +50,10 @@ Map<String, dynamic> _$AnnouncementModelToJson(AnnouncementModel instance) =>
       'description': instance.description,
       'job_type': instance.jobType,
       'expected_salary': instance.expectedSalary,
-      'time_to_contact': instance.timeToContact,
+      'time_to_contact_to': instance.timeToContactTo,
+      'time_to_contact_from': instance.timeToContactFrom,
       'cv_url': instance.cvUrl,
+      'currency': instance.currency,
       'from_where': instance.fromWhere,
       'is_valid': instance.isValid,
     };

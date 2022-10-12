@@ -4,9 +4,12 @@ import 'package:ish_top/cubits/helper/helper_cubit.dart';
 import 'package:ish_top/cubits/vacancy/vacancy_cubit.dart';
 import 'package:ish_top/ui/tab_box/vacancies_page/vacancy_detail/vacancy_detail_page.dart';
 import 'package:ish_top/ui/tab_box/vacancies_page/widgets/vacancy_item.dart';
+
 import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/icon.dart';
 import 'package:ish_top/utils/style.dart';
+
+import '../../widgets/category_item_button.dart';
 
 class VacanciesPage extends StatefulWidget {
   const VacanciesPage({Key? key}) : super(key: key);
@@ -23,8 +26,12 @@ class _VacanciesPageState extends State<VacanciesPage> {
     super.initState();
   }
 
+  bool isActive = false;
+
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text("Applications",

@@ -4,7 +4,7 @@ part 'category_item.g.dart';
 
 @JsonSerializable()
 class CategoryItem {
-  @JsonKey(defaultValue: "", name: "category_id")
+  @JsonKey(defaultValue: "", name: "id")
   String categoryId;
 
   @JsonKey(defaultValue: "", name: "category_name")
