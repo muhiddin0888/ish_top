@@ -46,8 +46,7 @@ class _TabBoxState extends State<TabBox> {
         },
       ),
       bottomNavigationBar: NavigationBarTheme(
-        data:
-            const NavigationBarThemeData(indicatorColor: MyColors.primaryColor),
+        data: const NavigationBarThemeData(indicatorColor: MyColors.primaryColor),
         child: NavigationBar(
           backgroundColor: CupertinoColors.quaternarySystemFill,
           elevation: 0,
@@ -56,6 +55,7 @@ class _TabBoxState extends State<TabBox> {
           onDestinationSelected: (v) {
             context.read<TabCubit>().changeTabState(v);
           },
+          labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
           destinations: const [
             NavigationDestination(
               icon: Icon(Icons.store_mall_directory_outlined),
@@ -75,39 +75,6 @@ class _TabBoxState extends State<TabBox> {
           ],
         ),
       ),
-
-      //  BottomNavigationBar(
-      //   type: BottomNavigationBarType.fixed,
-      //   backgroundColor: MyColors.textColor,
-      //   showSelectedLabels: false,
-      //   showUnselectedLabels: false,
-      //   iconSize: 24,
-      //   onTap: (index) {
-      //     setState(() {
-      //       currentIndex = index;
-      //     });
-      //   },
-      //   currentIndex: currentIndex,
-      //   items: [
-      //     getItem(icon: Icons.store, labelText: "Home"),
-      //     getItem(icon: Icons.category, labelText: "Category"),
-      //     getItem(icon: Icons.shopping_basket, labelText: "Card"),
-      //   ],
-      // ),
     );
-  }
-
-  BottomNavigationBarItem getItem(
-      {required IconData icon, required String labelText}) {
-    return BottomNavigationBarItem(
-        label: labelText,
-        icon: Icon(
-          icon,
-          color: MyColors.white,
-        ),
-        activeIcon: Icon(
-          icon,
-          color: Colors.yellowAccent,
-        ));
   }
 }

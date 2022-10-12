@@ -8,6 +8,7 @@ import 'package:ish_top/ui/tab_box/announcements/add_announcement/add_announceme
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/widgets/select_address_with_map.dart';
 import 'package:ish_top/ui/tab_box/profile/view/profile_update_page.dart';
 import 'package:ish_top/ui/tab_box/tab_box.dart';
+import 'package:ish_top/ui/tab_box/vacancies_page/vacancy_detail/vacancy_detail_page.dart';
 import 'package:ish_top/utils/constants.dart';
 
 class MyRouter {
@@ -29,6 +30,11 @@ class MyRouter {
         return navigateTo(const AddAnnouncementPage());
       case profileUpdatePage:
         return navigateTo(const ProfileUpdatePage());
+      case vacancyDetailPage:
+        return MaterialPageRoute(builder: (_) {
+          var args = settings.arguments as List;
+          return VacancyDetailPage(vacancy: args[0], index: args[1]);
+        });
       case googleMapView:
         return navigateTo(const GoogleMapView());
       default:
