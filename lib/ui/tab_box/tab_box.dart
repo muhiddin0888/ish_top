@@ -6,6 +6,7 @@ import 'package:ish_top/ui/tab_box/announcements/announcements_page.dart';
 import 'package:ish_top/ui/tab_box/profile/home.dart';
 import 'package:ish_top/ui/tab_box/vacancies_page/vacancies_page.dart';
 import 'package:ish_top/utils/color.dart';
+import 'package:ish_top/utils/icon.dart';
 
 class TabBox extends StatefulWidget {
   const TabBox({Key? key}) : super(key: key);

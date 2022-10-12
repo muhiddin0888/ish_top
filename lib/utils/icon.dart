@@ -13,6 +13,12 @@ class MyIcons {
   static const boardingImage5 = "assets/images/img_4.png";
   static const boardingImage6 = "assets/images/img_5.png";
 
+  static const announcement = "assets/images/announcement.png";
+  static const vacancies = "assets/images/vacancies.png";
+  static const profile = "assets/images/profile.png";
+
+
+
   static const String mapLogo = "assets/images/google_maps_logo.png";
   
 
