@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/widgets/select_level.dart';
+import '../../../../../../../cubits/announcement/announcement_cubit.dart';
 
-class SelectLevelButtonsWidget extends StatefulWidget {
-  SelectLevelButtonsWidget({super.key, required this.selectLevel});
-  int selectLevel;
+class SelectLevelItem extends StatelessWidget {
+  const SelectLevelItem({
+    super.key,
+    required this.selectLevel,
+    required this.importSelectedLevel,
+  });
+  final ValueChanged<String> importSelectedLevel;
+  final String selectLevel;
 
-  @override
-  State<SelectLevelButtonsWidget> createState() =>
-      _SelectLevelButtonsWidgetState();
-}
-
-class _SelectLevelButtonsWidgetState extends State<SelectLevelButtonsWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -21,138 +20,73 @@ class _SelectLevelButtonsWidgetState extends State<SelectLevelButtonsWidget> {
         scrollDirection: Axis.horizontal,
         children: [
           SelectLevelWidget(
+            isSelected: selectLevel == "Internship",
             onTap: () {
-              widget.selectLevel = 0;
-              setState(
-                () => {},
-              );
+              importSelectedLevel.call('Internship');
               context.read<AnnouncementCubit>().state.fields["level"] =
-                  "Internship";
+              "Internship";
             },
-            backGroundColor: widget.selectLevel == 0 ? Color(0xff356899) : null,
-            border: widget.selectLevel == 0
-                ? null
-                : Border.all(width: 1, color: Color(0xff95969d)),
-            textColor:
-                widget.selectLevel == 0 ? Colors.white : Color(0xff95969d),
-            text: widget.selectLevel == 0 ? 'Internship 👶' : 'Internship',
-            textSize: widget.selectLevel == 0 ? 18 : 14,
+            text: selectLevel == 'Internship' ? 'Internship 👶' : 'Internship',
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           SelectLevelWidget(
-            textSize: widget.selectLevel == 1 ? 18 : 14,
+            isSelected: selectLevel == "Junior",
             onTap: () {
-              widget.selectLevel = 1;
-              setState(
-                () => {},
-              );
+              importSelectedLevel.call("Junior");
               context.read<AnnouncementCubit>().state.fields["level"] =
-                  "Junior";
+              "Junior";
             },
-            backGroundColor: widget.selectLevel == 1 ? Color(0xff356899) : null,
-            border: widget.selectLevel == 1
-                ? null
-                : Border.all(width: 1, color: Color(0xff95969d)),
-            textColor:
-                widget.selectLevel == 1 ? Colors.white : Color(0xff95969d),
-            text: widget.selectLevel == 1 ? 'Junior 👦' : 'Junior',
+            text: selectLevel == "Junior" ? 'Junior 👦' : 'Junior',
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           SelectLevelWidget(
-            textSize: widget.selectLevel == 2 ? 18 : 14,
+            isSelected: selectLevel == 'Middle',
             onTap: () {
-              widget.selectLevel = 2;
-              setState(
-                () => {},
-              );
+              importSelectedLevel.call('Middle');
               context.read<AnnouncementCubit>().state.fields["level"] =
-                  "Middle";
+              "Middle";
             },
-            backGroundColor: widget.selectLevel == 2 ? Color(0xff356899) : null,
-            border: widget.selectLevel == 2
-                ? null
-                : Border.all(width: 1, color: Color(0xff95969d)),
-            textColor:
-                widget.selectLevel == 2 ? Colors.white : Color(0xff95969d),
-            text: widget.selectLevel == 2 ? 'Middle 👨' : 'Middle',
+            text: selectLevel == 'Middle' ? 'Middle 👨' : 'Middle',
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           SelectLevelWidget(
-            textSize: widget.selectLevel == 3 ? 18 : 14,
+            isSelected: selectLevel == 'Senior',
             onTap: () {
-              widget.selectLevel = 3;
-              setState(
-                () => {},
-              );
+              importSelectedLevel.call('Senior');
               context.read<AnnouncementCubit>().state.fields["level"] =
-                  "Senior";
+              "Senior";
             },
-            backGroundColor: widget.selectLevel == 3 ? Color(0xff356899) : null,
-            border: widget.selectLevel == 3
-                ? null
-                : Border.all(width: 1, color: Color(0xff95969d)),
-            textColor:
-                widget.selectLevel == 3 ? Colors.white : Color(0xff95969d),
-            text: widget.selectLevel == 3 ? 'Senior 👨‍🦱' : 'Senior',
+            text: selectLevel == 'Senior' ? 'Senior 👨‍🦱' : 'Senior',
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           SelectLevelWidget(
-            textSize: widget.selectLevel == 4 ? 18 : 14,
+            isSelected: selectLevel == 'Expert',
             onTap: () {
-              widget.selectLevel = 4;
-              setState(
-                () => {},
-              );
+              importSelectedLevel.call("Expert");
               context.read<AnnouncementCubit>().state.fields["level"] =
-                  "Expert";
+              "Expert";
             },
-            backGroundColor: widget.selectLevel == 4 ? Color(0xff356899) : null,
-            border: widget.selectLevel == 4
-                ? null
-                : Border.all(width: 1, color: Color(0xff95969d)),
-            textColor:
-                widget.selectLevel == 4 ? Colors.white : Color(0xff95969d),
-            text: widget.selectLevel == 4 ? 'Expert 👨‍🦲' : 'Expert',
+            text: selectLevel == "Expert" ? 'Expert 👨‍🦲' : 'Expert',
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           SelectLevelWidget(
-            textSize: widget.selectLevel == 5 ? 18 : 14,
+            isSelected: selectLevel == "Team Lead",
             onTap: () {
-              widget.selectLevel = 5;
-              setState(
-                () => {},
-              );
+              importSelectedLevel.call("Team Lead");
               context.read<AnnouncementCubit>().state.fields["level"] =
-                  "Team Lead";
+              "Team Lead";
             },
-            backGroundColor: widget.selectLevel == 5 ? Color(0xff356899) : null,
-            border: widget.selectLevel == 5
-                ? null
-                : Border.all(width: 1, color: Color(0xff95969d)),
-            textColor:
-                widget.selectLevel == 5 ? Colors.white : Color(0xff95969d),
-            text: widget.selectLevel == 5 ? 'Team Lead 👨‍💻' : 'Team Lead',
+            text: selectLevel == "Team Lead" ? 'Team Lead 👨‍💻' : 'Team Lead',
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           SelectLevelWidget(
-            textSize: widget.selectLevel == 6 ? 18 : 14,
+            isSelected: selectLevel == "Project Manager",
             onTap: () {
-              widget.selectLevel = 6;
-              setState(
-                () => {},
-              );
+              importSelectedLevel.call("Project Manager");
               context.read<AnnouncementCubit>().state.fields["level"] =
-                  "Project Manager";
+              "Project Manager";
             },
-            backGroundColor: widget.selectLevel == 6 ? Color(0xff356899) : null,
-            border: widget.selectLevel == 6
-                ? null
-                : Border.all(width: 1, color: Color(0xff95969d)),
-            textColor:
-                widget.selectLevel == 6 ? Colors.white : Color(0xff95969d),
-            text: widget.selectLevel == 6
-                ? 'Project Manager 👴'
-                : 'Project Manager',
+            text: selectLevel == "Project Manager" ? 'Project Manager 👴' : 'Project Manager',
           ),
         ],
       ),

@@ -8,7 +8,6 @@ import 'package:ish_top/ui/on_boarding/on_boarding_page.dart';
 import 'package:ish_top/ui/sign_up/sign_up.dart';
 import 'package:ish_top/ui/splash/splash_page.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/add_announcement_page.dart';
-import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/widgets/select_address_with_map.dart';
 import 'package:ish_top/ui/tab_box/announcements/detail_announcement_page/detail_announcements_page.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/add_fields_one/select_address_with_map.dart';
 import 'package:ish_top/ui/tab_box/profile/view/profile_update_page.dart';
@@ -34,8 +33,6 @@ class MyRouter {
         return navigateTo(const AddAnnouncementPage());
       case profileUpdatePage:
         return navigateTo(const ProfileUpdatePage());
-      case googleMapView:
-        return navigateTo(const GoogleMapView());
       case detailAnnouncements:
         final args = settings.arguments as List;
         return navigateTo(
@@ -44,11 +41,15 @@ class MyRouter {
             helperRepository:
                 HelperRepository(fireStore: FirebaseFirestore.instance),
             users: args[1],
+          ),
+        );
+      case googleMapView:
         return navigateTo(
           GoogleMapView(
             addressName: settings.arguments as ValueChanged<String>,
           ),
         );
+
       default:
         return navigateTo(
           Scaffold(
