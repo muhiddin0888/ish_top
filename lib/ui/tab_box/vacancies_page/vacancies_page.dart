@@ -163,26 +163,3 @@ class _VacanciesPageState extends State<VacanciesPage> {
     );
   }
 }
-// Container(
-// padding: EdgeInsets.symmetric(horizontal: 9),
-// margin: const EdgeInsets.symmetric(
-// horizontal: 9),
-// decoration: BoxDecoration(
-// borderRadius: BorderRadius.circular(9),
-// color: MyColors.C_CACBCE,
-// ),
-// child: Center(
-// child: Row(
-// children: [
-// Image.network(
-// state.categories[index].icon
-//     .toString(),
-// ),
-// SizedBox(width: width*.01),
-// Text(
-// state.categories[index].categoryName,
-// ),
-// ],
-// ),
-// ),
-// ),
