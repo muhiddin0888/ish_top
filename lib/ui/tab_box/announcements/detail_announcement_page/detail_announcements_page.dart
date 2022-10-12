@@ -174,7 +174,7 @@ class _DetailAnnouncementsPageState extends State<DetailAnnouncementsPage>
                     info: widget.announcementModel.telegramUrl,
                   ),
                   InfoShortText(
-                      info: widget.announcementModel.timeToContact,
+                      info: widget.announcementModel.timeToContactTo,
                       title: "Bog'lanish vaqti"),
                   InfoShortText(
                       info: widget.announcementModel.jobTitle, title: "Kasb"),

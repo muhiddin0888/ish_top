@@ -15,6 +15,7 @@ class AnnouncementsPage extends StatefulWidget {
 
 class _AnnouncementsPageState extends State<AnnouncementsPage> {
   final args = AnnouncementModel(
+      currency: "USD",
       address: 'Tashkent/Chirchiq',
       age: 19,
       aim:
@@ -44,7 +45,9 @@ It has survived not only five centuries,
       level: 'Junior',
       phoneNumber: '+998999955876',
       telegramUrl: '@yorqinbek_yuldashev',
-      timeToContact: '9:00 - 21:00',
+      timeToContactTo: '9:00 - 21:00',
+      timeToContactFrom: '9:00 - 21:00',
+
       userId: 'qwerty3003');
   final List<UserModel> users = [
     UserModel(

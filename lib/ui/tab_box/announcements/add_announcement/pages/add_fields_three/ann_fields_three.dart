@@ -192,12 +192,12 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
                 currentValue: context
                     .read<AnnouncementCubit>()
                     .state
-                    .fields['expected_salary_currency'],
+                    .fields['currency'],
                 items: currencys,
                 onChanged: (value) {
                   context.read<AnnouncementCubit>().updateCurrentItem(
                         fieldValue: currencys[value],
-                        fieldKey: 'expected_salary_currency',
+                        fieldKey: 'currency',
                       );
                   setState(() {});
                 },

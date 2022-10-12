@@ -50,7 +50,7 @@ class AnnouncementCubit extends Cubit<AnnouncementState> {
               "cv_url": "",
               "from_where": 0,
               "is_valid": false,
-              "expected_salary_currency": "UZS",
+              "currency": "UZS",
             },
           ),
         );
