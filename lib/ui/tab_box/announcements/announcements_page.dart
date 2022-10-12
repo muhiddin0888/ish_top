@@ -100,9 +100,7 @@ It has survived not only five centuries,
           IconButton(
               onPressed: () {
                 Navigator.pushNamed(context, addAnnouncementPage
-                    // detailAnnouncements,
-                    // arguments: [args, users],
-                    ); //detail Announcementga shuyerdan o'tib turdim
+                    );
               },
               icon: Icon(Icons.add))
         ],

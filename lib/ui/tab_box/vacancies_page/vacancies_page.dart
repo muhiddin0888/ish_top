@@ -6,10 +6,9 @@ import 'package:ish_top/ui/tab_box/vacancies_page/vacancy_detail/vacancy_detail_
 import 'package:ish_top/ui/tab_box/vacancies_page/widgets/vacancy_item.dart';
 
 import 'package:ish_top/utils/color.dart';
-import 'package:ish_top/utils/icon.dart';
+import 'package:ish_top/utils/constants.dart';
 import 'package:ish_top/utils/style.dart';
 
-import '../../widgets/category_item_button.dart';
 
 class VacanciesPage extends StatefulWidget {
   const VacanciesPage({Key? key}) : super(key: key);
@@ -30,14 +29,21 @@ class _VacanciesPageState extends State<VacanciesPage> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    // double width = MediaQuery.of(context).size.width;
+    // double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text("Applications",
             style: MyTextStyle.sfProSemibold.copyWith(fontSize: 20)),
         centerTitle: true,
-        actions: [ClipOval(child: Image.asset(MyIcons.boardingImage1))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, addVacancyPage
+                );
+              },
+              icon: const Icon(Icons.add))
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
