@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formz/formz.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ish_top/cubits/user/user_cubit.dart';
 import 'package:ish_top/data/models/users/user_model.dart';
@@ -27,7 +26,7 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
     TextEditingController phoneController = TextEditingController();
 
     String imagePath = "";
-    final ImagePicker picker = ImagePicker();
+    final ImagePicker _picker = ImagePicker();
     XFile? imageFile;
 
     Future uploadFile() async {
@@ -45,7 +44,7 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
     }
 
     getFromGallery() async {
-      imageFile = await picker.pickImage(
+      imageFile = await _picker.pickImage(
         maxHeight: 500,
         maxWidth: 500,
         source: ImageSource.gallery,
@@ -59,7 +58,7 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
     }
 
     getFromCamera() async {
-      imageFile = await picker.pickImage(
+      imageFile = await _picker.pickImage(
         maxHeight: 500,
         maxWidth: 500,
         source: ImageSource.camera,

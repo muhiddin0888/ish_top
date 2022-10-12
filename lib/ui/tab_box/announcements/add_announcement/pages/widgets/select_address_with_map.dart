@@ -5,7 +5,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
 import 'package:ish_top/cubits/location/location_cubit.dart';
-import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/icon.dart';
 
 class GoogleMapView extends StatefulWidget {
@@ -78,6 +77,7 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                                   isIdle = false;
                                 });
                               },
+                              zoomControlsEnabled: false,
                               onCameraIdle: () {
                                 setState(() {
                                   isIdle = true;
@@ -141,9 +141,37 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                           ),
                         ),
                         Positioned(
+                          top: 20,
+                          left: 10,
+                          right: 10,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 3),
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  offset: Offset(0, 0),
+                                  blurRadius: 10,
+                                )
+                              ],
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              locationName,
+                              maxLines: 3,
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  fontSize: 16, color: Colors.blue),
+                            ),
+                          ),
+                        ),
+                        Positioned(
                           bottom: 10,
-                          left: 5,
-                          right: 5,
+                          left: 30,
+                          right: 30,
                           child: InkWell(
                             onTap: () {
                               context
@@ -166,43 +194,16 @@ class _GoogleMapViewState extends State<GoogleMapView> {
                                         offset: Offset(0, 0),
                                         blurRadius: 10)
                                   ],
-                                  color: Colors.white,
+                                  color: Colors.green,
                                   borderRadius: BorderRadius.circular(20)),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  const Icon(
-                                    Icons.location_history,
-                                    size: 40,
-                                    color: Colors.blue,
-                                  ),
-                                  !isIdle
-                                      ? const CircularProgressIndicator
-                                          .adaptive()
-                                      : Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            const Text(
-                                              "Send selected address",
-                                              style: TextStyle(
-                                                  color: MyColors.primaryColor,
-                                                  fontSize: 20),
-                                            ),
-                                            Text(
-                                              locationName,
-                                              // maxLines: 3,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: const TextStyle(
-                                                fontSize: 16,
-                                                  color: Colors.blue),
-                                            ),
-                                          ],
-                                        ),
-                                ],
+                              child: const Center(
+                                child: Text(
+                                  "Save",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 20),
+                                ),
                               ),
                             ),
                           ),
