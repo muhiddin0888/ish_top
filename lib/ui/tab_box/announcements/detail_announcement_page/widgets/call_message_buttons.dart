@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:ish_top/utils/color.dart';
 
@@ -28,7 +26,7 @@ class ConnectedButton extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: (isActive) ? MyColors.C_356899 : Colors.white,
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             blurRadius: 5,
             color: MyColors.C_2C557D,

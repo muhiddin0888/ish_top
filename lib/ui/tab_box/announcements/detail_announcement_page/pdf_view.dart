@@ -17,7 +17,7 @@ class _PDFViewPageState extends State<PDFViewPage> {
   Widget build(BuildContext context) {
     final name = basename(widget.file.path);
     return Scaffold(
-        appBar: AppBar(title: Text("PDF View")),
+        appBar: AppBar(title: const Text("PDF View")),
         body: PDFView(
           filePath: widget.file.path,
         ));
