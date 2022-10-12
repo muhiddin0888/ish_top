@@ -26,6 +26,7 @@ class MyIcons {
   static const facebook = "assets/svg/facebook.svg";
   static const search = "assets/svg/search.svg";
   static const time = "assets/svg/time.svg";
+  static const status="assets/svg/status.svg";
 
   //.jpg files
 
