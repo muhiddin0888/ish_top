@@ -63,7 +63,7 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
         const TitleForSelectText(
           text: 'Bilimingiz haqida qisqacha',
         ),
-        const SizedBox(height: 5),
+        const SizedBox(height: 15),
         CommentInputComponent(
           height: 275,
           hintText: "Ma'lumot kiriting",
@@ -80,6 +80,9 @@ class _AnnFieldsTwoState extends State<AnnFieldsTwo> {
             BlocProvider.of<AnnouncementCubit>(context)
                 .updateCurrentItem(fieldValue: value, fieldKey: "knowledge");
           },
+        ),
+        const SizedBox(
+          height: 20,
         )
       ],
     );

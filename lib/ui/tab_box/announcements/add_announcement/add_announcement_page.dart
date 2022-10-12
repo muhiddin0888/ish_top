@@ -292,6 +292,8 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
     String level = fields["level"];
     var categoryId =
         BlocProvider.of<AnnouncementCubit>(context).state.fields['category_id'];
+
+    print("CATGEORY ID:$categoryId");
     var knowledge = fields["knowledge"];
     if (level == "") {
       MyUtils.getMyToast(message: "Darajangizni tanlang!");

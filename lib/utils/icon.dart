@@ -21,9 +21,6 @@ class MyIcons {
 
 
   static const pdfImage = "assets/images/pdf_image.png";
-
-
-  static const String pdfImage = "assets/images/pdf_image.png";
   static const String defaultUser = "assets/images/default_user.png";
 
 

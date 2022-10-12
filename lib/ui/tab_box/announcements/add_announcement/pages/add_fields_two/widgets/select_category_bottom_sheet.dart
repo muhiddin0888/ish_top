@@ -172,7 +172,10 @@ Future<dynamic> selectCategoryBottomSheet(BuildContext context) {
                             context
                                 .read<AnnouncementCubit>().updateCurrentItem(fieldValue: state.categories[selectedCategory].categoryId, fieldKey: "category_id"),
                             setState(() => {}),
-
+                          print( context
+                              .read<AnnouncementCubit>()
+                              .state
+                              .fields["category_id"].toString())
                           },
                         ),
                       ),
