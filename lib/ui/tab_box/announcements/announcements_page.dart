@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/cubits/helper/helper_cubit.dart';
+import 'package:ish_top/ui/tab_box/announcements/widgets/custom_drawer.dart';
 import 'package:ish_top/data/models/announcement/announcement_model.dart';
 import 'package:ish_top/data/models/users/user_model.dart';
 import 'package:ish_top/utils/color.dart';
@@ -124,6 +125,7 @@ It has survived not only five centuries,
           return Text("error");
         },
       ),
+      drawer: const CustomDrawer(),
     );
   }
 }

@@ -4,8 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:form_inputs/form_inputs.dart';
 import 'package:formz/formz.dart';
 
-// TODO: SHERZOD user registratsiya qilgandan keyin ismini update qilish uchun
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+
 
 part 'sign_up_state.dart';
 
@@ -71,14 +70,14 @@ class SignUpCubit extends Cubit<SignUpState> {
   }
 
   Future<void> signUpFormSubmitted() async {
-    if (!state.status.isValidated && state.userName.length < 2) return;
+    if (!state.status.isValidated) return;
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {
       await _authenticationRepository.signUp(
         email: state.email.value,
         password: state.password.value,
       );
-      await firebase_auth.FirebaseAuth.instance.currentUser!.updateDisplayName(state.userName);
+
       emit(state.copyWith(status: FormzStatus.submissionSuccess));
     } on SignUpWithEmailAndPasswordFailure catch (e) {
       emit(
