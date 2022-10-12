@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
@@ -7,9 +6,6 @@ import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/widgets/
 import 'package:ish_top/ui/widgets/selectable_field.dart';
 import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/my_utils.dart';
-import 'package:ish_top/utils/style.dart';
-
-import '../widgets/clock.dart';
 
 class AnnFieldsThree extends StatefulWidget {
   const AnnFieldsThree({Key? key}) : super(key: key);
@@ -31,9 +27,6 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
   final fromF = FocusNode();
   final toF = FocusNode();
 
-  late TimeOfDay selectedTimeFrom;
-  late TimeOfDay selectedTimeTo;
-
   List<String> currencys = ["UZS", "USD", "RUB"];
 
   @override
@@ -43,16 +36,6 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
     aimC.text = BlocProvider.of<AnnouncementCubit>(context).state.fields["aim"];
     descC.text =
         BlocProvider.of<AnnouncementCubit>(context).state.fields["description"];
-    selectedTimeFrom = TimeOfDay.fromDateTime(
-      DateTime.parse(BlocProvider.of<AnnouncementCubit>(context)
-          .state
-          .fields['time_to_contact_from']),
-    );
-    selectedTimeTo = TimeOfDay.fromDateTime(
-      DateTime.parse(BlocProvider.of<AnnouncementCubit>(context)
-          .state
-          .fields['time_to_contact_to']),
-    );
     String expectedSalary = BlocProvider.of<AnnouncementCubit>(context)
         .state
         .fields["expected_salary"];
@@ -253,23 +236,22 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
       {required BuildContext context, required bool isFrom}) async {
     final selected = await showTimePicker(
       context: context,
-      initialTime: isFrom ? selectedTimeFrom : selectedTimeTo,
+      initialTime: TimeOfDay.fromDateTime(DateTime.parse(context
+          .read<AnnouncementCubit>()
+          .state
+          .fields[isFrom ? 'time_to_contact_from' : 'time_to_contact_to'])),
     );
-    if (selected != null && selected != selectedTimeFrom) {
+    if (selected != null) {
       if (isFrom) {
-        selectedTimeFrom = selected;
         context.read<AnnouncementCubit>().updateCurrentItem(
-              fieldValue: DateTime(
-                      0, 0, 0, selectedTimeFrom.hour, selectedTimeFrom.minute)
-                  .toString(),
+              fieldValue:
+                  DateTime(0, 0, 0, selected.hour, selected.minute).toString(),
               fieldKey: "time_to_contact_from",
             );
       } else {
-        selectedTimeTo = selected;
         context.read<AnnouncementCubit>().updateCurrentItem(
               fieldValue:
-                  DateTime(0, 0, 0, selectedTimeTo.hour, selectedTimeTo.minute)
-                      .toString(),
+                  DateTime(0, 0, 0, selected.hour, selected.minute).toString(),
               fieldKey: "time_to_contact_to",
             );
       }
