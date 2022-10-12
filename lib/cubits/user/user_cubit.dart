@@ -29,35 +29,41 @@ class UserCubit extends Cubit<UserState> {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {
       userRepository.postUser(userModel: userModel);
-      emit(state.copyWith(
-        status: FormzStatus.submissionSuccess,
-        userModel: userModel,
-      ),);
+      emit(
+        state.copyWith(
+          status: FormzStatus.submissionSuccess,
+          userModel: userModel,
+        ),
+      );
     } catch (e) {
-      emit(state.copyWith(
-        status: FormzStatus.submissionFailure,
-        errorText: e.toString(),
-      ),);
+      emit(
+        state.copyWith(
+          status: FormzStatus.submissionFailure,
+          errorText: e.toString(),
+        ),
+      );
     }
   }
 
-  void fetchUser(String docId)async{
+  void fetchUser(String docId) async {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {
-     var userModel = await userRepository.getUserData(docId: docId);
-      emit(state.copyWith(
-        status: FormzStatus.submissionSuccess,
-        userModel: userModel,
-      ),);
+      var userModel = await userRepository.getUserData(docId: docId);
+      emit(
+        state.copyWith(
+          status: FormzStatus.submissionSuccess,
+          userModel: userModel,
+        ),
+      );
     } catch (e) {
-      emit(state.copyWith(
-        status: FormzStatus.submissionFailure,
-        errorText: e.toString(),
-      ),);
+      emit(
+        state.copyWith(
+          status: FormzStatus.submissionFailure,
+          errorText: e.toString(),
+        ),
+      );
     }
   }
-
-
 
   void updateUser(UserModel userModel) {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
