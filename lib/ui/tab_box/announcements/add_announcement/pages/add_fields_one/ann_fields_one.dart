@@ -34,12 +34,10 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
               UniversalTextInput(
                 caption: "FISH",
                 onChanged: (value) {
-                  if (value.length > 3) {
-                    context.read<AnnouncementCubit>().updateCurrentItem(
-                          fieldValue: value,
-                          fieldKey: "full_name",
-                        );
-                  }
+                  context.read<AnnouncementCubit>().updateCurrentItem(
+                        fieldValue: value,
+                        fieldKey: "full_name",
+                      );
                 },
                 hintText: "Falonchiyev Pistonchi",
                 initialText: context
@@ -54,12 +52,12 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
               UniversalTextInput(
                 caption: "Yosh",
                 onChanged: (value) {
-                  if (value.length > 1) {
+
                     context.read<AnnouncementCubit>().updateCurrentItem(
                           fieldValue: int.tryParse(value),
                           fieldKey: "age",
                         );
-                  }
+
                 },
                 hintText: "20",
                 initialText: context
@@ -75,12 +73,10 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
               UniversalTextInput(
                 caption: "Telefon no'mer",
                 onChanged: (value) {
-                  if (value.length >= 13) {
                     context.read<AnnouncementCubit>().updateCurrentItem(
                           fieldValue: value,
                           fieldKey: "phone_number",
                         );
-                  }
                 },
                 hintText: "+998 99",
                 initialText: context
@@ -96,12 +92,10 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
               UniversalTextInput(
                 caption: "Telegram Url",
                 onChanged: (value) {
-                  if (value.length > 3) {
                     context.read<AnnouncementCubit>().updateCurrentItem(
                           fieldValue: value,
                           fieldKey: "telegram_url",
                         );
-                  }
                 },
                 hintText: "@forExample",
                 initialText: context

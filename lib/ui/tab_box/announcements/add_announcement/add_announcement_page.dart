@@ -253,11 +253,11 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
     String address = fields["address"];
     if (fullName.length < 3) {
       MyUtils.getMyToast(message: "To'liq ism sharifingizni kiriting!");
-    } else if (age <= 12) {
+    } else if (age < 12) {
       MyUtils.getMyToast(message: "11 dan katta yosh kiriting!");
     } else if (phoneNumber.length < 10) {
       MyUtils.getMyToast(message: "Telefon raqamni to'gri kiriting");
-    } else if (address.length < 10) {
+    } else if (address == '') {
       MyUtils.getMyToast(message: "Manzilni to'gri kiriting");
     } else {
       isValid = true;
@@ -266,14 +266,14 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
   }
   bool isPageTwoValidated(Map<String, dynamic> fields) {
     bool isValid = false;
-    String fullName = fields["full_name"];
+    String level = fields["level"];
     int age = fields["age"];
     String phoneNumber = fields["phone_number"];
     String address = fields["address"];
-    if (fullName.length < 3) {
-      MyUtils.getMyToast(message: "To'liq ism sharifingizni kiriting!");
-    } else if (age <= 12) {
-      MyUtils.getMyToast(message: "11 dan katta yosh kiriting!");
+    if (level == "") {
+      MyUtils.getMyToast(message: "Darajangizni tanlang!");
+    } else if (level == '') {
+      MyUtils.getMyToast(message: "Darajangizni tanlang!");
     } else if (phoneNumber.length < 10) {
       MyUtils.getMyToast(message: "Telefon raqamni to'gri kiriting");
     } else if (address.length < 10) {

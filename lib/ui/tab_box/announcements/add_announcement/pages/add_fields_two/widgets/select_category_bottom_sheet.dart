@@ -27,6 +27,7 @@ Future<dynamic> selectCategoryBottomSheet(BuildContext context) {
               child: CircularProgressIndicator(),
             );
           } else if (state is GetCategoriesInSuccess) {
+
             return Padding(
               padding: const EdgeInsets.all(4.0),
               child: Column(children: [
@@ -41,9 +42,8 @@ Future<dynamic> selectCategoryBottomSheet(BuildContext context) {
                     TextButton(
                         onPressed: () {
                           context
-                              .read<AnnouncementCubit>()
-                              .state
-                              .fields["category_id"] = selectedCategory;
+                              .read<AnnouncementCubit>().updateCurrentItem(fieldValue: state.categories[selectedCategory].categoryId, fieldKey: "category_id");
+
                           searchedCategory.isNotEmpty
                               ? MyUtils.getMyToast(
                                   message:
@@ -169,11 +169,10 @@ Future<dynamic> selectCategoryBottomSheet(BuildContext context) {
                                       }
                                   },
                               },
-                            setState(() => {}),
                             context
-                                .read<AnnouncementCubit>()
-                                .state
-                                .fields["category_id"] = selectedCategory,
+                                .read<AnnouncementCubit>().updateCurrentItem(fieldValue: state.categories[selectedCategory].categoryId, fieldKey: "category_id"),
+                            setState(() => {}),
+
                           },
                         ),
                       ),
