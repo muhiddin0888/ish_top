@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
+import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/add_fields_three/widgets/select_time_to_contact.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/add_fields_three/widgets/selected_time_item.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/widgets/comment_input_componenet.dart';
 import 'package:ish_top/ui/widgets/selectable_field.dart';
@@ -213,16 +214,19 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SelectedTimeItem(
-                title: "From",
-                timeKey: "time_to_contact_from",
-                onTap: () async =>
-                    _selectTimeFrom(context: context, isFrom: true),
-              ),
+                  title: "From",
+                  timeKey: "time_to_contact_from",
+                  onTap: () async {
+                    await selectTimeFrom(context: context, isFrom: true);
+                    setState(() {});
+                  }),
               SelectedTimeItem(
                 title: "To",
                 timeKey: "time_to_contact_to",
-                onTap: () async =>
-                    _selectTimeFrom(context: context, isFrom: false),
+                onTap: () async {
+                  await selectTimeFrom(context: context, isFrom: false);
+                  setState(() {});
+                },
               ),
             ],
           ),
@@ -230,34 +234,5 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
         ],
       ),
     );
-  }
-
-  Future<void> _selectTimeFrom(
-      {required BuildContext context, required bool isFrom}) async {
-    final selected = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.fromDateTime(DateTime.parse(context
-          .read<AnnouncementCubit>()
-          .state
-          .fields[isFrom ? 'time_to_contact_from' : 'time_to_contact_to'])),
-    );
-    if (selected != null) {
-      if (isFrom) {
-        context.read<AnnouncementCubit>().updateCurrentItem(
-              fieldValue:
-                  DateTime(0, 0, 0, selected.hour, selected.minute).toString(),
-              fieldKey: "time_to_contact_from",
-            );
-      } else {
-        context.read<AnnouncementCubit>().updateCurrentItem(
-              fieldValue:
-                  DateTime(0, 0, 0, selected.hour, selected.minute).toString(),
-              fieldKey: "time_to_contact_to",
-            );
-      }
-      setState(() {});
-    } else {
-      MyUtils.getMyToast(message: "Time is not selected");
-    }
   }
 }

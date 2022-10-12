@@ -43,7 +43,7 @@ class SelectedTimeItem extends StatelessWidget {
             child: Text(
               DateFormat.Hm().format(
                 DateTime.parse(
-                  context.read<AnnouncementCubit>().state.fields[timeKey],
+                  context.watch<AnnouncementCubit>().state.fields[timeKey],
                 ),
               ),
               style: MyTextStyle.sfProMedium.copyWith(
