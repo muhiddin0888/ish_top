@@ -14,11 +14,17 @@ class MyIcons {
   static const boardingImage6 = "assets/images/img_5.png";
 
   static const String mapLogo = "assets/images/google_maps_logo.png";
+
+  static const String chooseLocation = "assets/images/choose_location.png";
   
 
 
 
   static const pdfImage = "assets/images/pdf_image.png";
+
+
+  static const String pdfImage = "assets/images/pdf_image.png";
+  static const String defaultUser = "assets/images/default_user.png";
 
 
   //.svg files

@@ -64,9 +64,9 @@ class _VacanciesPageState extends State<VacanciesPage> {
                             BlocProvider.of<VacancyCubit>(context).listenToVacancies();
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 5),
                             margin: const EdgeInsets.symmetric(
                                 horizontal: 10),
+                            width: 100,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: MyColors.C_CACBCE,
@@ -85,9 +85,9 @@ class _VacanciesPageState extends State<VacanciesPage> {
                                 BlocProvider.of<VacancyCubit>(context).listenToVacanciesById(categoryId: state.categories[index].categoryId);
                               },
                               child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
                                 margin: const EdgeInsets.symmetric(
                                     horizontal: 10),
+                                width: 100,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: MyColors.C_CACBCE,
