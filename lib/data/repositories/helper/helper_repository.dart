@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:ish_top/data/models/announcement/announcement_model.dart';
 import 'package:ish_top/data/models/category/category_item.dart';
+import 'package:ish_top/data/models/users/user_model.dart';
 
 class HelperRepository {
   final FirebaseFirestore _fireStore;
@@ -53,6 +55,21 @@ class HelperRepository {
       return downloadUrl;
     } catch (error) {
       throw Exception();
+    }
+  }
+
+  Future<String> getUserDetailById(
+      {required AnnouncementModel announcement,
+      required List<UserModel> users}) async {
+    try {
+      for (var i = 0; i < users.length; i++) {
+        if (users[i].userId == announcement.userId) {
+          return users[i].imageUrl;
+        }
+      }
+      return "Topilmadi";
+    } catch (e) {
+      throw Exception(e);
     }
   }
 }

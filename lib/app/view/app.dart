@@ -8,6 +8,7 @@ import 'package:ish_top/cubits/helper/helper_cubit.dart';
 import 'package:ish_top/cubits/location/location_cubit.dart';
 import 'package:ish_top/cubits/tab/tab_cubit.dart';
 import 'package:ish_top/cubits/user/user_cubit.dart';
+import 'package:ish_top/cubits/user_detail/user_detail_cubit.dart';
 import 'package:ish_top/cubits/vacancy/vacancy_cubit.dart';
 import 'package:ish_top/data/api_services/yandex_map_api_service/api_client.dart';
 import 'package:ish_top/data/api_services/yandex_map_api_service/api_service.dart';
@@ -60,7 +61,7 @@ class App extends StatelessWidget {
                 mapApiClient: MapApiClient(),
               ),
             ),
-          )
+          ),
         ],
         child: MultiBlocProvider(
           providers: [
@@ -99,6 +100,10 @@ class App extends StatelessWidget {
             BlocProvider(
               create: (context) => TabCubit(),
             ),
+            BlocProvider(
+              create: (context) => UserDetailCubit(
+                  helperRepository: context.read<HelperRepository>()),
+            )
           ],
           child: AppView(),
         ));

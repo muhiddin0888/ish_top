@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ish_top/app/view/app.dart';
+import 'package:ish_top/data/models/announcement/announcement_model.dart';
+import 'package:ish_top/data/repositories/helper/helper_repository.dart';
 import 'package:ish_top/ui/login/login.dart';
 import 'package:ish_top/ui/on_boarding/on_boarding_page.dart';
 import 'package:ish_top/ui/sign_up/sign_up.dart';
@@ -32,12 +35,22 @@ class MyRouter {
         return navigateTo(const ProfileUpdatePage());
       case googleMapView:
         return navigateTo(const GoogleMapView());
-        case detailAnnouncements:
-        return navigateTo(const DetailAnnouncementsPage());
+      case detailAnnouncements:
+        final args = settings.arguments as List;
+        return navigateTo(
+          DetailAnnouncementsPage(
+            announcementModel: args[0],
+            helperRepository:
+                HelperRepository(fireStore: FirebaseFirestore.instance),
+            users: args[1],
+          ),
+        );
       default:
-        return navigateTo(Scaffold(
-          body: Center(child: Text('No route defined for ${settings.name}')),
-        ));
+        return navigateTo(
+          Scaffold(
+            body: Center(child: Text('No route defined for ${settings.name}')),
+          ),
+        );
     }
   }
 }
