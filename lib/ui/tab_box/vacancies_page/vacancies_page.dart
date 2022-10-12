@@ -43,13 +43,16 @@ class _VacanciesPageState extends State<VacanciesPage> {
           )
         ],
       ),
-      body: Padding(
+      body: BlocBuilder<VacancyCubit, VacancyState>(
+  builder: (context, state) {
+    if(state is GetVacancyInSuccess){
+      return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "You have\n27 Applications 👍",
+              "You have\n${state.vacancies.length} Applications 👍",
               style: MyTextStyle.sfBold800.copyWith(fontSize: 25),
             ),
             const SizedBox(
@@ -64,7 +67,7 @@ class _VacanciesPageState extends State<VacanciesPage> {
                   return SizedBox(
                     height: 40,
                     child:
-                        ListView(scrollDirection: Axis.horizontal, children: [
+                    ListView(scrollDirection: Axis.horizontal, children: [
                       GestureDetector(
                         onTap: () {
                           BlocProvider.of<VacancyCubit>(context)
@@ -86,12 +89,12 @@ class _VacanciesPageState extends State<VacanciesPage> {
                       ),
                       ...List.generate(
                         state.categories.length,
-                        (index) => GestureDetector(
+                            (index) => GestureDetector(
                           onTap: () {
                             BlocProvider.of<VacancyCubit>(context)
                                 .listenToVacanciesById(
-                                    categoryId:
-                                        state.categories[index].categoryId);
+                                categoryId:
+                                state.categories[index].categoryId);
                           },
                           child: Padding(
 
@@ -100,10 +103,10 @@ class _VacanciesPageState extends State<VacanciesPage> {
                               isActive: isActive,
                               buttonText: state.categories[index].categoryName,
                               onPressed: () {
-                               BlocProvider.of<VacancyCubit>(context)
-                                .listenToVacanciesById(
+                                BlocProvider.of<VacancyCubit>(context)
+                                    .listenToVacanciesById(
                                     categoryId:
-                                        state.categories[index].categoryId);
+                                    state.categories[index].categoryId);
                               },
                               icon: Image.network(state.categories[index].icon),
                             ),
@@ -133,23 +136,23 @@ class _VacanciesPageState extends State<VacanciesPage> {
                     child: ListView(
                       children: List.generate(
                           state.vacancies.length,
-                          (index) => VacanciesCard(
+                              (index) => VacanciesCard(
                               width: width,
                               height: height,
                               logoPath:
-                                  state.vacancies[index].brandImage.toString(),
+                              state.vacancies[index].brandImage.toString(),
                               jobTitle:
-                                  state.vacancies[index].jobTitle.toString(),
+                              state.vacancies[index].jobTitle.toString(),
                               salary: state.vacancies[index].offeredSalary
                                   .toString(),
                               compName:
-                                  state.vacancies[index].companyName.toString(),
+                              state.vacancies[index].companyName.toString(),
                               location:
-                                  state.vacancies[index].fromWhere.toString(),
+                              state.vacancies[index].fromWhere.toString(),
                               status: state.vacancies[index].requiredLevel
                                   .toString(),
                               time:
-                                  state.vacancies[index].createdAt.toString())),
+                              state.vacancies[index].createdAt.toString())),
                     ),
                   );
                 } else {
@@ -159,7 +162,12 @@ class _VacanciesPageState extends State<VacanciesPage> {
             )
           ],
         ),
-      ),
+      );
+    }else{
+      return SizedBox();
+    }
+  },
+),
     );
   }
 }
