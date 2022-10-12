@@ -7,6 +7,8 @@ import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/icon.dart';
 import 'package:ish_top/utils/style.dart';
 
+import '../../widgets/category_item_button.dart';
+
 class VacanciesPage extends StatefulWidget {
   const VacanciesPage({Key? key}) : super(key: key);
 
@@ -21,6 +23,8 @@ class _VacanciesPageState extends State<VacanciesPage> {
     BlocProvider.of<VacancyCubit>(context).listenToVacancies();
     super.initState();
   }
+
+  bool isActive = false;
 
   @override
   Widget build(BuildContext context) {
@@ -81,38 +85,30 @@ class _VacanciesPageState extends State<VacanciesPage> {
                         ),
                       ),
                       ...List.generate(
-                          state.categories.length,
-                          (index) => GestureDetector(
-                                onTap: () {
-                                  BlocProvider.of<VacancyCubit>(context)
-                                      .listenToVacanciesById(
-                                          categoryId: state
-                                              .categories[index].categoryId);
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: MyColors.C_CACBCE,
-                                  ),
-                                  child: Center(
-                                    child: Row(
-                                      children: [
-                                        Image.network(
-                                          state.categories[index].icon
-                                              .toString(),
-                                        ),
-                                        SizedBox(width: width*.02),
-                                        Text(
-                                          state.categories[index].categoryName,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              )),
+                        state.categories.length,
+                        (index) => GestureDetector(
+                          onTap: () {
+                            BlocProvider.of<VacancyCubit>(context)
+                                .listenToVacanciesById(
+                                    categoryId:
+                                        state.categories[index].categoryId);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            child: CategoryItemButton(
+                              isActive: isActive,
+                              buttonText: state.categories[index].categoryName,
+                              onPressed: () {
+                                setState(() {
+                                  isActive = !isActive;
+                                });
+                                isActive == isActive;
+                              },
+                              icon: Image.network(state.categories[index].icon),
+                            ),
+                          ),
+                        ),
+                      ),
                     ]),
                   );
                 } else if (state is GetCategoriesInFailure) {
@@ -122,7 +118,7 @@ class _VacanciesPageState extends State<VacanciesPage> {
                 }
               },
             ),
-            SizedBox(height: height*.01),
+            SizedBox(height: height * .01),
             BlocBuilder<VacancyCubit, VacancyState>(
               builder: (context, state) {
                 if (state is GetVacancyProgress) {
@@ -166,3 +162,26 @@ class _VacanciesPageState extends State<VacanciesPage> {
     );
   }
 }
+// Container(
+// padding: EdgeInsets.symmetric(horizontal: 9),
+// margin: const EdgeInsets.symmetric(
+// horizontal: 9),
+// decoration: BoxDecoration(
+// borderRadius: BorderRadius.circular(9),
+// color: MyColors.C_CACBCE,
+// ),
+// child: Center(
+// child: Row(
+// children: [
+// Image.network(
+// state.categories[index].icon
+//     .toString(),
+// ),
+// SizedBox(width: width*.01),
+// Text(
+// state.categories[index].categoryName,
+// ),
+// ],
+// ),
+// ),
+// ),
