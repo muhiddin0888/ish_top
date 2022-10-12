@@ -21,6 +21,7 @@ class AnnFieldsFour extends StatefulWidget {
 }
 
 class _AnnFieldsFourState extends State<AnnFieldsFour> {
+  List<String> jobTypes = ["Part time", "Full time", "Any"];
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -109,9 +110,12 @@ class _AnnFieldsFourState extends State<AnnFieldsFour> {
           ),
         ),
         SelectableField(
-          items: const ["Part time", "Full time", "Any"],
+          currentValue: jobTypes[
+              context.read<AnnouncementCubit>().state.fields["job_type"]],
+          items: jobTypes,
           onChanged: (int value) {
             context.read<AnnouncementCubit>().state.fields['job_type'] = value;
+            setState(() {});
           },
         ),
       ],

@@ -28,36 +28,10 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
   final fromF = FocusNode();
   final toF = FocusNode();
 
-  TimeOfDay selectedTimeFrom = TimeOfDay.fromDateTime(DateTime(0,0,0,10,0,));
-  TimeOfDay selectedTimeTo = TimeOfDay.fromDateTime(DateTime(0,0,0,20,0,));
+  late TimeOfDay selectedTimeFrom;
+  late TimeOfDay selectedTimeTo;
 
-  Future<TimeOfDay> _selectTimeFrom(BuildContext context) async {
-    final selected = await showTimePicker(
-      context: context,
-      initialTime: selectedTimeFrom,
-    );
-    if (selected != null && selected != selectedTimeFrom) {
-      setState(() {
-        selectedTimeFrom = selected;
-      });
-    }
-    context.read<AnnouncementCubit>().updateCurrentItem(fieldValue: "${selectedTimeFrom.hour}:${selectedTimeFrom.minute} - ${selectedTimeTo.hour}:${selectedTimeTo.minute}", fieldKey: "time_to_contact");
-    return selectedTimeFrom;
-  }
-
-  Future<TimeOfDay> _selectTimeTo(BuildContext context) async {
-    final selected = await showTimePicker(
-      context: context,
-      initialTime: selectedTimeTo,
-    );
-    if (selected != null && selected != selectedTimeTo) {
-      setState(() {
-        selectedTimeTo = selected;
-      });
-    }
-    context.read<AnnouncementCubit>().updateCurrentItem(fieldValue: "${selectedTimeFrom.hour}:${selectedTimeFrom.minute} - ${selectedTimeTo.hour}:${selectedTimeTo.minute}", fieldKey: "time_to_contact");
-    return selectedTimeTo;
-  }
+  List<String> currencys = ["UZS", "USD", "RUB"];
 
   @override
   void initState() {
@@ -66,7 +40,24 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
     aimC.text = BlocProvider.of<AnnouncementCubit>(context).state.fields["aim"];
     descC.text =
         BlocProvider.of<AnnouncementCubit>(context).state.fields["description"];
-    BlocProvider.of<AnnouncementCubit>(context).updateCurrentItem(fieldValue: "${selectedTimeFrom.hour}:${selectedTimeFrom.minute} - ${selectedTimeTo.hour}:${selectedTimeTo.minute}", fieldKey: "time_to_contact");
+    selectedTimeFrom = TimeOfDay.fromDateTime(
+      DateTime.parse(BlocProvider.of<AnnouncementCubit>(context)
+          .state
+          .fields['time_to_contact_from']),
+    );
+    selectedTimeTo = TimeOfDay.fromDateTime(
+      DateTime.parse(BlocProvider.of<AnnouncementCubit>(context)
+          .state
+          .fields['time_to_contact_to']),
+    );
+    String expectedSalary = BlocProvider.of<AnnouncementCubit>(context)
+        .state
+        .fields["expected_salary"];
+    if (expectedSalary != "") {
+      var splittedSalory = expectedSalary.split(" - ");
+      fromC.text = splittedSalory[0];
+      toC.text = splittedSalory[1];
+    }
     super.initState();
   }
 
@@ -162,8 +153,10 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
                     TextField(
                       controller: fromC,
                       focusNode: fromF,
-                      onChanged: (value){
-                        context.read<AnnouncementCubit>().updateCurrentItem(fieldValue: "${fromC.text} - ${toC.text}", fieldKey: "expected_salary");
+                      onChanged: (value) {
+                        context.read<AnnouncementCubit>().updateCurrentItem(
+                            fieldValue: "${fromC.text} - ${toC.text}",
+                            fieldKey: "expected_salary");
                       },
                       onSubmitted: (v) {
                         MyUtils.fieldFocusChange(context, fromF, toF);
@@ -190,9 +183,14 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
                     TextField(
                       controller: toC,
                       focusNode: toF,
-                      onChanged: (value){
-                        context.read<AnnouncementCubit>().updateCurrentItem(fieldValue: "${fromC.text} - ${toC.text}", fieldKey: "expected_salary");
-                        print(context.read<AnnouncementCubit>().state.fields['expected_salary']);
+                      onChanged: (value) {
+                        context.read<AnnouncementCubit>().updateCurrentItem(
+                            fieldValue: "${fromC.text} - ${toC.text}",
+                            fieldKey: "expected_salary");
+                        print(context
+                            .read<AnnouncementCubit>()
+                            .state
+                            .fields['expected_salary']);
                       },
                       onSubmitted: (v) {
                         toF.unfocus();
@@ -212,9 +210,18 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
               ),
               const SizedBox(height: 18),
               SelectableField(
-                hideCurrencyIcons: false,
-                items: const ["SO'M", "USD", "RUB"],
-                onChanged: (value) {},
+                currentValue: context
+                    .read<AnnouncementCubit>()
+                    .state
+                    .fields['expected_salary_currency'],
+                items: currencys,
+                onChanged: (value) {
+                  context.read<AnnouncementCubit>().updateCurrentItem(
+                        fieldValue: currencys[value],
+                        fieldKey: 'expected_salary_currency',
+                      );
+                  setState(() {});
+                },
               ),
             ],
           ),
@@ -231,10 +238,7 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
                 child: SelectDateItem(
                   text: "${selectedTimeFrom.hour}:${selectedTimeFrom.minute}",
                   onTap: () async {
-                    var t = await _selectTimeFrom(context);
-                    setState(() {
-                      selectedTimeFrom = t;
-                    });
+                    await _selectTimeFrom(context: context, isFrom: true);
                   },
                 ),
               ),
@@ -242,10 +246,7 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
                 child: SelectDateItem(
                   text: "${selectedTimeTo.hour}:${selectedTimeFrom.minute}",
                   onTap: () async {
-                    var t = await _selectTimeTo(context);
-                    setState(() {
-                      selectedTimeTo = t;
-                    });
+                    await _selectTimeFrom(context: context, isFrom: false);
                   },
                 ),
               )
@@ -254,5 +255,35 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
         ],
       ),
     );
+  }
+
+  Future<void> _selectTimeFrom(
+      {required BuildContext context, required bool isFrom}) async {
+    final selected = await showTimePicker(
+      context: context,
+      initialTime: isFrom ? selectedTimeFrom : selectedTimeTo,
+    );
+    if (selected != null && selected != selectedTimeFrom) {
+      if (isFrom) {
+        selectedTimeFrom = selected;
+        context.read<AnnouncementCubit>().updateCurrentItem(
+              fieldValue: DateTime(
+                      0, 0, 0, selectedTimeFrom.hour, selectedTimeFrom.minute)
+                  .toString(),
+              fieldKey: "time_to_contact_from",
+            );
+      } else {
+        selectedTimeTo = selected;
+        context.read<AnnouncementCubit>().updateCurrentItem(
+              fieldValue:
+                  DateTime(0, 0, 0, selectedTimeTo.hour, selectedTimeTo.minute)
+                      .toString(),
+              fieldKey: "time_to_contact_to",
+            );
+      }
+      setState(() {});
+    } else {
+      MyUtils.getMyToast(message: "Time is not selected");
+    }
   }
 }
