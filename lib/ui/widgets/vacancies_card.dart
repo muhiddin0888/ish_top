@@ -67,7 +67,7 @@ class VacanciesCard extends StatelessWidget {
       height: height * .2,
       margin: EdgeInsets.fromLTRB(width * .04, height * .03, width * .04, 0),
       decoration: BoxDecoration(
-          color: Colors.grey, borderRadius: BorderRadius.circular(20)),
+          color: Colors.grey.shade300, borderRadius: BorderRadius.circular(20)),
       child: Column(children: [
         Expanded(
             child: Row(
@@ -81,8 +81,10 @@ class VacanciesCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: height * .02, left: width * .03),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         jobTitle,
@@ -94,6 +96,7 @@ class VacanciesCard extends StatelessWidget {
                     ],
                   ),
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
                         '\$$salary/m',
