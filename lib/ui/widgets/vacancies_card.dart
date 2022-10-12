@@ -27,11 +27,11 @@ class VacanciesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     checkStatus() {
-      if (status == 'Cancelled' || status == 'Closed') {
+      if (status == 'Junior' || status == 'junior') {
         return Colors.red;
-      } else if (status == 'Reviewing' || status == 'Open') {
+      } else if (status == 'Middle' || status == 'middle') {
         return Colors.green;
-      } else if (status == 'Delivered' || status == 'Applied') {
+      } else if (status == 'Senior' || status == 'senior') {
         return Colors.blue;
       } else {
         return Colors.white;
@@ -39,14 +39,26 @@ class VacanciesCard extends StatelessWidget {
     }
 
     checkBackground() {
-      if (status == 'Cancelled' || status == 'Closed') {
+      if (status == 'Junior' || status == 'junior') {
         return const Color(0xFFFFEDED);
-      } else if (status == 'Reviewing' || status == 'Open') {
+      } else if (status == 'Middle' || status == 'middle') {
         return const Color(0xFFE8FDF2);
-      } else if (status == 'Delivered' || status == 'Applied') {
+      } else if (status == 'Senior' || status == 'senior') {
         return const Color(0xFFEDF3FC);
       } else {
         return Colors.black;
+      }
+    }
+
+    checkLocation(){
+      if (location == '0'){
+        return 'Uydan';
+      } else if (location == '1') {
+        return  'Ishxonadan';
+      } else if (location == '2') {
+        return  'Gibrid';
+      } else {
+        return 'Noaniq';
       }
     }
 
@@ -87,7 +99,7 @@ class VacanciesCard extends StatelessWidget {
                         '\$$salary/m',
                         style: const TextStyle(fontWeight: FontWeight.w600),
                       ),
-                      Text(location,
+                      Text(checkLocation(),
                           style: const TextStyle(color: Colors.blueGrey))
                     ],
                   ),
