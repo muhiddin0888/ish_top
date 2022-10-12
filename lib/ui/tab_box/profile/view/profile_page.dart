@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/app/app.dart';
 import 'package:ish_top/cubits/user/user_cubit.dart';
+import 'package:ish_top/ui/tab_box/profile/widgets/alert_dialog.dart';
 import 'package:ish_top/ui/tab_box/profile/widgets/profile_item.dart';
 import 'package:ish_top/utils/constants.dart';
 
@@ -31,6 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     final user = context.select((AppBloc bloc) => bloc.state.user);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -40,7 +44,50 @@ class _ProfilePageState extends State<ProfilePage> {
           IconButton(
             key: const Key('homePage_logout_iconButton'),
             icon: const Icon(Icons.exit_to_app),
-            onPressed: () => context.read<AppBloc>().add(AppLogoutRequested()),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  scrollable: true,
+                  content: const SizedBox(
+                    height: 100,
+                    child: Center(
+                      child: Text(
+                        "Are you sure want to logout?",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ),
+                  actions: [
+                    SizedBox(
+                      height: 30,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          alertTextButton(
+                            textColor: Colors.blue,
+                            bgColor: Colors.grey.shade100,
+                            text: "Yes\t😔",
+                            onPressed: () {
+                              context.read<AppBloc>().add(AppLogoutRequested());
+                            },
+                          ),
+                          alertTextButton(
+                            bgColor: Colors.blue,
+                            textColor: Colors.white,
+                            text: "No\t😊",
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           )
         ],
       ),
@@ -56,7 +103,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   ClipOval(
                     child: Image.network(
-                      context.watch<UserCubit>().state.userModel.imageUrl.toString(),
+                      context
+                          .watch<UserCubit>()
+                          .state
+                          .userModel
+                          .imageUrl
+                          .toString(),
                       height: 200,
                       width: 200,
                     ),
@@ -115,6 +167,42 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           );
         },
+      ),
+    );
+  }
+
+  TextButton alertTextButton({
+    required Color bgColor,
+    required Color textColor,
+    required String text,
+    required VoidCallback onPressed,
+  }) {
+    return TextButton(
+      style: ButtonStyle(
+        padding: const MaterialStatePropertyAll(
+          EdgeInsets.symmetric(
+            horizontal: 10,
+          ),
+        ),
+        shape: MaterialStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        backgroundColor: MaterialStatePropertyAll(
+          bgColor,
+        ),
+      ),
+      onPressed: onPressed,
+      child: Center(
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 16,
+            color: textColor,
+          ),
+        ),
       ),
     );
   }
