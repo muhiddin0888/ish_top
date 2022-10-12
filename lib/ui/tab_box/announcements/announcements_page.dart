@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/cubits/helper/helper_cubit.dart';
@@ -95,7 +96,7 @@ It has survived not only five centuries,
     return Scaffold(
       backgroundColor: MyColors.backgroundColor,
       appBar: AppBar(
-        title: const Text("E'lonlar!"),
+        title:  Text(tr('language')),
         actions: [
           IconButton(
               onPressed: () {
