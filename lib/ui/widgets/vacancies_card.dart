@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ish_top/utils/color.dart';
 
 class VacanciesCard extends StatelessWidget {
   const VacanciesCard({
@@ -67,7 +68,7 @@ class VacanciesCard extends StatelessWidget {
       height: height * .2,
       margin: EdgeInsets.fromLTRB(width * .04, height * .03, width * .04, 0),
       decoration: BoxDecoration(
-          color: Colors.grey.shade300, borderRadius: BorderRadius.circular(20)),
+          color: MyColors.backgroundColor, borderRadius: BorderRadius.circular(20)),
       child: Column(children: [
         Expanded(
             child: Row(
