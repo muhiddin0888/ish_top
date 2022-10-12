@@ -57,8 +57,8 @@ Future<dynamic> selectCategoryBottomSheet(BuildContext context) {
                                   .state
                                   .fields["category_id"] =
                               searchedCategory.isNotEmpty
-                                  ? element
-                                  : selectedCategory;
+                                  ? state.categories[element].categoryId
+                                  :  state.categories[selectedCategory].categoryId;
                         },
                         child: Text("Bajarildi"))
                   ],
