@@ -101,7 +101,7 @@ class _VacanciesPageState extends State<VacanciesPage> {
             ),
             BlocBuilder<VacancyCubit, VacancyState>(
               builder: (context, state) {
-                if (state is GetVacancyProgress) {
+                if(state is GetVacancyProgress){
                   return const CircularProgressIndicator();
                 } else if (state is GetVacancyInFailure) {
                   return Center(child: Text(state.errorText));
@@ -177,7 +177,7 @@ class _VacanciesPageState extends State<VacanciesPage> {
                       ),
                     ),
                   );
-                } else {
+                } else{
                   return const SizedBox();
                 }
               },

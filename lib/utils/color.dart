@@ -19,6 +19,8 @@ class MyColors {
   static const Color C_F2F2F2 = Color(0xFFF2F2F2);
   static const Color C_5386e4 = Color(0xFF5386E4);
   static const Color C_039D57 = Color(0xFF039D57);
+  static const Color C_5386E4 = Color(0xFF5386E4);
+  static const Color C_E9E9EFF= Color(0xFFE9E9EF);
 }
 
 class Palette {
