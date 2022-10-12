@@ -94,15 +94,16 @@ class _VacanciesPageState extends State<VacanciesPage> {
                                         state.categories[index].categoryId);
                           },
                           child: Padding(
+
                             padding: const EdgeInsets.symmetric(horizontal: 5),
                             child: CategoryItemButton(
                               isActive: isActive,
                               buttonText: state.categories[index].categoryName,
                               onPressed: () {
-                                setState(() {
-                                  isActive = !isActive;
-                                });
-                                isActive == isActive;
+                               BlocProvider.of<VacancyCubit>(context)
+                                .listenToVacanciesById(
+                                    categoryId:
+                                        state.categories[index].categoryId);
                               },
                               icon: Image.network(state.categories[index].icon),
                             ),
