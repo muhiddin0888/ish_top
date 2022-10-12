@@ -114,6 +114,52 @@ class _VacanciesPageState extends State<VacanciesPage> {
                         ),
                       ),
                     ]),
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 10),
+                            width: 100,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: MyColors.C_CACBCE,
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "all",
+                              ),
+                            ),
+                          ),
+                        ),
+                        ...List.generate(
+                            state.categories.length,
+                                (index) => GestureDetector(
+                              onTap: () {
+                                BlocProvider.of<VacancyCubit>(context).listenToVacanciesById(categoryId: state.categories[index].categoryId);
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 10),
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: MyColors.C_CACBCE,
+                                ),
+                                child: Center(
+                                  child: Row(
+                                    children: [
+                                      Image.network(
+                                        state.categories[index].icon,
+                                        fit: BoxFit.scaleDown,
+                                      ),
+                                      Text(
+                                        state.categories[index].categoryName,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )),
+                      ]
+                    ),
                   );
                 } else if (state is GetCategoriesInFailure) {
                   return Text(state.errorText);

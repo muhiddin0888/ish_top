@@ -7,6 +7,7 @@ const String addAnnouncementPage = '/add_announcement_page';
 const String onBoarding = '/on_boarding';
 const String profileUpdatePage = '/profile_update_page';
 const String googleMapView = 'map_view';
+const String detailAnnouncements = 'detail_announcements';
 
 // map api
 const String mapBaseUrl = "https://geocode-maps.yandex.ru/1.x/";

@@ -22,11 +22,13 @@ class MyIcons {
     "assets/images/users/user_4.png",
     "assets/images/users/user_5.png",
   ];
-  
 
+  static const String chooseLocation = "assets/images/choose_location.png";
 
+ 
 
   static const pdfImage = "assets/images/pdf_image.png";
+  static const String defaultUser = "assets/images/default_user.png";
 
 
   //.svg files
