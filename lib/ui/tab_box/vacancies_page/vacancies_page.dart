@@ -44,176 +44,137 @@ class _VacanciesPageState extends State<VacanciesPage> {
         ],
       ),
       body: BlocBuilder<VacancyCubit, VacancyState>(
-  builder: (context, state) {
-    if(state is GetVacancyInSuccess){
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "You have\n${state.vacancies.length} Applications 👍",
-              style: MyTextStyle.sfBold800.copyWith(fontSize: 25),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            BlocBuilder<HelperCubit, HelperState>(
-              builder: (context, state) {
-                if (state is GetCategoriesInProgress) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (state is GetCategoriesInSuccess) {
-                  return SizedBox(
-                    height: 40,
-                    child:
-                    ListView(scrollDirection: Axis.horizontal, children: [
-                      GestureDetector(
-                        onTap: () {
-                          BlocProvider.of<VacancyCubit>(context)
-                              .listenToVacancies();
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 5),
-                          margin: const EdgeInsets.symmetric(horizontal: 5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: MyColors.C_CACBCE,
-                          ),
-                          child: const Center(
-                            child: Text(
-                              "All",
-                            ),
-                          ),
-                        ),
-                      ),
-                      ...List.generate(
-                        state.categories.length,
-                            (index) => GestureDetector(
-                          onTap: () {
-                            BlocProvider.of<VacancyCubit>(context)
-                                .listenToVacanciesById(
-                                categoryId:
-                                state.categories[index].categoryId);
-                          },
-                          child: Padding(
-
-                            padding: const EdgeInsets.symmetric(horizontal: 5),
-                            child: CategoryItemButton(
-                              isActive: isActive,
-                              buttonText: state.categories[index].categoryName,
-                              onPressed: () {
-                                BlocProvider.of<VacancyCubit>(context)
-                                    .listenToVacanciesById(
-                                    categoryId:
-                                    state.categories[index].categoryId);
-                              },
-                              icon: Image.network(state.categories[index].icon),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ]),
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 10),
-                            width: 100,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: MyColors.C_CACBCE,
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "all",
-                              ),
-                            ),
-                          ),
-                        ),
-                        ...List.generate(
-                            state.categories.length,
-                                (index) => GestureDetector(
-                              onTap: () {
-                                BlocProvider.of<VacancyCubit>(context).listenToVacanciesById(categoryId: state.categories[index].categoryId);
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 10),
-                                width: 100,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: MyColors.C_CACBCE,
-                                ),
-                                child: Center(
-                                  child: Row(
-                                    children: [
-                                      Image.network(
-                                        state.categories[index].icon,
-                                        fit: BoxFit.scaleDown,
+        builder: (context, state) {
+          if (state is GetVacancyInSuccess) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "You have\n${state.vacancies.length} Applications 👍",
+                    style: MyTextStyle.sfBold800.copyWith(fontSize: 25),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  BlocBuilder<HelperCubit, HelperState>(
+                    builder: (context, state) {
+                      if (state is GetCategoriesInProgress) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      if (state is GetCategoriesInSuccess) {
+                        return SizedBox(
+                          height: 40,
+                          child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    BlocProvider.of<VacancyCubit>(context)
+                                        .listenToVacancies();
+                                  },
+                                  child: Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 5),
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 5),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: MyColors.C_CACBCE,
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        "All",
                                       ),
-                                      Text(
-                                        state.categories[index].categoryName,
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            )),
-                      ]
-                    ),
-                  );
-                } else if (state is GetCategoriesInFailure) {
-                  return Text(state.errorText);
-                } else {
-                  return SizedBox();
-                }
-              },
-            ),
-            SizedBox(height: height * .01),
-            BlocBuilder<VacancyCubit, VacancyState>(
-              builder: (context, state) {
-                if (state is GetVacancyProgress) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state is GetVacancyInFailure) {
-                  return Center(
-                    child: Text(state.errorText),
-                  );
-                } else if (state is GetVacancyInSuccess) {
-                  return Expanded(
-                    child: ListView(
-                      children: List.generate(
-                          state.vacancies.length,
-                              (index) => VacanciesCard(
-                              width: width,
-                              height: height,
-                              logoPath:
-                              state.vacancies[index].brandImage.toString(),
-                              jobTitle:
-                              state.vacancies[index].jobTitle.toString(),
-                              salary: state.vacancies[index].offeredSalary
-                                  .toString(),
-                              compName:
-                              state.vacancies[index].companyName.toString(),
-                              location:
-                              state.vacancies[index].fromWhere.toString(),
-                              status: state.vacancies[index].requiredLevel
-                                  .toString(),
-                              time:
-                              state.vacancies[index].createdAt.toString())),
-                    ),
-                  );
-                } else {
-                  return const SizedBox();
-                }
-              },
-            )
-          ],
-        ),
-      );
-    }else{
-      return SizedBox();
-    }
-  },
-),
+                                ...List.generate(
+                                  state.categories.length,
+                                  (index) => GestureDetector(
+                                    onTap: () {
+                                      BlocProvider.of<VacancyCubit>(context)
+                                          .listenToVacanciesById(
+                                              categoryId: state
+                                                  .categories[index]
+                                                  .categoryId);
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5),
+                                      child: CategoryItemButton(
+                                        isActive: isActive,
+                                        buttonText: state
+                                            .categories[index].categoryName,
+                                        onPressed: () {
+                                          BlocProvider.of<VacancyCubit>(context)
+                                              .listenToVacanciesById(
+                                                  categoryId: state
+                                                      .categories[index]
+                                                      .categoryId);
+                                        },
+                                        icon: Image.network(
+                                            state.categories[index].icon),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                        );
+                      } else if (state is GetCategoriesInFailure) {
+                        return Text(state.errorText);
+                      } else {
+                        return SizedBox();
+                      }
+                    },
+                  ),
+                  SizedBox(height: height * .01),
+                  BlocBuilder<VacancyCubit, VacancyState>(
+                    builder: (context, state) {
+                      if (state is GetVacancyProgress) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (state is GetVacancyInFailure) {
+                        return Center(
+                          child: Text(state.errorText),
+                        );
+                      } else if (state is GetVacancyInSuccess) {
+                        return Expanded(
+                          child: ListView(
+                            children: List.generate(
+                                state.vacancies.length,
+                                (index) => VacanciesCard(
+                                    width: width,
+                                    height: height,
+                                    logoPath: state.vacancies[index].brandImage
+                                        .toString(),
+                                    jobTitle: state.vacancies[index].jobTitle
+                                        .toString(),
+                                    salary: state.vacancies[index].offeredSalary
+                                        .toString(),
+                                    compName: state.vacancies[index].companyName
+                                        .toString(),
+                                    location: state.vacancies[index].fromWhere
+                                        .toString(),
+                                    status: state.vacancies[index].requiredLevel
+                                        .toString(),
+                                    time: state.vacancies[index].createdAt
+                                        .toString())),
+                          ),
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    },
+                  )
+                ],
+              ),
+            );
+          } else {
+            return SizedBox();
+          }
+        },
+      ),
     );
   }
 }

@@ -6,12 +6,10 @@ part of 'my_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MyResponse _$MyResponseFromJson(Map<String, dynamic> json) {
-  return MyResponse(
-    geoObjectCollection: GeoObjectCollection.fromJson(
-        json['GeoObjectCollection'] as Map<String, dynamic>),
-  );
-}
+MyResponse _$MyResponseFromJson(Map<String, dynamic> json) => MyResponse(
+      geoObjectCollection: GeoObjectCollection.fromJson(
+          json['GeoObjectCollection'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$MyResponseToJson(MyResponse instance) =>
     <String, dynamic>{
