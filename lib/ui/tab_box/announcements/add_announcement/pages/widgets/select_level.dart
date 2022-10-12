@@ -4,20 +4,14 @@ import 'package:ish_top/utils/style.dart';
 class SelectLevelWidget extends StatelessWidget {
   SelectLevelWidget({
     super.key,
+    required this.isSelected,
     required this.onTap,
-    required this.backGroundColor,
-    required this.border,
-    required this.textColor,
     required this.text,
-    required this.textSize,
   });
 
+  final bool isSelected;
   VoidCallback onTap;
-  Color? backGroundColor;
-  BoxBorder? border;
-  Color textColor;
   final String text;
-  final double textSize;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -25,15 +19,17 @@ class SelectLevelWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
         decoration: BoxDecoration(
-          color: backGroundColor,
+          color: isSelected ? const Color(0xff356899) : null,
           borderRadius: BorderRadius.circular(97),
-          border: border,
+          border: isSelected
+              ? null
+              : Border.all(width: 1, color: const Color(0xff95969d)),
         ),
         child: AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 450),
           style: MyTextStyle.sfProMedium.copyWith(
-            color: textColor,
-            fontSize: textSize,
+            color: isSelected ? Colors.white : const Color(0xff95969d),
+            fontSize: isSelected ? 18 : 14,
           ),
           child: Text(
             text,
