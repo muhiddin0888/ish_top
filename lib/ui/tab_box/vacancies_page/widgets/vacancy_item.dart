@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ish_top/utils/icon.dart';
@@ -56,7 +57,7 @@ class VacancyItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.network(brandImage,width: 75,height: 75,),
+                CachedNetworkImage(imageUrl: brandImage,width: 75,height: 75),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -84,6 +85,7 @@ class VacancyItem extends StatelessWidget {
 
                 Container(
                   height: 25,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
                       color: MyColors.C_E9E9EFF,
                       borderRadius: BorderRadius.circular(8)
@@ -93,6 +95,7 @@ class VacancyItem extends StatelessWidget {
                 ),
                 Container(
                    height: 25,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
                     color: MyColors.C_E9E9EFF,
                     borderRadius: BorderRadius.circular(8)
