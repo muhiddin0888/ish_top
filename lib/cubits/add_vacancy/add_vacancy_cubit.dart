@@ -60,7 +60,7 @@ class AddVacancyCubit extends Cubit<VacancyState> {
           "telegram_url": "",
           "offered_salary_from": "",
           "from_where": 0,
-          "offered_salary_to": 0,
+          "offered_salary_to": "",
         }),
       );
     } catch (error) {

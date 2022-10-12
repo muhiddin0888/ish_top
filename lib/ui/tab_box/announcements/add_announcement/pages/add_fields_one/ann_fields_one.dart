@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
+import 'package:ish_top/cubits/location/location_cubit.dart';
+import 'package:ish_top/data/repositories/location/location_repository.dart';
+import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/add_fields_one/select_address_with_map.dart';
 import 'package:ish_top/ui/widgets/universal_text_input.dart';
-import 'package:ish_top/utils/constants.dart';
-import 'package:ish_top/utils/icon.dart';
+import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/style.dart';
 
 class AnnFieldsOne extends StatefulWidget {
@@ -21,16 +24,13 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
         return SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(
-                height: 12,
-              ),
+              const SizedBox(height: 12),
               Center(
                 child: Text("Your Personal Information",
-                    style: MyTextStyle.sfProBlack.copyWith(fontSize: 20)),
+                    style: MyTextStyle.sfProBlack
+                        .copyWith(fontSize: 20, color: MyColors.primaryColor)),
               ),
-              const SizedBox(
-                height: 12,
-              ),
+              const SizedBox(height: 12),
               UniversalTextInput(
                 caption: "FISH",
                 onChanged: (value) {
@@ -46,18 +46,14 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                     .fields["full_name"],
                 keyBoardType: TextInputType.text,
               ),
-              const SizedBox(
-                height: 12,
-              ),
+              const SizedBox(height: 12),
               UniversalTextInput(
                 caption: "Yosh",
                 onChanged: (value) {
-
-                    context.read<AnnouncementCubit>().updateCurrentItem(
-                          fieldValue: int.tryParse(value),
-                          fieldKey: "age",
-                        );
-
+                  context.read<AnnouncementCubit>().updateCurrentItem(
+                        fieldValue: int.tryParse(value),
+                        fieldKey: "age",
+                      );
                 },
                 hintText: "20",
                 initialText: context
@@ -67,16 +63,14 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                     .toString(),
                 keyBoardType: TextInputType.number,
               ),
-              const SizedBox(
-                height: 12,
-              ),
+              const SizedBox(height: 12),
               UniversalTextInput(
                 caption: "Telefon no'mer",
                 onChanged: (value) {
-                    context.read<AnnouncementCubit>().updateCurrentItem(
-                          fieldValue: value,
-                          fieldKey: "phone_number",
-                        );
+                  context.read<AnnouncementCubit>().updateCurrentItem(
+                        fieldValue: value,
+                        fieldKey: "phone_number",
+                      );
                 },
                 hintText: "+998 99",
                 initialText: context
@@ -86,16 +80,14 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                     .toString(),
                 keyBoardType: TextInputType.phone,
               ),
-              const SizedBox(
-                height: 12,
-              ),
+              const SizedBox(height: 12),
               UniversalTextInput(
                 caption: "Telegram Url",
                 onChanged: (value) {
-                    context.read<AnnouncementCubit>().updateCurrentItem(
-                          fieldValue: value,
-                          fieldKey: "telegram_url",
-                        );
+                  context.read<AnnouncementCubit>().updateCurrentItem(
+                        fieldValue: value,
+                        fieldKey: "telegram_url",
+                      );
                 },
                 hintText: "@forExample",
                 initialText: context
@@ -105,86 +97,40 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                     .toString(),
                 keyBoardType: TextInputType.text,
               ),
-              const SizedBox(
-                height: 12,
+              const SizedBox(height: 12),
+              UniversalTextInput(
+                caption: "Manzil",
+                onChanged: (value) {
+                  context.read<AnnouncementCubit>().updateCurrentItem(
+                        fieldValue: value,
+                        fieldKey: "address",
+                      );
+                },
+                hintText: "Tashkent.sh",
+                initialText: state.fields["address"],
+                keyBoardType: TextInputType.streetAddress,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+              TextButton(
+                onPressed: mapLogic,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Expanded(
-                      child: Text(
-                        context
-                                    .read<AnnouncementCubit>()
-                                    .state
-                                    .fields['address'] ==
-                                ""
-                            ? "Address is not selected"
-                            : context
-                                .read<AnnouncementCubit>()
-                                .state
-                                .fields['address'],
-                        style: MyTextStyle.sfProMedium.copyWith(fontSize: 15),
-                      ),
+                    Text(
+                      "Xaritadan ko'rsatish",
+                      style: MyTextStyle.sfProRegular.copyWith(
+                          fontSize: 15,
+                          color: MyColors.primaryColor,
+                          decoration: TextDecoration.underline),
                     ),
-                    // Expanded(
-                    //   flex: 5,
-                    //   child: UniversalTextInput(
-                    //     caption: "Manzil",
-                    //     onChanged: (value) {
-                    //       if (value.length > 5) {
-                    //         context.read<AnnouncementCubit>().updateCurrentItem(
-                    //               fieldValue:
-                    //                   BlocProvider.of<LocationCubit>(context)
-                    //                       .selectedLocationName,
-                    //               fieldKey: "address",
-                    //             );
-                    //       }
-                    //     },
-                    //     hintText: "Tashkent.sh",
-                    //     initialText: context
-                    //         .watch<LocationCubit>()
-                    //         .selectedLocationName
-                    //         .toString(),
-                    //     keyBoardType: TextInputType.streetAddress,
-                    //   ),
-                    // ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          googleMapView,
-                          arguments: (addressName) {
-                            setState(() {
-                              context
-                                  .read<AnnouncementCubit>()
-                                  .updateCurrentItem(
-                                    fieldValue: addressName,
-                                    fieldKey: 'address',
-                                  );
-                            });
-                          },
-                        );
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.greenAccent[100],
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 10,
-                              offset: Offset(0, 5),
-                            ),
-                          ],
-                        ),
-                        child: Image.asset(
-                          MyIcons.chooseLocation,
-                          scale: 8.5,
-                        ),
-                      ),
+                    const SizedBox(
+                      width: 6,
                     ),
+                    const Icon(
+                      Icons.add_location,
+                      color: MyColors.primaryColor,
+                      size: 30,
+                    ),
+                    const SizedBox(height: 12),
                   ],
                 ),
               )
@@ -192,6 +138,30 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
           ),
         );
       },
+    );
+  }
+
+  void mapLogic() async {
+    var position = await RepositoryProvider.of<LocationRepository>(context)
+        .determinePosition();
+    await BlocProvider.of<LocationCubit>(context).getLocationName(
+      lat: position.latitude,
+      long: position.longitude,
+    );
+    await BlocProvider.of<LocationCubit>(context)
+        .updateCurrentPosition(position);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return GoogleMapView(
+            latLng: LatLng(position.latitude, position.longitude),
+            callback: () {
+              setState(() {});
+            },
+          );
+        },
+      ),
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ish_top/app/app.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
 import 'package:ish_top/cubits/cv_url/cv_url_cubit.dart';
 import 'package:ish_top/cubits/user/user_cubit.dart';
@@ -36,6 +35,7 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
       child: Scaffold(
         backgroundColor: MyColors.backgroundColor,
         appBar: CustomAppBar(
+          title: "Add announcement",
           onBackTap: () {
             if (currentPage >= 1) {
               setState(() {
@@ -71,78 +71,82 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
               //0,1,2,3
               BlocBuilder<CvUrlCubit, CvUrlState>(
                 builder: (context, state) {
-                  return ActiveButton(
-                      buttonText: "Next",
-                      onPressed: () {
-                        var user =
-                            BlocProvider.of<UserCubit>(context).state.userModel;
-                        var t = BlocProvider.of<AnnouncementCubit>(context);
-                        if (currentPage == 3) {
-                          if (isPageFourValidated(
-                              fields: t.state.fields,
-                              cvUrl: state.cvUrl.downloadUrl)) {
-                            BlocProvider.of<AnnouncementCubit>(context)
-                                .updateCurrentItem(
-                              fieldValue: user.userId,
-                              fieldKey: "user_id",
-                            );
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: ActiveButton(
+                        buttonText: "Next",
+                        onPressed: () {
+                          var user = BlocProvider.of<UserCubit>(context)
+                              .state
+                              .userModel;
+                          var t = BlocProvider.of<AnnouncementCubit>(context);
+                          if (currentPage == 3) {
+                            if (isPageFourValidated(
+                                fields: t.state.fields,
+                                cvUrl: state.cvUrl.downloadUrl)) {
+                              BlocProvider.of<AnnouncementCubit>(context)
+                                  .updateCurrentItem(
+                                fieldValue: user.userId,
+                                fieldKey: "user_id",
+                              );
 
-                            BlocProvider.of<AnnouncementCubit>(context)
-                                .updateCurrentItem(
-                              fieldValue: user.imageUrl,
-                              fieldKey: "user_image",
-                            );
+                              BlocProvider.of<AnnouncementCubit>(context)
+                                  .updateCurrentItem(
+                                fieldValue: user.imageUrl,
+                                fieldKey: "user_image",
+                              );
 
-                            BlocProvider.of<AnnouncementCubit>(context)
-                                .updateCurrentItem(
-                                    fieldValue: BlocProvider.of<CvUrlCubit>(
-                                            context,
-                                            listen: false)
-                                        .state
-                                        .cvUrl
-                                        .downloadUrl,
-                                    fieldKey: "cv_url");
-                            BlocProvider.of<AnnouncementCubit>(context)
-                                .addAnnouncement();
+                              BlocProvider.of<AnnouncementCubit>(context)
+                                  .updateCurrentItem(
+                                      fieldValue: BlocProvider.of<CvUrlCubit>(
+                                              context,
+                                              listen: false)
+                                          .state
+                                          .cvUrl
+                                          .downloadUrl,
+                                      fieldKey: "cv_url");
+                              BlocProvider.of<AnnouncementCubit>(context)
+                                  .addAnnouncement();
+                            }
                           }
-                        }
-                        if ((currentPage < 3)) {
-                          switch (currentPage) {
-                            case 0:
-                              {
-                                if (isPageOneValidated(t.state.fields)) {
-                                  setState(() {
-                                    currentPage++;
-                                  });
-                                  navigateToPage();
+                          if ((currentPage < 3)) {
+                            switch (currentPage) {
+                              case 0:
+                                {
+                                  if (isPageOneValidated(t.state.fields)) {
+                                    setState(() {
+                                      currentPage++;
+                                    });
+                                    navigateToPage();
+                                  }
                                 }
-                              }
-                              break;
-                            case 1:
-                              {
-                                if (isPageTwoValidated(t.state.fields)) {
-                                  setState(() {
-                                    currentPage++;
-                                  });
-                                  navigateToPage();
+                                break;
+                              case 1:
+                                {
+                                  if (isPageTwoValidated(t.state.fields)) {
+                                    setState(() {
+                                      currentPage++;
+                                    });
+                                    navigateToPage();
+                                  }
                                 }
-                              }
-                              break;
-                            case 2:
-                              {
-                                if (isPageThreeValidated(t.state.fields)) {
-                                  setState(() {
-                                    currentPage++;
-                                  });
-                                  navigateToPage();
+                                break;
+                              case 2:
+                                {
+                                  if (isPageThreeValidated(t.state.fields)) {
+                                    setState(() {
+                                      currentPage++;
+                                    });
+                                    navigateToPage();
+                                  }
                                 }
-                              }
-                              break;
-                            default:
-                              {}
+                                break;
+                              default:
+                                {}
+                            }
                           }
-                        }
-                      });
+                        }),
+                  );
                 },
               ),
             ],
@@ -154,7 +158,7 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
 
   void navigateToPage() {
     pageController.animateToPage(currentPage,
-        duration: Duration(milliseconds: 500), curve: Curves.linear);
+        duration: const Duration(milliseconds: 500), curve: Curves.linear);
   }
 
   bool isPageOneValidated(Map<String, dynamic> fields) {

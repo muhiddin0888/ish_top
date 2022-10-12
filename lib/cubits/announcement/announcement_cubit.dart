@@ -19,7 +19,7 @@ class AnnouncementCubit extends Cubit<AnnouncementState> {
             fields: {
               "announcement_id": "",
               "full_name": "",
-              "age": 0,
+              "age": 12,
               "phone_number": "",
               "telegram_url": "",
               "knowledge": "",
