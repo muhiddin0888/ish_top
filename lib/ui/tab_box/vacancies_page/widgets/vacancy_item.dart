@@ -2,23 +2,23 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ish_top/utils/icon.dart';
-import 'package:ish_top/utils/style.dart';
 
 import '../../../../utils/color.dart';
 
 class VacancyItem extends StatelessWidget {
-  const VacancyItem(
-      {Key? key,
-      required this.onTap,
-      required this.brandImage,
-      required this.companyName,
-      required this.fromWhere,
-      required this.jobTitle,
-      required this.offeredSalary,
-      required this.requiredLevel,
-      required this.jobType,
-      required this.recruiterPhone})
-      : super(key: key);
+  const VacancyItem({
+    Key? key,
+    required this.onTap,
+    required this.brandImage,
+    required this.companyName,
+    required this.fromWhere,
+    required this.jobTitle,
+    required this.offeredSalary,
+    required this.requiredLevel,
+    required this.jobType,
+    required this.recruiterPhone,
+    required this.index,
+  }) : super(key: key);
   final String brandImage;
   final String companyName;
   final String jobTitle;
@@ -28,6 +28,7 @@ class VacancyItem extends StatelessWidget {
   final int jobType;
   final String recruiterPhone;
   final VoidCallback onTap;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +55,16 @@ class VacancyItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: CachedNetworkImage(
-                    imageUrl: brandImage,
-                    width: 55,
-                    height: 55,
-                    fit: BoxFit.cover,
+                Hero(
+                  tag: "$index",
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: CachedNetworkImage(
+                      imageUrl: brandImage,
+                      width: 55,
+                      height: 55,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Column(

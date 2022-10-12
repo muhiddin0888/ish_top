@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/cubits/helper/helper_cubit.dart';
 import 'package:ish_top/cubits/vacancy/vacancy_cubit.dart';
 import 'package:ish_top/ui/tab_box/vacancies_page/vacancy_detail/vacancy_detail_page.dart';
+import 'package:ish_top/ui/tab_box/vacancies_page/widgets/vacancy_item.dart';
 import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/icon.dart';
 import 'package:ish_top/utils/style.dart';
@@ -101,83 +102,41 @@ class _VacanciesPageState extends State<VacanciesPage> {
             ),
             BlocBuilder<VacancyCubit, VacancyState>(
               builder: (context, state) {
-                if(state is GetVacancyProgress){
+                if (state is GetVacancyProgress) {
                   return const CircularProgressIndicator();
                 } else if (state is GetVacancyInFailure) {
                   return Center(child: Text(state.errorText));
                 } else if (state is GetVacancyInSuccess) {
                   return Expanded(
                     child: ListView(
-                      children: List.generate(
-                        state.vacancies.length,
-                        (index) => Container(
-                          margin: const EdgeInsets.symmetric(vertical: 10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: MyColors.C_FAFAFD,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.3),
-                                  offset: const Offset(1, 3),
-                                  blurRadius: 3,
-                                  spreadRadius: 5,
-                                )
-                              ]),
-                          width: double.infinity,
-                          child: Column(
-                            children: [
-                              ListTile(
-                                leading: Hero(
-                                    tag: "$index",
-                                    child: Image.network(
-                                        state.vacancies[index].brandImage)),
-                                subtitle:
-                                    Text(state.vacancies[index].companyName),
-                                title: Text(state.vacancies[index].jobTitle),
-                                trailing: Column(
-                                  children: [
-                                    Text(state.vacancies[index].offeredSalary),
-                                    const SizedBox(height: 5),
-                                    Text(state.vacancies[index].requiredLevel)
-                                  ],
-                                ),
+                      children: List.generate(state.vacancies.length, (index) {
+                        return VacancyItem(
+                          index: index,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                transitionDuration: const Duration(seconds: 1),
+                                reverseTransitionDuration: const Duration(seconds: 1),
+                                pageBuilder: (c, a, sA) {
+                                  return FadeTransition(opacity: a, child: VacancyDetailPage(vacancy: state.vacancies[index], index: index));
+                                },
                               ),
-                              ListTile(
-                                leading: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  )),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                        transitionDuration: const Duration(milliseconds: 800),
-                                        reverseTransitionDuration: const Duration(milliseconds: 800),
-                                        pageBuilder: (c, a, sA) {
-                                          return FadeTransition(
-                                            opacity: a,
-                                            child: VacancyDetailPage(vacancy: state.vacancies[index], index: index),
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  },
-                                  child: const Text("Canceled"),
-                                ),
-                                trailing:
-                                    Text(state.vacancies[index].fromWhere == 0
-                                        ? "Full-Time"
-                                        : state.vacancies[index].fromWhere == 1
-                                            ? "Part-Time"
-                                            : "Any"),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                            );
+                          },
+                          brandImage: state.vacancies[index].brandImage,
+                          companyName: state.vacancies[index].companyName,
+                          fromWhere: state.vacancies[index].fromWhere,
+                          jobTitle: state.vacancies[index].jobTitle,
+                          offeredSalary: state.vacancies[index].offeredSalary,
+                          requiredLevel: state.vacancies[index].requiredLevel,
+                          recruiterPhone: state.vacancies[index].recruiterPhone,
+                          jobType: state.vacancies[index].jobType,
+                        );
+                      }),
                     ),
                   );
-                } else{
+                } else {
                   return const SizedBox();
                 }
               },
