@@ -94,6 +94,7 @@ class _VacanciesPageState extends State<VacanciesPage> {
                                         state.categories[index].categoryId);
                           },
                           child: Padding(
+
                             padding: const EdgeInsets.symmetric(horizontal: 5),
                             child: CategoryItemButton(
                               isActive: isActive,
