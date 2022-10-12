@@ -117,7 +117,6 @@
 //   }
 // }
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/app/app.dart';
@@ -187,16 +186,16 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
                 onPressed: () {
                   var t = BlocProvider.of<AnnouncementCubit>(context);
                   if (currentPage == 3) {
-                   if(isPageFourValidated(t.state.fields)){
-                     BlocProvider.of<AnnouncementCubit>(context)
-                         .addAnnouncement();
-                     BlocProvider.of<AnnouncementCubit>(context)
-                         .updateCurrentItem(
-                       fieldValue:
-                       BlocProvider.of<AppBloc>(context).state.user.id,
-                       fieldKey: "user_id",
-                     );
-                   }
+                    if (isPageFourValidated(t.state.fields)) {
+                      BlocProvider.of<AnnouncementCubit>(context)
+                          .addAnnouncement();
+                      BlocProvider.of<AnnouncementCubit>(context)
+                          .updateCurrentItem(
+                        fieldValue:
+                            BlocProvider.of<AppBloc>(context).state.user.id,
+                        fieldKey: "user_id",
+                      );
+                    }
                   }
                   if ((currentPage < 3)) {
                     switch (currentPage) {
@@ -230,7 +229,8 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
                           }
                         }
                         break;
-                      default:{}
+                      default:
+                        {}
                     }
                   }
                 }),
@@ -264,44 +264,49 @@ class _AddAnnouncementPageState extends State<AddAnnouncementPage> {
     }
     return isValid;
   }
+
   bool isPageTwoValidated(Map<String, dynamic> fields) {
     bool isValid = false;
     String level = fields["level"];
-    int age = fields["age"];
-    String phoneNumber = fields["phone_number"];
-    String address = fields["address"];
+    // String categoryId = fields["category_id"];
+    var knowledge = fields["knowledge"];
     if (level == "") {
       MyUtils.getMyToast(message: "Darajangizni tanlang!");
-    } else if (level == '') {
-      MyUtils.getMyToast(message: "Darajangizni tanlang!");
-    } else if (phoneNumber.length < 10) {
-      MyUtils.getMyToast(message: "Telefon raqamni to'gri kiriting");
-    } else if (address.length < 10) {
-      MyUtils.getMyToast(message: "Manzilni to'gri kiriting");
+    }
+    // else if (categoryId == "") {
+    //    MyUtils.getMyToast(message: "Mutaxassislikni tanlang!");
+    //  }
+    else if (knowledge == "") {
+      MyUtils.getMyToast(message: "Bilmingiz haqida\nma'lumot kiriting");
     } else {
       isValid = true;
     }
     return isValid;
   }
+
   bool isPageThreeValidated(Map<String, dynamic> fields) {
     bool isValid = false;
-    String fullName = fields["full_name"];
-    int age = fields["age"];
-    String phoneNumber = fields["phone_number"];
-    String address = fields["address"];
-    if (fullName.length < 3) {
-      MyUtils.getMyToast(message: "To'liq ism sharifingizni kiriting!");
-    } else if (age <= 12) {
-      MyUtils.getMyToast(message: "11 dan katta yosh kiriting!");
-    } else if (phoneNumber.length < 10) {
-      MyUtils.getMyToast(message: "Telefon raqamni to'gri kiriting");
-    } else if (address.length < 10) {
-      MyUtils.getMyToast(message: "Manzilni to'gri kiriting");
+    String job_title = fields["job_title"];
+    String aim = fields["aim"];
+    String description = fields["description"];
+    List<String> expectedSalary = (fields['expected_salary'] as String).split(" - ");
+    print(expectedSalary);
+    if (job_title == "") {
+      MyUtils.getMyToast(message: "Ish nomini kiriting!");
+    } else if (aim == "") {
+      MyUtils.getMyToast(message: "Maqsadinggizni kiriting!");
+    }
+    else if (description == "") {
+      MyUtils.getMyToast(message: "Description kiriting");
+    }
+    else if (expectedSalary[0] == '' || expectedSalary[1] == '') {
+      MyUtils.getMyToast(message: "Maosh kiriting");
     } else {
       isValid = true;
     }
     return isValid;
   }
+
   bool isPageFourValidated(Map<String, dynamic> fields) {
     bool isValid = false;
     String fullName = fields["full_name"];
