@@ -8,22 +8,27 @@ class CategoryItemButton extends StatelessWidget {
     required this.onPressed,
     this.isActive = false,
     this.icon,
+    this.buttonColor,
+    this.textColor,
+    this.fontSize
   }) : super(key: key);
 
   final String buttonText;
   final VoidCallback onPressed;
   final bool isActive;
   final Widget? icon;
+  final Color? buttonColor;
+  final Color? textColor;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 37,
       decoration: BoxDecoration(
-        border: Border.all(
-            color: (isActive) ? MyColors.C_356899 : MyColors.C_95969D),
+        border: Border.all(color: (buttonColor == null) ? ((isActive) ? MyColors.C_356899 : MyColors.C_95969D) : buttonColor!),
         borderRadius: BorderRadius.circular(100),
-        color: (isActive) ? MyColors.C_356899 : Colors.transparent,
+        color: (buttonColor == null) ? ((isActive) ? MyColors.C_356899 : Colors.transparent) : buttonColor,
       ),
       child: TextButton(
         onPressed: onPressed,
@@ -42,8 +47,8 @@ class CategoryItemButton extends StatelessWidget {
             Text(
               buttonText,
               style: TextStyle(
-                color: (isActive) ? Colors.white : MyColors.C_95969D,
-                fontSize: 16,
+                color: (textColor == null) ? ((isActive) ? Colors.white : MyColors.C_95969D) : textColor,
+                fontSize: fontSize ?? 16,
                 fontWeight: FontWeight.w500,
               ),
             ),

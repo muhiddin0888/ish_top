@@ -35,14 +35,11 @@ migrate_working_dir/
 /build/
 
 
-#  Google Services (e .g  APIs or Firebase)
-google-services.json
+
 
 # Symbolication related
 app.*.symbols
 # Google Services (e.g. APIs or Firebase)
-
-
 
 
 # Obfuscation related
