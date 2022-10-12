@@ -1,10 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
+import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/add_fields_three/widgets/selected_time_item.dart';
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/widgets/comment_input_componenet.dart';
 import 'package:ish_top/ui/widgets/selectable_field.dart';
 import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/my_utils.dart';
+import 'package:ish_top/utils/style.dart';
 
 import '../widgets/clock.dart';
 
@@ -67,7 +70,6 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 15),
@@ -136,11 +138,8 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
           const SizedBox(height: 20),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text("Expected Salary:",
-                  style: TextStyle(fontWeight: FontWeight.w600)),
-            ),
+            child: Text("Expected Salary:",
+                style: TextStyle(fontWeight: FontWeight.w600)),
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -187,10 +186,6 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
                         context.read<AnnouncementCubit>().updateCurrentItem(
                             fieldValue: "${fromC.text} - ${toC.text}",
                             fieldKey: "expected_salary");
-                        print(context
-                            .read<AnnouncementCubit>()
-                            .state
-                            .fields['expected_salary']);
                       },
                       onSubmitted: (v) {
                         toF.unfocus();
@@ -232,26 +227,23 @@ class _AnnFieldsThreeState extends State<AnnFieldsThree> {
           ),
           const SizedBox(height: 10),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Card(
-                child: SelectDateItem(
-                  text: "${selectedTimeFrom.hour}:${selectedTimeFrom.minute}",
-                  onTap: () async {
-                    await _selectTimeFrom(context: context, isFrom: true);
-                  },
-                ),
+              SelectedTimeItem(
+                title: "From",
+                timeKey: "time_to_contact_from",
+                onTap: () async =>
+                    _selectTimeFrom(context: context, isFrom: true),
               ),
-              Card(
-                child: SelectDateItem(
-                  text: "${selectedTimeTo.hour}:${selectedTimeFrom.minute}",
-                  onTap: () async {
-                    await _selectTimeFrom(context: context, isFrom: false);
-                  },
-                ),
-              )
+              SelectedTimeItem(
+                title: "To",
+                timeKey: "time_to_contact_to",
+                onTap: () async =>
+                    _selectTimeFrom(context: context, isFrom: false),
+              ),
             ],
           ),
+          const SizedBox(height: 10),
         ],
       ),
     );
