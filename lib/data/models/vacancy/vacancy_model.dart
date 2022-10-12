@@ -33,6 +33,7 @@ class VacancyModel {
 
   @JsonKey(defaultValue: 0, name: "job_type")
   int jobType;
+
   //1-part time
   //2-full time
   //3 any
@@ -43,8 +44,14 @@ class VacancyModel {
   @JsonKey(defaultValue: "", name: "telegram_url")
   String telegramUrl;
 
-  @JsonKey(defaultValue: "", name: "offered_salary")
-  String offeredSalary;
+  @JsonKey(defaultValue: "", name: "currency")
+  String currency;
+
+  @JsonKey(defaultValue: "", name: "offered_salary_from")
+  String offeredSalaryFrom;
+
+  @JsonKey(defaultValue: "", name: "offered_salary_to")
+  String offeredSalaryTo;
 
   @JsonKey(defaultValue: 0, name: "from_where")
   int fromWhere;
@@ -59,7 +66,9 @@ class VacancyModel {
     required this.fromWhere,
     required this.jobTitle,
     required this.jobType,
-    required this.offeredSalary,
+    required this.currency,
+    required this.offeredSalaryFrom,
+    required this.offeredSalaryTo,
     required this.recruiterPhone,
     required this.requiredLevel,
     required this.telegramUrl,

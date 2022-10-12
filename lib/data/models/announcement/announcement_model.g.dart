@@ -30,6 +30,7 @@ AnnouncementModel _$AnnouncementModelFromJson(Map<String, dynamic> json) =>
       timeToContactFrom: json['time_to_contact_from'] as String? ?? '',
       timeToContactTo: json['time_to_contact_to'] as String? ?? '',
       isValid: json['is_valid'] as bool? ?? false,
+      imageUrl: json['image_url'] as String? ?? '',
     );
 
 Map<String, dynamic> _$AnnouncementModelToJson(AnnouncementModel instance) =>
@@ -56,4 +57,5 @@ Map<String, dynamic> _$AnnouncementModelToJson(AnnouncementModel instance) =>
       'currency': instance.currency,
       'from_where': instance.fromWhere,
       'is_valid': instance.isValid,
+      'image_url': instance.imageUrl,
     };

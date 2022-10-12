@@ -12,6 +12,7 @@ import 'package:ish_top/ui/tab_box/announcements/detail_announcement_page/detail
 import 'package:ish_top/ui/tab_box/announcements/add_announcement/pages/add_fields_one/select_address_with_map.dart';
 import 'package:ish_top/ui/tab_box/profile/view/profile_update_page.dart';
 import 'package:ish_top/ui/tab_box/tab_box.dart';
+import 'package:ish_top/ui/tab_box/vacancies_page/add_vacancy/add_vacancy_page.dart';
 import 'package:ish_top/ui/tab_box/vacancies_page/vacancy_detail/vacancy_detail_page.dart';
 import 'package:ish_top/utils/constants.dart';
 
@@ -19,21 +20,24 @@ class MyRouter {
   static Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case onBoarding:
-        return navigateTo(const MainOnBoardingPage());
+        return navigateTo( MainOnBoardingPage());
       case mainPage:
-        return navigateTo(const MainPage());
+        return navigateTo( MainPage());
       case tabBox:
-        return navigateTo(const TabBox());
+        return navigateTo( TabBox());
       case splashPage:
-        return navigateTo(const SplashScreen());
+        return navigateTo( SplashScreen());
       case loginPage:
-        return navigateTo(const LoginPage());
+        return navigateTo( LoginPage());
       case signUpPage:
-        return navigateTo(const SignUpPage());
+        return navigateTo( SignUpPage());
       case addAnnouncementPage:
-        return navigateTo(const AddAnnouncementPage());
+        return navigateTo( AddAnnouncementPage());
+
+      case addVacancyPage:
+        return navigateTo( AddVacancyPage());
       case profileUpdatePage:
-        return navigateTo(const ProfileUpdatePage());
+        return navigateTo( ProfileUpdatePage());
       case detailAnnouncements:
         final args = settings.arguments as List;
         return navigateTo(

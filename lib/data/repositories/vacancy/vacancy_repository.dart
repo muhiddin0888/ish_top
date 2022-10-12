@@ -9,11 +9,11 @@ class VacancyRepository {
       : _fireStore = fireStore;
 
   Future<void> postVacancy({
-    required VacancyModel vacancyModel,
+    required Map<String , dynamic> json,
   }) async {
     try {
       var newVacancy =
-          await _fireStore.collection("vacancies").add(vacancyModel.toJson());
+          await _fireStore.collection("vacancies").add(json);
       await _fireStore
           .collection("vacancies")
           .doc(newVacancy.id)

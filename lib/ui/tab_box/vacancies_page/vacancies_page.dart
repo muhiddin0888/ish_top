@@ -135,7 +135,7 @@ class _VacanciesPageState extends State<VacanciesPage> {
                           companyName: state.vacancies[index].companyName,
                           fromWhere: state.vacancies[index].fromWhere,
                           jobTitle: state.vacancies[index].jobTitle,
-                          offeredSalary: state.vacancies[index].offeredSalary,
+                          offeredSalary: state.vacancies[index].offeredSalaryFrom,
                           requiredLevel: state.vacancies[index].requiredLevel,
                           recruiterPhone: state.vacancies[index].recruiterPhone,
                           jobType: state.vacancies[index].jobType,

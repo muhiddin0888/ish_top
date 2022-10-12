@@ -21,7 +21,7 @@ class VacancyCubit extends Cubit<VacancyState> {
   Future<void> listenToVacancies() async {
     emit(GetVacancyProgress());
     _subscription = vacancyRepository.getVacancies().listen(
-          (items) {
+      (items) {
         emit(GetVacancyInSuccess(vacancies: items));
       },
       onError: (error) {
@@ -30,13 +30,11 @@ class VacancyCubit extends Cubit<VacancyState> {
     );
   }
 
-
-
-
   Future<void> listenToVacanciesById({required String categoryId}) async {
     emit(GetVacancyProgress());
-    _subscription = vacancyRepository.getVacanciesByCategory(categoryId: categoryId).listen(
-          (items) {
+    _subscription =
+        vacancyRepository.getVacanciesByCategory(categoryId: categoryId).listen(
+      (items) {
         emit(GetVacancyInSuccess(vacancies: items));
       },
       onError: (error) {

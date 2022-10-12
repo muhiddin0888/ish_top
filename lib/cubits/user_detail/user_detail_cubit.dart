@@ -17,6 +17,7 @@ class UserDetailCubit extends Cubit<UserDetailState> {
             users: [],
           ),
         );
+  
   String image = "Kemadi";
   Future<String> getUserImageById({
     required AnnouncementModel announcement,

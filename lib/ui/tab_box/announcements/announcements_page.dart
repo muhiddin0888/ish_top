@@ -16,6 +16,7 @@ class AnnouncementsPage extends StatefulWidget {
 
 class _AnnouncementsPageState extends State<AnnouncementsPage> {
   final args = AnnouncementModel(
+      imageUrl: "",
       currency: "USD",
       address: 'Tashkent/Chirchiq',
       age: 19,
@@ -48,7 +49,6 @@ It has survived not only five centuries,
       telegramUrl: '@yorqinbek_yuldashev',
       timeToContactTo: '9:00 - 21:00',
       timeToContactFrom: '9:00 - 21:00',
-
       userId: 'qwerty3003');
   final List<UserModel> users = [
     UserModel(
@@ -83,6 +83,7 @@ It has survived not only five centuries,
       userId: "qwerty8888",
     )
   ];
+
   @override
   void initState() {
     BlocProvider.of<HelperCubit>(context).listenToCategories();
@@ -98,11 +99,10 @@ It has survived not only five centuries,
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  detailAnnouncements,
-                  arguments: [args, users],
-                ); //detail Announcementga shuyerdan o'tib turdim
+                Navigator.pushNamed(context, addAnnouncementPage
+                    // detailAnnouncements,
+                    // arguments: [args, users],
+                    ); //detail Announcementga shuyerdan o'tib turdim
               },
               icon: Icon(Icons.add))
         ],
@@ -125,7 +125,7 @@ It has survived not only five centuries,
           return Text("error");
         },
       ),
-      drawer: const CustomDrawer(),
+      drawer:  CustomDrawer(),
     );
   }
 }

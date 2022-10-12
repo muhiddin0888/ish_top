@@ -25,7 +25,8 @@ class CustomDrawer extends StatelessWidget {
             children: [
               // DRAWER HEADER / USER INFO
               Padding(
-                padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                padding:
+                    EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                 child: Column(
                   children: [
                     // USER PICTURE
@@ -68,7 +69,8 @@ class CustomDrawer extends StatelessWidget {
                       },
                       child: Text(
                         'Edit Profile',
-                        style: MyTextStyle.sfProMedium.copyWith(fontSize: 16, color: MyColors.C_356899),
+                        style: MyTextStyle.sfProMedium
+                            .copyWith(fontSize: 16, color: MyColors.C_356899),
                       ),
                     ),
                   ],
@@ -89,7 +91,9 @@ class CustomDrawer extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text('What do you want add?', style: MyTextStyle.sfProRegular.copyWith(fontSize: 18)),
+                            Text('What do you want add?',
+                                style: MyTextStyle.sfProRegular
+                                    .copyWith(fontSize: 18)),
                             ActiveButton(
                               buttonText: 'Announcement',
                               onPressed: () {
@@ -98,12 +102,12 @@ class CustomDrawer extends StatelessWidget {
                               },
                             ),
                             PassiveButton(
-                                buttonText: 'Vacancie',
-                                onPressed: () {
-                                  Navigator.pop(_);
-                                  MyUtils.getMyToast(message: 'Vacancie qowilgandan keyin ishlaydi');
-                                  // Navigator.pushNamed(_, addVacanciePage);
-                                }),
+                              buttonText: 'Vacancie',
+                              onPressed: () {
+                                Navigator.pop(_);
+                                Navigator.pushNamed(_, addVacancyPage);
+                              },
+                            ),
                           ],
                         ),
                       ),
@@ -115,7 +119,8 @@ class CustomDrawer extends StatelessWidget {
                 title: 'Settings',
                 icon: CupertinoIcons.settings,
                 onPressed: () {
-                  MyUtils.getMyToast(message: 'Setting page qowilgandan keyin ishlaydi');
+                  MyUtils.getMyToast(
+                      message: 'Setting page qowilgandan keyin ishlaydi');
                 },
               ),
               CustomDrawerItem(
@@ -130,7 +135,9 @@ class CustomDrawer extends StatelessWidget {
               const Expanded(child: SizedBox()),
               // PREMIUM BUTTON
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: MediaQuery.of(context).padding.bottom),
+                padding: EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: MediaQuery.of(context).padding.bottom),
                 child: ActiveButton(
                   buttonText: 'Go Premium',
                   onPressed: () {

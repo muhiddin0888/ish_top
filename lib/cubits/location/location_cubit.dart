@@ -10,14 +10,14 @@ part 'location_state.dart';
 class LocationCubit extends Cubit<LocationState> {
   LocationCubit({required this.locationRepository})
       : super(const LocationState(
-            status: FormzStatus.submissionInProgress,
-            errorText: "",
-            locationName: ''));
+          status: FormzStatus.submissionInProgress,
+          errorText: "",
+          locationName: '',
+        ));
 
   LocationRepository locationRepository;
 
   String errorText = "";
-  bool isLoading = false;
   Position? position;
   String currentLocationName = '';
   String selectedLocationName = '';

@@ -70,6 +70,9 @@ class AnnouncementModel {
   @JsonKey(defaultValue: false, name: "is_valid")
   bool isValid;
 
+  @JsonKey(defaultValue: "", name: "image_url")
+  String imageUrl;
+
   AnnouncementModel({
     required this.jobType,
     required this.userId,
@@ -93,6 +96,7 @@ class AnnouncementModel {
     required this.timeToContactFrom,
     required this.timeToContactTo,
     required this.isValid,
+    required this.imageUrl,
   });
 
   factory AnnouncementModel.fromJson(Map<String, dynamic> json) =>

@@ -8,6 +8,7 @@ const String onBoarding = '/on_boarding';
 const String profileUpdatePage = '/profile_update_page';
 const String googleMapView = 'map_view';
 const String detailAnnouncements = 'detail_announcements';
+const String addVacancyPage = 'add_vacancy_page';
 // map api
 const String mapBaseUrl = "https://geocode-maps.yandex.ru/1.x/";
 const String mapApiKey = "d66d2234-ec39-4855-adf7-adb6779100dd";

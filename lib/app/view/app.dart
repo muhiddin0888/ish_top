@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/app/app.dart';
+import 'package:ish_top/cubits/add_vacancy/add_vacancy_cubit.dart';
 import 'package:ish_top/cubits/announcement/announcement_cubit.dart';
 import 'package:ish_top/cubits/helper/helper_cubit.dart';
 import 'package:ish_top/cubits/location/location_cubit.dart';
@@ -74,6 +75,11 @@ class App extends StatelessWidget {
             BlocProvider(
               create: (context) => AnnouncementCubit(
                 announcementRepository: context.read<AnnouncementRepository>(),
+              ),
+            ),
+            BlocProvider(
+              create: (context) => AddVacancyCubit(
+                context.read<VacancyRepository>(),
               ),
             ),
             BlocProvider(

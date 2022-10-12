@@ -4,7 +4,7 @@ import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/style.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSize {
-  const CustomAppBar({Key? key, this.onBackTap,this.title}) : super(key: key);
+  const CustomAppBar({Key? key, this.onBackTap, this.title}) : super(key: key);
 
   final VoidCallback? onBackTap;
   final String? title;
@@ -14,15 +14,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
     return AppBar(
       backgroundColor: MyColors.white,
       elevation: 0,
-      title: Text(title!,style: MyTextStyle.sfBold800.copyWith(fontSize: 20)),
-      // TODO: bir hil joylarda arrow kerakmas shunga onBackTap null bolishi ham mumkin (sherzod)
-      leading: onBackTap != null ? IconButton(
-        onPressed: onBackTap,
-        icon: const Icon(
-          Icons.arrow_back_ios,
-          color: Colors.black,
-        ),
-      ):null,
+      title: Text(title ?? "",
+          style: MyTextStyle.sfBold800.copyWith(fontSize: 20)),
+      leading: onBackTap != null
+          ? IconButton(
+              onPressed: onBackTap,
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              ),
+            )
+          : null,
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: MyColors.white,
         statusBarIconBrightness: Brightness.dark,

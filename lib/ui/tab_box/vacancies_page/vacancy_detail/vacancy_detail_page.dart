@@ -137,7 +137,7 @@ class _VacancyDetailPageState extends State<VacancyDetailPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                vac.offeredSalary,
+                                vac.offeredSalaryFrom,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16,

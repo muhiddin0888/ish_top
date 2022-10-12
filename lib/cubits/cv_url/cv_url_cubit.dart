@@ -72,25 +72,3 @@ class CvUrlCubit extends Cubit<CvUrlState> {
     );
   }
 }
-
-// Future<void> selectFile() async {
-//     FilePickerResult? result =
-//         await FilePicker.platform.pickFiles(allowMultiple: false);
-//     if (result != null) {
-//       setState(() {
-//         isLoading = true;
-//       });
-//       pickedFile = result.files.first;
-//       String downloadUrl =
-//           await context.read<HelperRepository>().uploadCv(pickedFile!);
-//       context.read<AnnouncementCubit>().updateCurrentItem(
-//             fieldValue: downloadUrl,
-//             fieldKey: "cv_url",
-//           );
-//     } else {
-//       MyUtils.getMyToast(message: "File not picked");
-//     }
-//     setState(() {
-//       isLoading = false;
-//     });
-//   }
