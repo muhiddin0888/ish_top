@@ -41,7 +41,50 @@ class _ProfilePageState extends State<ProfilePage> {
           IconButton(
             key: const Key('homePage_logout_iconButton'),
             icon: const Icon(Icons.exit_to_app),
-            onPressed: () => context.read<AppBloc>().add(AppLogoutRequested()),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  scrollable: true,
+                  content: const SizedBox(
+                    height: 100,
+                    child: Center(
+                      child: Text(
+                        "Are you sure want to logout?",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ),
+                  actions: [
+                    SizedBox(
+                      height: 30,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          alertTextButton(
+                            textColor: Colors.blue,
+                            bgColor: Colors.grey.shade100,
+                            text: "Yes\t😔",
+                            onPressed: () {
+                              context.read<AppBloc>().add(AppLogoutRequested());
+                            },
+                          ),
+                          alertTextButton(
+                            bgColor: Colors.blue,
+                            textColor: Colors.white,
+                            text: "No\t😊",
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           )
         ],
       ),
@@ -95,7 +138,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         state.userModel.fullName.toString() == ''
                             ? 'Your phone number'
                             : state.userModel.phoneNumber.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 20,
                             color: Colors.white,
                             fontWeight: FontWeight.w600),
