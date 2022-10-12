@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,10 +7,11 @@ import 'package:ish_top/data/api_services/pdf_viewer/pdf_viewer.dart';
 import 'package:ish_top/data/models/announcement/announcement_model.dart';
 import 'package:ish_top/data/models/users/user_model.dart';
 import 'package:ish_top/data/repositories/helper/helper_repository.dart';
-import 'package:ish_top/ui/tab_box/announcements/detail_page_widgets/call_message_buttons.dart';
-import 'package:ish_top/ui/tab_box/announcements/detail_page_widgets/info_long_text.dart';
-import 'package:ish_top/ui/tab_box/announcements/detail_page_widgets/info_short_text.dart';
-import 'package:ish_top/ui/tab_box/announcements/pdf_view.dart';
+import 'package:ish_top/ui/tab_box/announcements/detail_announcement_page/widgets/call_message_buttons.dart';
+import 'package:ish_top/ui/tab_box/announcements/detail_announcement_page/widgets/info_long_text.dart';
+import 'package:ish_top/ui/tab_box/announcements/detail_announcement_page/widgets/info_short_text.dart';
+import 'package:ish_top/ui/tab_box/announcements/detail_announcement_page/pdf_view.dart';
+import 'package:ish_top/ui/tab_box/announcements/detail_announcement_page/widgets/salary_container.dart';
 import 'package:ish_top/ui/widgets/custom_app_bar.dart';
 import 'package:ish_top/ui/widgets/passive_button.dart';
 import 'package:ish_top/utils/color.dart';
@@ -36,9 +35,26 @@ class DetailAnnouncementsPage extends StatefulWidget {
       _DetailAnnouncementsPageState();
 }
 
-class _DetailAnnouncementsPageState extends State<DetailAnnouncementsPage> {
+class _DetailAnnouncementsPageState extends State<DetailAnnouncementsPage>
+    with TickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation animationHeight;
+  late Animation animationOpacity;
+  late CurvedAnimation curvedAnimationForHeight;
   @override
   void initState() {
+    controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+
+    curvedAnimationForHeight =
+        CurvedAnimation(parent: controller, curve: Curves.linearToEaseOut);
+    animationHeight =
+        Tween(begin: 20.0, end: 50.0).animate(curvedAnimationForHeight);
+    animationOpacity = Tween(begin: 0.5, end: 1.0).animate(controller);
+    controller.forward();
+    controller.addListener(() {
+      setState(() {});
+    });
     BlocProvider.of<UserDetailCubit>(context).getUserImageById(
         announcement: widget.announcementModel, users: widget.users);
     super.initState();
@@ -61,12 +77,12 @@ class _DetailAnnouncementsPageState extends State<DetailAnnouncementsPage> {
                 BlocBuilder<UserDetailCubit, UserDetailState>(
                   builder: (context, state) {
                     if (state.status == FormzStatus.submissionInProgress) {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     } else if (state.status == FormzStatus.submissionFailure) {
                       printt.log("error");
-                      return Center(
+                      return const Center(
                         child: Text("Error"),
                       );
                     } else if (state.status == FormzStatus.submissionSuccess) {
@@ -80,7 +96,7 @@ class _DetailAnnouncementsPageState extends State<DetailAnnouncementsPage> {
                           ));
                     } else {
                       printt.log("Nimadir Xato");
-                      return Text("Nimadir xato");
+                      return const Text("Nimadir xato");
                     }
                   },
                 ),
@@ -109,19 +125,30 @@ class _DetailAnnouncementsPageState extends State<DetailAnnouncementsPage> {
             const SizedBox(
               height: 10,
             ),
-            PassiveButton(
-              buttonText: "Resumeni ko'rish",
-              onPressed: () async {
-                const url =
-                    "https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf";
-                final file = await ApiProvider.loadNetwork(url);
-                openPdf(context, file);
-              },
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 1000),
+              opacity: animationOpacity.value,
+              child: PassiveButton(
+                buttonText: "Resumeni ko'rish",
+                onPressed: () async {
+                  const url =
+                      "https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf";
+                  final file = await ApiProvider.loadNetwork(url);
+                  openPdf(context, file);
+                },
+              ),
             ),
-            const SizedBox(
-              height: 10,
+            const SizedBox(height: 10),
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 500),
+              opacity: animationOpacity.value,
+              child: SalaryContainer(
+                  salaryText: widget.announcementModel.expectedSalary,
+                  height: animationHeight.value,
+                  radius: 10),
             ),
-            Text("Asosiy malumotlar",
+            const SizedBox(height: 10),
+            Text("Asosiy ma'lumotlar",
                 style: MyTextStyle.sfBold800.copyWith(fontSize: 20)),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 4),
@@ -157,9 +184,6 @@ class _DetailAnnouncementsPageState extends State<DetailAnnouncementsPage> {
                       info: widget.announcementModel.phoneNumber,
                       title: "Telefon raqam"),
                   InfoShortText(
-                      info: widget.announcementModel.expectedSalary,
-                      title: "Maosh"),
-                  InfoShortText(
                       info: widget.announcementModel.fromWhere == 0
                           ? "Ofisdan"
                           : widget.announcementModel.fromWhere == 1
@@ -192,7 +216,7 @@ class _DetailAnnouncementsPageState extends State<DetailAnnouncementsPage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ConnectedButton(
-                    icon: Icon(Icons.call),
+                    icon: const Icon(Icons.call),
                     text: "Qo'ng'iroq qilish",
                     onPressed: () {
                       launchUrl(Uri.parse(
@@ -200,7 +224,7 @@ class _DetailAnnouncementsPageState extends State<DetailAnnouncementsPage> {
                     },
                     isActive: false),
                 ConnectedButton(
-                    icon: Icon(Icons.message),
+                    icon: const Icon(Icons.message),
                     text: "Message",
                     onPressed: () {
                       final uri =
@@ -214,6 +238,12 @@ class _DetailAnnouncementsPageState extends State<DetailAnnouncementsPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   void openPdf(BuildContext context, File file) => Navigator.push(
