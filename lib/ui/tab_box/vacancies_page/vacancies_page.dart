@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ish_top/cubits/helper/helper_cubit.dart';
 import 'package:ish_top/cubits/vacancy/vacancy_cubit.dart';
+import 'package:ish_top/ui/widgets/vacancies_card.dart';
 import 'package:ish_top/utils/color.dart';
 import 'package:ish_top/utils/icon.dart';
 import 'package:ish_top/utils/style.dart';
@@ -23,6 +24,8 @@ class _VacanciesPageState extends State<VacanciesPage> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -51,64 +54,66 @@ class _VacanciesPageState extends State<VacanciesPage> {
             BlocBuilder<HelperCubit, HelperState>(
               builder: (context, state) {
                 if (state is GetCategoriesInProgress) {
-                  return const CircularProgressIndicator();
+                  return const Center(child: CircularProgressIndicator());
                 }
                 if (state is GetCategoriesInSuccess) {
                   return SizedBox(
                     height: 40,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            BlocProvider.of<VacancyCubit>(context).listenToVacancies();
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 5),
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: MyColors.C_CACBCE,
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "all",
-                              ),
+                    child:
+                        ListView(scrollDirection: Axis.horizontal, children: [
+                      GestureDetector(
+                        onTap: () {
+                          BlocProvider.of<VacancyCubit>(context)
+                              .listenToVacancies();
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 5),
+                          margin: const EdgeInsets.symmetric(horizontal: 5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: MyColors.C_CACBCE,
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "All",
                             ),
                           ),
                         ),
-                        ...List.generate(
-                            state.categories.length,
-                                (index) => GestureDetector(
-                              onTap: () {
-                                BlocProvider.of<VacancyCubit>(context).listenToVacanciesById(categoryId: state.categories[index].categoryId);
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 10),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: MyColors.C_CACBCE,
-                                ),
-                                child: Center(
-                                  child: Row(
-                                    children: [
-                                      Image.network(
-                                        state.categories[index].icon,
-                                        fit: BoxFit.scaleDown,
-                                      ),
-                                      Text(
-                                        state.categories[index].categoryName,
-                                      ),
-                                    ],
+                      ),
+                      ...List.generate(
+                          state.categories.length,
+                          (index) => GestureDetector(
+                                onTap: () {
+                                  BlocProvider.of<VacancyCubit>(context)
+                                      .listenToVacanciesById(
+                                          categoryId: state
+                                              .categories[index].categoryId);
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: MyColors.C_CACBCE,
+                                  ),
+                                  child: Center(
+                                    child: Row(
+                                      children: [
+                                        Image.network(
+                                          state.categories[index].icon
+                                              .toString(),
+                                        ),
+                                        SizedBox(width: width*.02),
+                                        Text(
+                                          state.categories[index].categoryName,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            )),
-                      ]
-                    ),
+                              )),
+                    ]),
                   );
                 } else if (state is GetCategoriesInFailure) {
                   return Text(state.errorText);
@@ -117,63 +122,40 @@ class _VacanciesPageState extends State<VacanciesPage> {
                 }
               },
             ),
+            SizedBox(height: height*.01),
             BlocBuilder<VacancyCubit, VacancyState>(
               builder: (context, state) {
-                if(state is GetVacancyProgress){
-                  return const CircularProgressIndicator();
-                }
-                else if(state is GetVacancyInFailure){
-                  return Center(child: Text(state.errorText),);
-                }
-                else if(state is GetVacancyInSuccess) {
+                if (state is GetVacancyProgress) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is GetVacancyInFailure) {
+                  return Center(
+                    child: Text(state.errorText),
+                  );
+                } else if (state is GetVacancyInSuccess) {
                   return Expanded(
                     child: ListView(
-                    children: List.generate(state.vacancies.length, (index) => Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: MyColors.C_FAFAFD,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.3),
-                            offset: const Offset(1,3),
-                            blurRadius: 3,
-                            spreadRadius: 5,
-                          )
-                        ]
-                      ),
-                      width: double.infinity,
-                      child: Column(
-                        children: [
-                          ListTile(
-                            leading: Image.network(state.vacancies[index].brandImage),
-                            subtitle: Text(state.vacancies[index].companyName),
-                            title: Text(state.vacancies[index].jobTitle),
-                            trailing: Column(
-                              children: [
-                                Text(state.vacancies[index].offeredSalary),
-                                const SizedBox(height: 5),
-                                Text(state.vacancies[index].requiredLevel)
-                              ],
-                            ),
-                          ),
-                          ListTile(
-                            leading: ElevatedButton(style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              )
-                            ), onPressed: () {
-                            }, child: const Text("Canceled"),),
-                            trailing: Text(state.vacancies[index].fromWhere == 0 ? "fullTime" :
-                            state.vacancies[index].fromWhere == 1 ? "partTime" : "any"
-                            ),
-                          )
-                        ],
-                      ),
-                    )),
-                ),
+                      children: List.generate(
+                          state.vacancies.length,
+                          (index) => VacanciesCard(
+                              width: width,
+                              height: height,
+                              logoPath:
+                                  state.vacancies[index].brandImage.toString(),
+                              jobTitle:
+                                  state.vacancies[index].jobTitle.toString(),
+                              salary: state.vacancies[index].offeredSalary
+                                  .toString(),
+                              compName:
+                                  state.vacancies[index].companyName.toString(),
+                              location:
+                                  state.vacancies[index].fromWhere.toString(),
+                              status: state.vacancies[index].requiredLevel
+                                  .toString(),
+                              time:
+                                  state.vacancies[index].createdAt.toString())),
+                    ),
                   );
-                } else{
+                } else {
                   return const SizedBox();
                 }
               },
