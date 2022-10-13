@@ -24,6 +24,7 @@ class NotificationCubit extends Cubit<NotificationState> {
     );
   }
 
+
   @override
   Future<void> close() {
     _subscription.cancel();

@@ -19,3 +19,5 @@ class GetNotificationInFailure extends NotificationState {
   final String errorText;
   GetNotificationInFailure({required this.errorText});
 }
+
+
