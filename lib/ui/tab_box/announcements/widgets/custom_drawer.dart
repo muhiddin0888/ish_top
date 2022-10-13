@@ -137,6 +137,7 @@ class CustomDrawer extends StatelessWidget {
                 Navigator.pushNamed(context,notificationPage);
                 },
               ),
+
               CustomDrawerItem(
                 title: 'Logout',
                 icon: Icons.logout_outlined,
