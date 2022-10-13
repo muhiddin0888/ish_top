@@ -27,6 +27,7 @@ class NotificationPage extends StatelessWidget {
               children: List.generate(state.news.length, (index) => ListTile()),
             );
           }
+
           return const SizedBox();
         }));
   }
