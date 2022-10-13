@@ -17,6 +17,8 @@ class AnnFieldsOne extends StatefulWidget {
 }
 
 class _AnnFieldsOneState extends State<AnnFieldsOne> {
+  bool positionLoader = false;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AnnouncementCubit, AnnouncementState>(
@@ -110,30 +112,32 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
                 initialText: state.fields["address"],
                 keyBoardType: TextInputType.streetAddress,
               ),
-              TextButton(
-                onPressed: mapLogic,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Xaritadan ko'rsatish",
-                      style: MyTextStyle.sfProRegular.copyWith(
-                          fontSize: 15,
-                          color: MyColors.primaryColor,
-                          decoration: TextDecoration.underline),
-                    ),
-                    const SizedBox(
-                      width: 6,
-                    ),
-                    const Icon(
-                      Icons.add_location,
-                      color: MyColors.primaryColor,
-                      size: 30,
-                    ),
-                    const SizedBox(height: 12),
-                  ],
-                ),
-              )
+              positionLoader
+                  ? const Center(child: CircularProgressIndicator.adaptive())
+                  : TextButton(
+                      onPressed: mapLogic,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "Xaritadan ko'rsatish",
+                            style: MyTextStyle.sfProRegular.copyWith(
+                                fontSize: 15,
+                                color: MyColors.primaryColor,
+                                decoration: TextDecoration.underline),
+                          ),
+                          const SizedBox(
+                            width: 6,
+                          ),
+                          const Icon(
+                            Icons.add_location,
+                            color: MyColors.primaryColor,
+                            size: 30,
+                          ),
+                          const SizedBox(height: 12),
+                        ],
+                      ),
+                    )
             ],
           ),
         );
@@ -142,6 +146,9 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
   }
 
   void mapLogic() async {
+    setState(() {
+      positionLoader = true;
+    });
     var position = await RepositoryProvider.of<LocationRepository>(context)
         .determinePosition();
     await BlocProvider.of<LocationCubit>(context).getLocationName(
@@ -150,6 +157,9 @@ class _AnnFieldsOneState extends State<AnnFieldsOne> {
     );
     await BlocProvider.of<LocationCubit>(context)
         .updateCurrentPosition(position);
+    setState(() {
+      positionLoader = false;
+    });
     Navigator.push(
       context,
       MaterialPageRoute(
