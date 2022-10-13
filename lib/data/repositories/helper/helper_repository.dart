@@ -44,15 +44,19 @@ class HelperRepository {
   }
 
   Future<String> uploadUserImage(
-    PlatformFile pickedFile,
-  ) async {
+      PlatformFile pickedFile,
+      String oldFileUrl,
+      ) async {
     try {
       String storagePath = "files/images/${pickedFile.name}";
       var ref = FirebaseStorage.instance.ref().child(storagePath);
       var task = await ref.putFile(File(pickedFile.path!));
       String downloadUrl = await task.ref.getDownloadURL();
+      if (oldFileUrl.isNotEmpty) {
+        await FirebaseStorage.instance.refFromURL(oldFileUrl).delete();
+      }
       return downloadUrl;
-    } catch (error) {
+    } on FirebaseException catch (error) {
       throw Exception();
     }
   }

@@ -116,7 +116,7 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile Update page"),
+        title:const Text("Profile Update page"),
       ),
       body: BlocBuilder<UserCubit, UserState>(
         builder: (context, state) {
