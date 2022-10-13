@@ -47,7 +47,8 @@ class _TabBoxState extends State<TabBox> {
         },
       ),
       bottomNavigationBar: NavigationBarTheme(
-        data: const NavigationBarThemeData(indicatorColor: MyColors.primaryColor),
+        data:
+            const NavigationBarThemeData(indicatorColor: MyColors.primaryColor),
         child: NavigationBar(
           backgroundColor: CupertinoColors.quaternarySystemFill,
           elevation: 0,

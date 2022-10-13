@@ -124,6 +124,22 @@ class CustomDrawer extends StatelessWidget {
                 },
               ),
               CustomDrawerItem(
+                title: 'Notification',
+                icon: Icons.notifications_none,
+                onPressed: () {
+                  MyUtils.getMyToast(
+                      message: 'Notification page qowilgandan keyin ishlaydi');
+                },
+              ),
+              CustomDrawerItem(
+                title: 'About',
+                icon: CupertinoIcons.info,
+                onPressed: () {
+                  MyUtils.getMyToast(
+                      message: 'About page qowilgandan keyin ishlaydi');
+                },
+              ),
+              CustomDrawerItem(
                 title: 'Logout',
                 icon: Icons.logout_outlined,
                 itemColor: Colors.red,
