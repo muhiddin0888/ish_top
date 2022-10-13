@@ -16,6 +16,7 @@ import 'package:ish_top/data/api_services/yandex_map_api_service/api_service.dar
 import 'package:ish_top/data/repositories/announcement/announcement_repository.dart';
 import 'package:ish_top/data/repositories/helper/helper_repository.dart';
 import 'package:ish_top/data/repositories/location/location_repository.dart';
+import 'package:ish_top/data/repositories/notification/notification_repostory.dart';
 import 'package:ish_top/data/repositories/user/user_repository.dart';
 import 'package:ish_top/data/repositories/vacancy/vacancy_repository.dart';
 import 'package:ish_top/theme.dart';
@@ -23,6 +24,8 @@ import 'package:ish_top/ui/login/login.dart';
 import 'package:ish_top/ui/router.dart';
 import 'package:ish_top/ui/tab_box/tab_box.dart';
 import 'package:ish_top/utils/constants.dart';
+
+import '../../cubits/notification/notification_cubit.dart';
 
 class App extends StatelessWidget {
   App({super.key}) {
@@ -55,6 +58,9 @@ class App extends StatelessWidget {
           ),
           RepositoryProvider(
             create: (_) => UserRepository(fireStore: fireStore),
+          ),
+          RepositoryProvider(
+            create: (_) => NotificationRepository(fireStore: fireStore),
           ),
           RepositoryProvider(
             create: (context) => LocationRepository(
@@ -105,6 +111,11 @@ class App extends StatelessWidget {
             ),
             BlocProvider(
               create: (context) => TabCubit(),
+            ),
+            BlocProvider(
+              create: (context) => NotificationCubit(
+                  notificationRepository:
+                      context.read<NotificationRepository>()),
             ),
             BlocProvider(
               create: (context) => UserDetailCubit(
