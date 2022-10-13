@@ -124,6 +124,20 @@ class CustomDrawer extends StatelessWidget {
                 },
               ),
               CustomDrawerItem(
+                title: 'Notification',
+                icon: Icons.notifications_none,
+                onPressed: () {
+                  Navigator.pushNamed(context,notificationPage);
+                },
+              ),
+              CustomDrawerItem(
+                title: 'About',
+                icon: CupertinoIcons.info,
+                onPressed: () {
+                Navigator.pushNamed(context,notificationPage);
+                },
+              ),
+              CustomDrawerItem(
                 title: 'Logout',
                 icon: Icons.logout_outlined,
                 itemColor: Colors.red,
